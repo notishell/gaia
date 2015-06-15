@@ -79,8 +79,8 @@ POST_UNINSTALL = :
 subdir = .
 DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/Makefile.am \
 	$(top_srcdir)/configure $(am__configure_deps) \
-	$(srcdir)/config.h.in $(dist_doc_DATA) README compile depcomp \
-	install-sh missing
+	$(srcdir)/config.h.in $(dist_doc_DATA) README ar-lib compile \
+	depcomp install-sh missing
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
@@ -222,6 +222,7 @@ distcleancheck_listfiles = find . -type f -print
 ACLOCAL = ${SHELL} /home/liaojun.lj/github/gaia/missing aclocal-1.14
 AMTAR = $${TAR-tar}
 AM_DEFAULT_VERBOSITY = 1
+AR = ar
 AUTOCONF = ${SHELL} /home/liaojun.lj/github/gaia/missing autoconf
 AUTOHEADER = ${SHELL} /home/liaojun.lj/github/gaia/missing autoheader
 AUTOMAKE = ${SHELL} /home/liaojun.lj/github/gaia/missing automake-1.14
@@ -257,6 +258,7 @@ PACKAGE_TARNAME = libclass
 PACKAGE_URL = 
 PACKAGE_VERSION = 1.0
 PATH_SEPARATOR = :
+RANLIB = ranlib
 SET_MAKE = 
 SHELL = /bin/sh
 STRIP = 
@@ -265,6 +267,7 @@ abs_builddir = /home/liaojun.lj/github/gaia
 abs_srcdir = /home/liaojun.lj/github/gaia
 abs_top_builddir = /home/liaojun.lj/github/gaia
 abs_top_srcdir = /home/liaojun.lj/github/gaia
+ac_ct_AR = ar
 ac_ct_CC = gcc
 am__include = include
 am__leading_dot = .
