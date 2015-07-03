@@ -17,35 +17,34 @@
 #ifndef SRC_GAIA_ADDON_ADDON_H_
 #define SRC_GAIA_ADDON_ADDON_H_
 
-
 #include <gaia/gaia.h>
 
 enum {
-	ADDON_ID_INIT = 0,
-	ADDON_ID_MANAGER = 1,
+	ADDON_ID_INIT 				= 0,
+	ADDON_ID_MANAGER 			= 1,
 };
 
 enum {
-	ADDON_TYPE_INIT           = 0,
-	ADDON_TYPE_MANAGER        = 1,
-	ADDON_TYPE_CONFIG         = 2,
-	ADDON_TYPE_NETWORK        = 3,
-	ADDON_TYPE_ETC            = 4,
+	ADDON_TYPE_INIT           	= 0,
+	ADDON_TYPE_MANAGER        	= 1,
+	ADDON_TYPE_CONFIG         	= 2,
+	ADDON_TYPE_NETWORK        	= 3,
+	ADDON_TYPE_ETC            	= 4,
 };
 
 struct gaia_addon_t;
 
 struct gaia_addon_func_t {
-	void (*init)(struct gaia_func_t *func);
+	int (*init)(struct gaia_func_t *func);
 	void (*exit)(struct gaia_addon_t *addon);
 	void (*handle_message)(struct gaia_message_t *msg);
 };
 
 struct gaia_addon_t {
-	uint64_t id;
-	uint32_t type;
-	uint32_t version;
-	uint32_t func_size;
+	u8 id;
+	u4 type;
+	u4 version;
+	u4 func_size;
 	struct gaia_addon_func_t *func;
 };
 

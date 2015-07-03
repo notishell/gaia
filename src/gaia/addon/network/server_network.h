@@ -20,9 +20,6 @@
 #include <gaia/gaia.h>
 #include <gaia/addon/addon.h>
 
-#define NET_SEPERATOR '|'
-#define NET_ENCODEER '\xC0'
-
 enum {
 	ADDON_ID_SERVER_NETWORK        = 0x2000000000000002,
 };

@@ -27,6 +27,7 @@
 #include <sys/socket.h>
 #include <netdb.h>
 #include <netinet/in.h>
+#include <sys/poll.h>
 
 enum {
 	BUFF_SIZE = 8192
@@ -37,26 +38,28 @@ enum {
     STATUS_DISCONNECT    = 1,
 };
 
-int sock = 0;
-int buff_size = BUFF_SIZE;
-char *buffer = 0;
-struct addrinfo *res = 0, *cur = 0;
-int status = STATUS_DISCONNECT;
-struct simple_config_func_t *config;
-pthread_mutex_t network_rlock = PTHREAD_MUTEX_INITIALIZER;
-pthread_mutex_t network_wlock = PTHREAD_MUTEX_INITIALIZER;
+static int sock = 0;
+static int buff_size = BUFF_SIZE;
+static int recv_size;
+static char *recv_buff;
+static char *send_buff;
+static struct addrinfo *res = 0, *cur = 0;
+static int status = STATUS_DISCONNECT;
+static struct config_func_t *config;
+static pthread_mutex_t network_rlock = PTHREAD_MUTEX_INITIALIZER;
+static pthread_mutex_t network_wlock = PTHREAD_MUTEX_INITIALIZER;
 
 struct addrinfo *get_server_addr() {
 	struct addrinfo *addr, mask;
 
 	if (!cur) {
 	    memset(&mask, 0, sizeof(struct addrinfo));
-	    mask.ai_family = AF_INET;     /* Allow IPv4 */
-	    mask.ai_flags = AI_PASSIVE;   /* For wild card IP address */
-	    mask.ai_protocol = 0;         /* Any protocol */
+	    mask.ai_family = AF_INET;
+	    mask.ai_flags = AI_PASSIVE;
+	    mask.ai_protocol = 0;
 	    mask.ai_socktype = SOCK_STREAM;
 
-		if (getaddrinfo(config->server_hostname(), config->server_service(), &mask, &res)) {
+		if (getaddrinfo(config->remote_server_hostname(), config->remote_server_service(), &mask, &res)) {
 			return (0);
 		}
 		cur = res;
@@ -98,61 +101,89 @@ int connect_server() {
 }
 
 static int receive_message(struct gaia_message_t *msg) {
-	int ret = 0;
-	uint16_t length = 0;
-	ssize_t tmp = 0, size = 0;
+	int i, ret = 0;
+	u4 size = 0;
+	struct pollfd recvfd;
+	struct gaia_message_t *tmp = 0;
 
 	pthread_mutex_lock(&network_rlock);
 	if (status == STATUS_DISCONNECT) {
 		ret = connect_server();
 	}
 	if (ret == 0 && status == STATUS_CONNECT) {
-		size = 0;
-		do {
-			tmp = recv(sock, ((uint8_t *)&length) + size, sizeof(uint16_t) - size, MSG_DONTWAIT);
-			if (tmp < 0) {
+		recvfd.fd = sock;
+		recvfd.events = POLLIN;
+		recvfd.revents = 0;
+
+		while (1) {
+			if (poll(&recvfd, 1, 100) < 0) {
+				continue;
+			}
+
+			if (!(recvfd.revents & POLLIN)) {
+				continue;
+			}
+
+			i = recv(sock, recv_buff + recv_size, BUFF_SIZE - recv_size, MSG_DONTWAIT);
+			if (i > 0) {
+				recv_size += i;
+				tmp = (struct gaia_message_t *)recv_buff;
+				if (recv_size < 16) {
+					continue;
+				}
+
+				size = n4_to_u4(tmp->size);
+				if (recv_size < size) {
+					continue;
+				}
+				tmp->addon_id = n8_to_u8(tmp->addon_id);
+				tmp->type = n4_to_u4(tmp->type);
+				tmp->size = n4_to_u4(tmp->size);
+
+				memcpy(msg, tmp, size);
+
+	    		recv_size -= size;
+	    		memmove(recv_buff, recv_buff + size, recv_size);
+	    		break;
+			}
+
+			if (i < 0 || size > sizeof(struct gaia_message_t)) {
+				ret = -1;
+				status = STATUS_DISCONNECT;
 				break;
 			}
-			size += tmp;
-		} while (size < sizeof(uint16_t));
-
-		length = ntohs(length);
-		if (sizeof(uint16_t) == size && length < BUFF_SIZE) {
-			size = 0;
-			do {
-				tmp = recv(sock, ((uint8_t *)buffer) + size, length - size, MSG_DONTWAIT);
-				if (tmp < 0) {
-					break;
-				}
-				size += tmp;
-			} while (size < length);
 		}
+	} else {
+		ret = -1;
 	}
 	pthread_mutex_unlock(&network_rlock);
 
-	return (size == length ? 0 : -1);
+	return (ret == 0 ? size : -1);
 }
 
 static int send_message(struct gaia_message_t *msg) {
 	int ret = 0;
 	ssize_t size = 0;
+	struct gaia_message_t *tmp;
 
 	pthread_mutex_lock(&network_wlock);
-//	if (status == STATUS_DISCONNECT) {
-//		ret = connect_server();
-//		printf("connect_server\n");
-//	}
-//	if (ret == 0 && status == STATUS_CONNECT) {
-//		do {
-//			printf("recv\n");
-//			size = recv(sock, buffer, buff_size, MSG_DONTWAIT);//MSG_DONTWAIT
-//			if (size > 0) {
-//				printf("%s\n", buffer);
-//				break;
-//			}
-//			break;
-//		} while (1);
-//	}
+	if (status == STATUS_DISCONNECT) {
+		ret = connect_server();
+	}
+	if (ret == 0 && status == STATUS_CONNECT) {
+		memcpy(send_buff, msg, msg->size);
+
+		tmp = (struct gaia_message_t *)send_buff;
+		tmp->addon_id = u8_to_n8(tmp->addon_id);
+		tmp->type = u4_to_n4(tmp->type);
+		tmp->size = u4_to_n4(tmp->size);
+
+		size = send(sock, send_buff, msg->size, 0);
+		if (size != msg->size) {
+			ret = -1;
+			status = STATUS_DISCONNECT;
+		}
+	}
 	pthread_mutex_unlock(&network_wlock);
 
 	return (ret);
@@ -170,19 +201,29 @@ struct gaia_addon_t *simple_network_info() {
 	simple_network_func.basic.exit = simple_network_exit;
 	simple_network_func.basic.handle_message = simple_network_handle_message;
 	simple_network_func.receive_message = receive_message;
+	simple_network_func.send_message = send_message;
 
 	return (&simple_network);
 }
 
 void simple_network_init(struct gaia_func_t *func) {
-	buffer = (char *)malloc(buff_size);
-	config = (struct simple_config_func_t *)func->get_addon_by_id(ADDON_ID_SIMPLE_CONFIG);
-	printf("simple_network_init\n");
+	recv_buff = (char *)malloc(buff_size);
+	send_buff = (char *)malloc(buff_size);
+	config = (struct config_func_t *)func->get_addon_by_type(ADDON_TYPE_CONFIG);
 }
 
 void simple_network_exit(struct gaia_addon_t *addon) {
-	free(buffer);
-	printf("simple_network_exit\n");
+	if (sock > 0) {
+		close(sock);
+		sock= -1;
+	}
+	if (res) {
+	    freeaddrinfo(res);
+	    res = 0;
+	}
+	status = STATUS_DISCONNECT;
+	free(recv_buff);
+	free(send_buff);
 }
 
 void simple_network_handle_message(struct gaia_message_t *msg) {

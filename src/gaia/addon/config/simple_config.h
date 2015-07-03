@@ -19,23 +19,12 @@
 
 #include <gaia/gaia.h>
 #include <gaia/addon/addon.h>
+#include <gaia/addon/config/config.h>
 
 enum {
 	ADDON_ID_SIMPLE_CONFIG          = 0x1000000000000001,
 };
 
-struct simple_config_func_t {
-	struct gaia_addon_func_t basic;
-	int (*run_as_server)();
-	unsigned int (*server_port)();
-	int (*server_max_conns)();
-	const char *(*server_hostname)();
-	const char *(*server_service)();
-};
-
 struct gaia_addon_t *simple_config_info();
-void simple_config_init(struct gaia_func_t *func);
-void simple_config_exit(struct gaia_addon_t *addon);
-void simple_config_handle_message(struct gaia_message_t *msg);
 
 #endif /* SRC_GAIA_ADDON_CONFIG_SIMPLE_CONFIG_H_ */

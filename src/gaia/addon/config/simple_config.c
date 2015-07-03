@@ -21,54 +21,55 @@
  */
 #include <stdio.h>
 
-int run_as_server() {
-	return (1);
+static int simple_config_init(struct gaia_func_t *func) {
+	printf("simple_config_init\n");
+	return (0);
 }
 
-unsigned int server_port() {
+static void simple_config_exit(struct gaia_addon_t *addon) {
+	printf("simple_config_exit\n");
+}
+
+static void simple_config_handle_message(struct gaia_message_t *msg) {
+	printf("simple_config_handle_message\n");
+}
+
+static int check_flag(int flag) {
+	return (flag & (CONFIG_FLAG_LOAD_ADDON | CONFIG_FLAG_RUN_AS_SERVER));
+}
+
+static unsigned int server_port() {
 	return (9999);
 }
 
-int server_max_conns() {
+static int server_max_conns() {
 	return (1000);
 }
 
-const char *server_hostname() {
+static const char *server_hostname() {
 	return ("127.0.0.1");
 }
 
-const char *server_service() {
+static const char *server_service() {
 	return ("9999");
 }
 
-struct gaia_addon_t *simple_config_info() {
+static struct gaia_addon_t *simple_config_info() {
 	static struct gaia_addon_t simple_config;
-	static struct simple_config_func_t simple_config_func;
+	static struct config_func_t simple_config_func;
 
 	simple_config.id = ADDON_ID_SIMPLE_CONFIG;
 	simple_config.type = ADDON_TYPE_CONFIG;
-	simple_config.func_size = sizeof(struct simple_config_func_t);
+	simple_config.func_size = sizeof(struct config_func_t);
 	simple_config.func = (struct gaia_addon_func_t *)&simple_config_func;
 	simple_config_func.basic.init = simple_config_init;
 	simple_config_func.basic.exit = simple_config_exit;
 	simple_config_func.basic.handle_message = simple_config_handle_message;
-	simple_config_func.run_as_server = run_as_server;
-	simple_config_func.server_port = server_port;
-	simple_config_func.server_max_conns = server_max_conns;
-	simple_config_func.server_hostname = server_hostname;
-	simple_config_func.server_service = server_service;
+	simple_config_func.check_flag = check_flag;
+	simple_config_func.get_server_port = server_port;
+	simple_config_func.get_server_max_conns = server_max_conns;
+	simple_config_func.remote_server_hostname = server_hostname;
+	simple_config_func.remote_server_service = server_service;
 
 	return (&simple_config);
-}
-
-void simple_config_init(struct gaia_func_t *func) {
-	printf("simple_config_init\n");
-}
-
-void simple_config_exit(struct gaia_addon_t *addon) {
-	printf("simple_config_exit\n");
-}
-
-void simple_config_handle_message(struct gaia_message_t *msg) {
-	printf("simple_config_handle_message\n");
 }

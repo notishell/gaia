@@ -32,4 +32,28 @@ typedef int16_t             s2;
 typedef int32_t             s4;
 typedef int64_t             s8;
 
+static inline u2 u2_to_n2(u2 v) {
+	return (v);
+}
+
+static inline u2 n2_to_u2(u2 v) {
+	return (v);
+}
+
+static inline u4 u4_to_n4(u4 v) {
+	return (v);
+}
+
+static inline u4 n4_to_u4(u4 v) {
+	return (v);
+}
+
+static inline u8 u8_to_n8(u8 v) {
+	return (v);
+}
+
+static inline u8 n8_to_u8(u8 v) {
+	return (v);
+}
+
 #endif /* SRC_UTIL_UTIL_H_ */

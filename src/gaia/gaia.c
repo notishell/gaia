@@ -32,9 +32,9 @@
  * addon information
  */
 struct gaia_addon_info_t {
-	uint64_t id;
-	uint32_t type;
-	uint32_t version;
+	u8 id;
+	u4 type;
+	u4 version;
 	struct gaia_func_t func;
 	struct gaia_addon_info_t *parent;
 	struct linked_list ref_list;
@@ -55,7 +55,7 @@ struct gaia_message_list_t {
  * context
  */
 struct gaia_context_t {
-	uint8_t working;
+	u1 working;
 	pthread_rwlock_t addon_lock;
 	struct linked_list addon_list;
 	pthread_mutex_t message_lock;
@@ -70,11 +70,12 @@ extern struct gaia_context_t gaia_global_context;
 /**
  *
  */
-int install(struct gaia_func_t *obj, struct gaia_addon_t *addon);
-int uninstall(struct gaia_func_t *obj, uint64_t id);
-struct gaia_addon_func_t *get_addon_by_id(uint64_t id);
-int get_addon_by_type(uint32_t type, int len, struct gaia_addon_func_t **addon);
-int handle_message(struct gaia_message_t *msg);
+static int install(struct gaia_func_t *obj, struct gaia_addon_t *addon);
+static int uninstall(struct gaia_func_t *obj, u8 id);
+static struct gaia_addon_func_t *get_addon_by_id(u8 id);
+static struct gaia_addon_func_t *get_addon_by_type(u4 type);
+static int get_addon_list_by_type(u4 type, int len, struct gaia_addon_func_t **addon);
+static int handle_message(struct gaia_message_t *msg);
 
 /**
  * gaia init addon handle message function
@@ -123,7 +124,7 @@ struct gaia_context_t gaia_global_context = {
  *
  *
  */
-int install(struct gaia_func_t *obj, struct gaia_addon_t *addon) {
+static int install(struct gaia_func_t *obj, struct gaia_addon_t *addon) {
 	int valid = 0;
 	struct gaia_addon_info_t *info, *src = 0;
 
@@ -143,6 +144,7 @@ int install(struct gaia_func_t *obj, struct gaia_addon_t *addon) {
 	info->func.uninstall = uninstall;
 	info->func.get_addon_by_id = get_addon_by_id;
 	info->func.get_addon_by_type = get_addon_by_type;
+	info->func.get_addon_list_by_type = get_addon_list_by_type;
 	info->func.handle_message = handle_message;
 	info->addon_orig = addon;
 	info->addon_func = addon->func;
@@ -165,12 +167,10 @@ int install(struct gaia_func_t *obj, struct gaia_addon_t *addon) {
 		free(info);
 		return (-3);
 	}
-	addon->func->init(&info->func);
-
-	return (0);
+	return (addon->func->init(&info->func));
 }
 
-int uninstall(struct gaia_func_t *obj, uint64_t id) {
+static int uninstall(struct gaia_func_t *obj, u8 id) {
 	int valid = 0;
 	struct gaia_addon_info_t *addon = 0, *parent = 0;
 
@@ -198,14 +198,13 @@ int uninstall(struct gaia_func_t *obj, uint64_t id) {
 	return (0);
 }
 
-struct gaia_addon_func_t *get_addon_by_id(uint64_t id) {
+static struct gaia_addon_func_t *get_addon_by_id(u8 id) {
 	struct gaia_addon_info_t *src = 0, *addon = 0;
 
 	pthread_rwlock_rdlock(&gaia_global_context.addon_lock);
 	list_for_each(src, &gaia_global_context.addon_list, addon_list) {
-		if (src->id == id) {
+		if (src->id == id && (addon == 0 || addon->version <= src->version)) {
 			addon = src;
-			break;
 		}
 	}
 	pthread_rwlock_unlock(&gaia_global_context.addon_lock);
@@ -213,7 +212,24 @@ struct gaia_addon_func_t *get_addon_by_id(uint64_t id) {
 	return (addon->addon_func);
 }
 
-int get_addon_by_type(uint32_t type, int len, struct gaia_addon_func_t **addon) {
+static struct gaia_addon_func_t *get_addon_by_type(u4 type) {
+	struct gaia_addon_info_t *src = 0, *addon = 0;
+
+	pthread_rwlock_rdlock(&gaia_global_context.addon_lock);
+	list_for_each(src, &gaia_global_context.addon_list, addon_list) {
+		if (src->type == type) {
+			addon = src;
+		}
+	}
+	pthread_rwlock_unlock(&gaia_global_context.addon_lock);
+
+	if (!addon) {
+		return (0);
+	}
+	return (addon->addon_func);
+}
+
+static int get_addon_list_by_type(u4 type, int len, struct gaia_addon_func_t **addon) {
 	int count = 0, enough = 1;
 	struct gaia_addon_info_t *src = 0;
 
@@ -233,7 +249,7 @@ int get_addon_by_type(uint32_t type, int len, struct gaia_addon_func_t **addon) 
 	return (enough ? count : -count);
 }
 
-int handle_message(struct gaia_message_t *msg) {
+static int handle_message(struct gaia_message_t *msg) {
 	struct gaia_message_list_t *msg_entry;
 
 	msg_entry = (struct gaia_message_list_t *)malloc(sizeof(struct gaia_message_list_t));

@@ -29,18 +29,10 @@ enum {
 	MSG_TYPE_NEW_MSG               = 0x00000002,
 };
 
-struct client_message_t {
-	uint64_t addon_id;
-	uint32_t type;
-	uint32_t size;
-	int fd;
-	uint8_t data[256];
-};
-
 struct client_manager_func_t {
 	struct gaia_addon_func_t basic;
-	void (*start_network)();
-	void (*stop_network)();
+	void (*new_client)(int fd);
+	void (*new_message)(int fd, struct gaia_message_t *msg);
 };
 
 struct gaia_addon_t *client_manager_info();
