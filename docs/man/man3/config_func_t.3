@@ -1,0 +1,51 @@
+.TH "config_func_t" 3 "Thu Jul 2 2015" "Version 0.9.0" "gaia" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+config_func_t \- 
+.SH SYNOPSIS
+.br
+.PP
+.SS "Data Fields"
+
+.in +1c
+.ti -1c
+.RI "struct \fBgaia_addon_func_t\fP \fBbasic\fP"
+.br
+.ti -1c
+.RI "int(* \fBcheck_flag\fP )(int flag)"
+.br
+.ti -1c
+.RI "const char **(* \fBget_addon_list\fP )()"
+.br
+.ti -1c
+.RI "unsigned int(* \fBget_server_port\fP )()"
+.br
+.ti -1c
+.RI "int(* \fBget_server_max_conns\fP )()"
+.br
+.ti -1c
+.RI "const char *(* \fBremote_server_hostname\fP )()"
+.br
+.ti -1c
+.RI "const char *(* \fBremote_server_service\fP )()"
+.br
+.in -1c
+.SH "Field Documentation"
+.PP 
+.SS "int(* config_func_t::check_flag) (int flag)"
+Check if flag marked\&. 
+.SS "const char**(* config_func_t::get_addon_list) ()"
+Use this interface to get addon list\&. 
+.SS "unsigned int(* config_func_t::get_server_port) ()"
+Get local server listen port\&. 
+.SS "int(* config_func_t::get_server_max_conns) ()"
+Get local server maximum connections\&. 
+.SS "const char*(* config_func_t::remote_server_hostname) ()"
+Get remote server host name\&. 
+.SS "const char*(* config_func_t::remote_server_service) ()"
+Get remote server service name\&. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for gaia from the source code\&.

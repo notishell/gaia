@@ -1,0 +1,92 @@
+.TH "gaia_message_t" 3 "Thu Jul 2 2015" "Version 0.9.0" "gaia" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+gaia_message_t \- 
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <gaia\&.h>\fP
+.SS "Data Fields"
+
+.in +1c
+.ti -1c
+.RI "u8 \fBaddon_id\fP"
+.br
+.ti -1c
+.RI "u4 \fBtype\fP"
+.br
+.ti -1c
+.RI "u4 \fBsize\fP"
+.br
+.ti -1c
+.RI "u1 \fBdata\fP [1024]"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Each message contains destination add-on id, message type, message size and data\&.
+.PP
+Example:
+.PP
+.PP
+.nf
+struct gaia_message_t msg;
+msg\&.id = ADDON_ID_INIT;
+msg\&.type = 0;
+msg\&.size = 16;
+gaia_func->handle_message(&msg);
+.fi
+.PP
+ 
+.SH "Field Documentation"
+.PP 
+.SS "u8 gaia_message_t::addon_id"
+Destination add-on id\&.
+.PP
+Such as:
+.PP
+.PP
+.nf
+msg\&.id = ADDON_ID_INIT;
+.fi
+.PP
+ 
+.SS "u4 gaia_message_t::type"
+User defined message type, unsigned 4 bytes\&.
+.PP
+Such as:
+.PP
+.PP
+.nf
+msg\&.type = 1;
+.fi
+.PP
+ 
+.SS "u4 gaia_message_t::size"
+Size of a message\&. Contains the size of add-on id, type, size, and data\&.
+.PP
+Such as:
+.PP
+.PP
+.nf
+msg\&.size = sizeof(msg\&.addon_id) + sizeof(msg\&.type) + sizeof(msg\&.size) + data_size;
+.fi
+.PP
+ 
+.SS "u1 gaia_message_t::data[1024]"
+Data of a message\&. Maximum size of data is 1024 bytes\&.
+.PP
+Such as:
+.PP
+.PP
+.nf
+strcpy(msg\&.data, "hello, world!");
+.fi
+.PP
+ 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for gaia from the source code\&.
