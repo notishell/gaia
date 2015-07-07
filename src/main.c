@@ -16,6 +16,6 @@
  */
 
 int main (void) {
-	gaia_start_up();
+	gaia_running();
     return (0);
 }

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['data',['data',['../structgaia__message__t.html#a99379f74b8a6f399461069c6c7bdb9c0',1,'gaia_message_t']]]
+  ['check_5fflag',['check_flag',['../structconfig__func__t.html#abdd2216c26c3c58163b8766b94e145f3',1,'config_func_t']]],
+  ['config_5ffunc_5ft',['config_func_t',['../structconfig__func__t.html',1,'']]]
 ];

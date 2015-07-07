@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['config_2eh',['config.h',['../config_8h.html',1,'']]]
+  ['direct_5fconfig_2eh',['direct_config.h',['../direct__config_8h.html',1,'']]]
 ];

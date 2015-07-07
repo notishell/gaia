@@ -14,30 +14,23 @@
  *
  * author: Notis Hell (notishell@gmail.com)
  */
-#ifndef SRC_GAIA_ADDON_CLIENT_MANAGER_H_
-#define SRC_GAIA_ADDON_CLIENT_MANAGER_H_
+#ifndef SRC_GAIA_ADDON_LOADER_DIRECT_LOADER_H_
+#define SRC_GAIA_ADDON_LOADER_DIRECT_LOADER_H_
 
-#include <gaia/gaia.h>
 #include <gaia/addon/addon.h>
 
-enum {
-	ADDON_ID_CLIENT_MANAGER        = 0x1000000000000002,
-};
+struct loader_func_t {
 
-enum {
-	MSG_TYPE_NEW_CONN              = 0x00000001,
-	MSG_TYPE_NEW_MSG               = 0x00000002,
-};
-
-struct client_manager_func_t {
+	/**
+	 * Basic.
+	 */
 	struct gaia_addon_func_t basic;
-	void (*new_client)(int fd);
-	void (*new_message)(int fd, struct gaia_message_t *msg);
+
+	int (*load_addon)(const char *addon);
+
+	void (*unload_addon)(const char *addon);
 };
 
-struct gaia_addon_t *client_manager_info();
-void client_manager_init(struct gaia_func_t *func);
-void client_manager_exit(struct gaia_addon_t *addon);
-void client_manager_handle_message(struct gaia_message_t *msg);
+struct gaia_addon_t *direct_loader_info();
 
-#endif /* SRC_GAIA_ADDON_CLIENT_MANAGER_H_ */
+#endif /* SRC_GAIA_ADDON_LOADER_DIRECT_LOADER_H_ */

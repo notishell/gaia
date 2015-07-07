@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.9.1"/>
-<title>gaia: addon.h Source File</title>
+<title>GAIA: addon.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -23,10 +23,10 @@
  <tbody>
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
-   <div id="projectname">gaia
-   &#160;<span id="projectnumber">0.9.0</span>
+   <div id="projectname">GAIA
+   &#160;<span id="projectnumber">1.0.0</span>
    </div>
-   <div id="projectbrief">gaia</div>
+   <div id="projectbrief">GAIA is a tool sets for you.</div>
   </td>
  </tr>
  </tbody>
@@ -112,16 +112,16 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="gaia_8h.html">gaia/gaia.h</a>&gt;</span></div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">enum</span> {</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;  ADDON_ID_INIT         = 0,</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;  ADDON_ID_MANAGER      = 1,</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;};</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">enum</span> {</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  ADDON_TYPE_INIT             = 0,</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  ADDON_TYPE_MANAGER          = 1,</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;  ADDON_TYPE_CONFIG           = 2,</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  ADDON_TYPE_NETWORK          = 3,</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  ADDON_TYPE_ETC              = 4,</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;  ADDON_ID_INIT             = 0,</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;};</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">enum</span> {</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;  ADDON_TYPE_INIT                 = 0,</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  ADDON_TYPE_MANAGER              = 1,</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  ADDON_TYPE_CLIENT_MANAGER             = 11,</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;  ADDON_TYPE_CONFIG               = 2,</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  ADDON_TYPE_SERVER_NETWORK         = 3,</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  ADDON_TYPE_CLIENT_NETWORK         = 4,</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;};</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keyword">struct </span><a class="code" href="structgaia__addon__t.html">gaia_addon_t</a>;</div>
@@ -133,23 +133,29 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;};</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div>
 <div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="structgaia__addon__t.html">   43</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structgaia__addon__t.html">gaia_addon_t</a> {</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  u8 id;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  u4 type;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  u4 version;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  u4 func_size;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  <a class="code" href="util_8h.html#ae4d1c3d548028e31400378ec81026110">u8</a> id;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  <a class="code" href="util_8h.html#ae5be1f726785414dd1b77d60df074c9d">u4</a> type;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  <a class="code" href="util_8h.html#ae5be1f726785414dd1b77d60df074c9d">u4</a> version;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  <a class="code" href="util_8h.html#ae5be1f726785414dd1b77d60df074c9d">u4</a> func_size;</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;  <span class="keyword">struct </span><a class="code" href="structgaia__addon__func__t.html">gaia_addon_func_t</a> *func;</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;};</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* SRC_GAIA_ADDON_ADDON_H_ */</span><span class="preprocessor"></span></div>
-<div class="ttc" id="structgaia__message__t_html"><div class="ttname"><a href="structgaia__message__t.html">gaia_message_t</a></div><div class="ttdef"><b>Definition:</b> gaia.h:47</div></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="keywordtype">int</span> default_addon_init(<span class="keyword">struct</span> <a class="code" href="structgaia__func__t.html">gaia_func_t</a> *func);</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="keywordtype">void</span> default_addon_exit(<span class="keyword">struct</span> <a class="code" href="structgaia__addon__t.html">gaia_addon_t</a> *addon);</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="keywordtype">void</span> default_addon_handle_message(<span class="keyword">struct</span> <a class="code" href="structgaia__message__t.html">gaia_message_t</a> *msg);</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* SRC_GAIA_ADDON_ADDON_H_ */</span><span class="preprocessor"></span></div>
+<div class="ttc" id="structgaia__message__t_html"><div class="ttname"><a href="structgaia__message__t.html">gaia_message_t</a></div><div class="ttdef"><b>Definition:</b> gaia.h:44</div></div>
+<div class="ttc" id="util_8h_html_ae4d1c3d548028e31400378ec81026110"><div class="ttname"><a href="util_8h.html#ae4d1c3d548028e31400378ec81026110">u8</a></div><div class="ttdeci">uint64_t u8</div><div class="ttdef"><b>Definition:</b> util.h:53</div></div>
 <div class="ttc" id="structgaia__addon__func__t_html"><div class="ttname"><a href="structgaia__addon__func__t.html">gaia_addon_func_t</a></div><div class="ttdef"><b>Definition:</b> addon.h:37</div></div>
+<div class="ttc" id="util_8h_html_ae5be1f726785414dd1b77d60df074c9d"><div class="ttname"><a href="util_8h.html#ae5be1f726785414dd1b77d60df074c9d">u4</a></div><div class="ttdeci">uint32_t u4</div><div class="ttdef"><b>Definition:</b> util.h:48</div></div>
 <div class="ttc" id="gaia_8h_html"><div class="ttname"><a href="gaia_8h.html">gaia.h</a></div></div>
-<div class="ttc" id="structgaia__func__t_html"><div class="ttname"><a href="structgaia__func__t.html">gaia_func_t</a></div><div class="ttdef"><b>Definition:</b> gaia.h:112</div></div>
+<div class="ttc" id="structgaia__func__t_html"><div class="ttname"><a href="structgaia__func__t.html">gaia_func_t</a></div><div class="ttdef"><b>Definition:</b> gaia.h:108</div></div>
 <div class="ttc" id="structgaia__addon__t_html"><div class="ttname"><a href="structgaia__addon__t.html">gaia_addon_t</a></div><div class="ttdef"><b>Definition:</b> addon.h:43</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jul 2 2015 23:14:21 for gaia by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Jul 7 2015 10:07:05 for GAIA by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

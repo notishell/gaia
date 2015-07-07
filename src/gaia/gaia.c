@@ -14,13 +14,12 @@
  *
  * author: Notis Hell (notishell@gmail.com)
  */
-#include <util/list.h>
 #include <gaia/gaia.h>
 #include <gaia/addon/addon.h>
-#include <gaia/addon/manager.h>
+#include <gaia/addon/manager/manager.h>
 
 /**
- * depend header files
+ * Standard header files
  */
 #include <config.h>
 #include <stdio.h>
@@ -29,17 +28,77 @@
 #include <pthread.h>
 
 /**
- * addon information
+ * Add-on information.
  */
 struct gaia_addon_info_t {
+
+	/**
+	 * Add-on id.
+	 *
+	 * @see gaia_addon_t
+	 */
 	u8 id;
+
+	/**
+	 * Add-on type.
+	 *
+	 * @see gaia_addon_t
+	 */
 	u4 type;
+
+	/**
+	 * Add-on version.
+	 *
+	 * @see gaia_addon_t
+	 */
 	u4 version;
+
+	/**
+	 * Function sets. Each add-on has a private sets.
+	 *
+	 * @see gaia_func_t
+	 */
 	struct gaia_func_t func;
+
+	/**
+	 * Pointer to parent add-on.
+	 */
 	struct gaia_addon_info_t *parent;
-	struct linked_list ref_list;
+
+	/**
+	 * Son list.
+	 */
+	struct linked_list son_list;
+
+	/**
+	 * All add-ons has same parent linked as a list.
+	 */
+	struct linked_list bro_list;
+
+	/**
+	 * All add-ons linked as a list.
+	 */
 	struct linked_list addon_list;
+
+	/**
+	 * Original add-on information.
+	 *
+	 * @see gaia_addon_t
+	 */
 	struct gaia_addon_t *addon_orig;
+
+	/**
+	 * Function table of add-on.
+	 *
+	 * Example:
+	 * @code
+	 * 		struct config_func_t {
+	 * 			struct gaia_addon_func_t basic;
+	 * 			int (*check_flag)(int flag);
+	 * 			...
+	 * 		};
+	 * @endcode
+	 */
 	struct gaia_addon_func_t *addon_func;
 };
 
@@ -167,7 +226,15 @@ static int install(struct gaia_func_t *obj, struct gaia_addon_t *addon) {
 		free(info);
 		return (-3);
 	}
-	return (addon->func->init(&info->func));
+
+	valid = addon->func->init(&info->func);
+	if (valid != 0) {
+		pthread_rwlock_wrlock(&gaia_global_context.addon_lock);
+		linked_list_del(&info->addon_list);
+		pthread_rwlock_unlock(&gaia_global_context.addon_lock);
+		free(info);
+	}
+	return (valid);
 }
 
 static int uninstall(struct gaia_func_t *obj, u8 id) {
@@ -265,13 +332,34 @@ static int handle_message(struct gaia_message_t *msg) {
 	return (0);
 }
 
-/**
- * start gaia
- * everything become nice
- *
- * always handle message after gaia start up
- */
-void gaia_start_up(void) {
+void gaia_init_handle_message(struct gaia_message_t *msg) {
+	struct gaia_addon_t *addon;
+
+	if (msg->type == 0) {
+		addon = (struct gaia_addon_t *)malloc(sizeof(struct gaia_addon_t));
+		if (!addon) {
+			return;
+		}
+		addon->id = ADDON_ID_MANAGER;
+		addon->type = ADDON_TYPE_MANAGER;
+
+		addon->func = (struct gaia_addon_func_t *)malloc(sizeof(struct gaia_addon_func_t));
+		if (!addon->func) {
+			free(addon);
+			return;
+		}
+		addon->func->init = manager_init;
+		addon->func->exit = manager_exit;
+		addon->func->handle_message = manager_handle_message;
+
+		if (install(&gaia_init_addon.func, addon) != 0) {
+			free(addon);
+			gaia_global_context.working = 0;
+		}
+	}
+}
+
+void gaia_running(void) {
 	int valid = 0;
 	struct gaia_message_t *msg;
 	struct gaia_message_list_t *msg_entry;
@@ -309,32 +397,6 @@ void gaia_start_up(void) {
 
 		if (&gaia_msg_init != msg_entry) {
 			free(msg_entry);
-		}
-	}
-}
-
-void gaia_init_handle_message(struct gaia_message_t *msg) {
-	struct gaia_addon_t *addon;
-
-	if (msg->type == 0) {
-		addon = (struct gaia_addon_t *)malloc(sizeof(struct gaia_addon_t));
-		if (!addon) {
-			return;
-		}
-		addon->id = ADDON_ID_MANAGER;
-		addon->type = ADDON_TYPE_MANAGER;
-
-		addon->func = (struct gaia_addon_func_t *)malloc(sizeof(struct gaia_addon_func_t));
-		if (!addon->func) {
-			free(addon);
-			return;
-		}
-		addon->func->init = manager_init;
-		addon->func->exit = manager_exit;
-		addon->func->handle_message = manager_handle_message;
-
-		if (install(&gaia_init_addon.func, addon) != 0) {
-			free(addon);
 		}
 	}
 }

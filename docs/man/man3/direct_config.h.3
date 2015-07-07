@@ -1,0 +1,65 @@
+.TH "direct_config.h" 3 "Tue Jul 7 2015" "Version 1.0.0" "GAIA" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+direct_config.h \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <gaia/addon/addon\&.h>\fP
+.br
+
+.SS "Data Structures"
+
+.in +1c
+.ti -1c
+.RI "struct \fBconfig_func_t\fP"
+.br
+.in -1c
+.SS "Enumerations"
+
+.in +1c
+.ti -1c
+.RI "enum { \fBCONFIG_FLAG_LOAD_ADDON\fP = 0x00000001, \fBCONFIG_FLAG_USE_NETWORK\fP = 0x00000002, \fBCONFIG_FLAG_RUN_AS_SERVER\fP = 0x00000003 }"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "struct \fBgaia_addon_t\fP * \fBdirect_config_info\fP ()"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Get config information from config center like this\&.
+.PP
+Example: 
+.PP
+.nf
+struct config_func_t *config;
+const char **file_list;
+
+config = (struct config_func_t *)func->get_addon_by_type(ADDON_TYPE_CONFIG);
+
+if (config->check_flag(CONFIG_FLAG_LOAD_ADDON)) {
+    file_list = config->get_addon_list();
+    while (*file_list) {
+        printf("load addon : %s\n", *file_list++);
+    }
+}
+
+if (config->check_flag(CONFIG_FLAG_RUN_AS_SERVER)) {
+    printf("local server listen port : %d\n", config->get_server_port());
+    printf("local server maximum connections : %d\n", config->get_server_max_conns());
+}
+
+printf("remote server(%s:%s)\n", config->remote_server_hostname(),
+    config->remote_server_service());
+
+.fi
+.PP
+ 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for GAIA from the source code\&.

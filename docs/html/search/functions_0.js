@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['gaia_5fstart_5fup',['gaia_start_up',['../gaia_8h.html#aded54e0e30337ddd349879f4d0fd81ae',1,'gaia.c']]]
+  ['gaia_5frunning',['gaia_running',['../gaia_8h.html#aa8bff47bcaad720ea46f4aedb997ebf9',1,'gaia.c']]]
 ];

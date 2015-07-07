@@ -1,8 +1,5 @@
 var searchData=
 [
-  ['check_5fflag',['check_flag',['../structconfig__func__t.html#abdd2216c26c3c58163b8766b94e145f3',1,'config_func_t']]],
-  ['client_5fmanager_5ffunc_5ft',['client_manager_func_t',['../structclient__manager__func__t.html',1,'']]],
-  ['client_5ft',['client_t',['../structclient__t.html',1,'']]],
-  ['config_2eh',['config.h',['../config_8h.html',1,'']]],
-  ['config_5ffunc_5ft',['config_func_t',['../structconfig__func__t.html',1,'']]]
+  ['basic',['basic',['../structconfig__func__t.html#a1875bd2559731ddd2e72cb49ac4d9443',1,'config_func_t']]],
+  ['bro_5flist',['bro_list',['../structgaia__addon__info__t.html#a464e7d6bee2f2c06d5e2df1aaa49cef0',1,'gaia_addon_info_t']]]
 ];

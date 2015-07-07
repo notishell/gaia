@@ -14,17 +14,17 @@
  *
  * author: Notis Hell (notishell@gmail.com)
  */
-#ifndef SRC_GAIA_ADDON_CONFIG_SIMPLE_CONFIG_H_
-#define SRC_GAIA_ADDON_CONFIG_SIMPLE_CONFIG_H_
+#ifndef SRC_GAIA_ADDON_NETWORK_CLIENT_NETWORK_H_
+#define SRC_GAIA_ADDON_NETWORK_CLIENT_NETWORK_H_
 
-#include <gaia/gaia.h>
 #include <gaia/addon/addon.h>
-#include <gaia/addon/config/config.h>
 
-enum {
-	ADDON_ID_SIMPLE_CONFIG          = 0x1000000000000001,
+struct client_network_func_t {
+	struct gaia_addon_func_t basic;
+	int (*receive_message)(struct gaia_message_t *msg);
+	int (*send_message)(struct gaia_message_t *msg);
 };
 
-struct gaia_addon_t *simple_config_info();
+struct gaia_addon_t *client_network_info();
 
-#endif /* SRC_GAIA_ADDON_CONFIG_SIMPLE_CONFIG_H_ */
+#endif /* SRC_GAIA_ADDON_NETWORK_CLIENT_NETWORK_H_ */

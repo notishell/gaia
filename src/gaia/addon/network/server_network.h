@@ -17,12 +17,7 @@
 #ifndef SRC_GAIA_ADDON_NETWORK_SERVER_NETWORK_H_
 #define SRC_GAIA_ADDON_NETWORK_SERVER_NETWORK_H_
 
-#include <gaia/gaia.h>
 #include <gaia/addon/addon.h>
-
-enum {
-	ADDON_ID_SERVER_NETWORK        = 0x2000000000000002,
-};
 
 struct server_network_func_t {
 	struct gaia_addon_func_t basic;
@@ -34,8 +29,5 @@ struct server_network_func_t {
 };
 
 struct gaia_addon_t *server_network_info();
-void server_network_init(struct gaia_func_t *func);
-void server_network_exit(struct gaia_addon_t *addon);
-void server_network_handle_message(struct gaia_message_t *msg);
 
 #endif /* SRC_GAIA_ADDON_NETWORK_SERVER_NETWORK_H_ */

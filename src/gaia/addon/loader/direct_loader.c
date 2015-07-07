@@ -14,14 +14,19 @@
  *
  * author: Notis Hell (notishell@gmail.com)
  */
-#ifndef SRC_GAIA_ADDON_MANAGER_H_
-#define SRC_GAIA_ADDON_MANAGER_H_
+#include <gaia/addon/loader/direct_loader.h>
 
-#include <gaia/gaia.h>
-#include <gaia/addon/addon.h>
+struct gaia_addon_t *direct_loader_info() {
+	static struct gaia_addon_t addon;
+	static struct loader_func_t addon_func;
 
-void manager_init(struct gaia_func_t *func);
-void manager_exit(struct gaia_addon_t *addon);
-void manager_handle_message(struct gaia_message_t *msg);
+	addon.id = ADDON_ID_DIRECT_CONFIG;
+	addon.type = ADDON_TYPE_CONFIG;
+	addon.func_size = sizeof(struct config_func_t);
+	addon.func = (struct loader_func_t *)&addon_func;
+	addon_func.basic.init = default_addon_init;
+	addon_func.basic.exit = default_addon_exit;
+	addon_func.basic.handle_message = default_addon_handle_message;
 
-#endif /* SRC_GAIA_ADDON_MANAGER_H_ */
+	return (&addon);
+}

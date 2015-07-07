@@ -17,17 +17,14 @@
 #ifndef SRC_GAIA_GAIA_H_
 #define SRC_GAIA_GAIA_H_
 
+#include <util/util.h>
+
 /**
  * @file
  * @mainpage GAIA
  *
- * Gaia is a...
+ * Gaia is a tool to manager distributed computers.
  */
-
-/**
- * depend header files
- */
-#include <util/util.h>
 
 struct gaia_addon_t;
 
@@ -45,6 +42,7 @@ struct gaia_addon_t;
  * @endcode
  */
 struct gaia_message_t {
+
 	/**
 	 * Destination add-on id.
 	 *
@@ -104,12 +102,11 @@ struct gaia_message_t {
  * 			if (config) {
  * 				gaia_func->handle_message(&msg);
  * 			}
- * 		} else {
- * 			gaia_func->uninstall(simple_config_info()->id);
  * 		}
  * @endcode
  */
 struct gaia_func_t {
+
 	/**
 	 * A method to install add-on. The first argument must be the 'gaia_func' pointer.
 	 * Once installed using current add-on's 'gaia_func', current add-on became the
@@ -200,6 +197,10 @@ struct gaia_func_t {
 	int (*handle_message)(struct gaia_message_t *msg);
 };
 
-void gaia_start_up();
+/**
+ * Method to run GAIA. Never stop until a quit message received.
+ */
+void gaia_running();
+
 
 #endif /* SRC_GAIA_GAIA_H_ */

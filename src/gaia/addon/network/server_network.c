@@ -14,9 +14,13 @@
  *
  * author: Notis Hell (notishell@gmail.com)
  */
-#include <gaia/addon/client_manager.h>
-#include <gaia/addon/config/simple_config.h>
+#include <gaia/addon/config/direct_config.h>
+#include <gaia/addon/manager/client_manager.h>
 #include <gaia/addon/network/server_network.h>
+
+enum {
+	ADDON_ID_SERVER_NETWORK        = 0x2000000000000002,
+};
 
 /**
  * depend header files
@@ -90,7 +94,7 @@ void server_network_receive(int fd) {
 		msg->size = n4_to_u4(msg->size);
 
 		if (!client_manager) {
-			client_manager = (struct client_manager_func_t *)gaia_func->get_addon_by_id(ADDON_ID_CLIENT_MANAGER);
+			client_manager = (struct client_manager_func_t *)gaia_func->get_addon_by_type(ADDON_TYPE_CLIENT_MANAGER);
 		}
 
 		if (client_manager) {
@@ -118,7 +122,7 @@ void server_network_accept(int fd, struct sockaddr_in *addr) {
 		inet_ntop(AF_INET, (void *)&addr->sin_addr, clients[i].ip, 16);
 
 		if (!client_manager) {
-			client_manager = (struct client_manager_func_t *)gaia_func->get_addon_by_id(ADDON_ID_CLIENT_MANAGER);
+			client_manager = (struct client_manager_func_t *)gaia_func->get_addon_by_type(ADDON_TYPE_CLIENT_MANAGER);
 		}
 
 		if (client_manager) {
@@ -294,12 +298,27 @@ static int send_message(int fd, struct gaia_message_t *msg) {
 	return (ret);
 }
 
+int server_network_init(struct gaia_func_t *func) {
+	config = (struct config_func_t *)func->get_addon_by_type(ADDON_TYPE_CONFIG);
+	gaia_func = func;
+	printf("server_network_init\n");
+	return (0);
+}
+
+void server_network_exit(struct gaia_addon_t *addon) {
+	printf("server_network_exit\n");
+}
+
+void server_network_handle_message(struct gaia_message_t *msg) {
+	printf("server_network_handle_message\n");
+}
+
 struct gaia_addon_t *server_network_info() {
 	static struct gaia_addon_t server_network;
 	static struct server_network_func_t server_network_func;
 
 	server_network.id = ADDON_ID_SERVER_NETWORK;
-	server_network.type = ADDON_TYPE_NETWORK;
+	server_network.type = ADDON_TYPE_SERVER_NETWORK;
 	server_network.func_size = sizeof(struct server_network_func_t);
 	server_network.func = (struct gaia_addon_func_t *)&server_network_func;
 	server_network_func.basic.init = server_network_init;
@@ -312,18 +331,4 @@ struct gaia_addon_t *server_network_info() {
 	server_network_func.send_message = send_message;
 
 	return (&server_network);
-}
-
-void server_network_init(struct gaia_func_t *func) {
-	config = (struct config_func_t *)func->get_addon_by_type(ADDON_TYPE_CONFIG);
-	gaia_func = func;
-	printf("server_network_init\n");
-}
-
-void server_network_exit(struct gaia_addon_t *addon) {
-	printf("server_network_exit\n");
-}
-
-void server_network_handle_message(struct gaia_message_t *msg) {
-	printf("server_network_handle_message\n");
 }

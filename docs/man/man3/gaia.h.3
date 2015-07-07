@@ -1,4 +1,4 @@
-.TH "gaia.h" 3 "Thu Jul 2 2015" "Version 0.9.0" "gaia" \" -*- nroff -*-
+.TH "gaia.h" 3 "Tue Jul 7 2015" "Version 1.0.0" "GAIA" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -23,15 +23,13 @@ gaia.h \-
 
 .in +1c
 .ti -1c
-.RI "void \fBgaia_start_up\fP ()"
+.RI "void \fBgaia_running\fP ()"
 .br
 .in -1c
 .SH "Function Documentation"
 .PP 
-.SS "void gaia_start_up (void)"
-start gaia everything become nice
-.PP
-always handle message after gaia start up 
+.SS "void gaia_running ()"
+Method to run GAIA\&. Never stop until a quit message received\&. 
 .SH "Author"
 .PP 
-Generated automatically by Doxygen for gaia from the source code\&.
+Generated automatically by Doxygen for GAIA from the source code\&.

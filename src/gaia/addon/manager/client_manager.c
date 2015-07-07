@@ -14,10 +14,13 @@
  *
  * author: Notis Hell (notishell@gmail.com)
  */
-#include <gaia/addon/client_manager.h>
-#include <gaia/addon/config/simple_config.h>
+#include <gaia/addon/manager/client_manager.h>
+#include <gaia/addon/config/direct_config.h>
 #include <gaia/addon/network/server_network.h>
 
+enum {
+	ADDON_ID_CLIENT_MANAGER        = 0x1000000000000002,
+};
 /**
  * depend header files
  */
@@ -52,27 +55,11 @@ void new_message(int fd, struct gaia_message_t *msg) {
 	server_network->send_message(fd, msg);
 }
 
-struct gaia_addon_t *client_manager_info() {
-	static struct gaia_addon_t client_manager;
-	static struct client_manager_func_t client_manager_func;
-
-	client_manager.id = ADDON_ID_CLIENT_MANAGER;
-	client_manager.type = ADDON_TYPE_ETC;
-	client_manager.func_size = sizeof(struct client_manager_func_t);
-	client_manager.func = (struct gaia_addon_func_t *)&client_manager_func;
-	client_manager_func.basic.init = client_manager_init;
-	client_manager_func.basic.exit = client_manager_exit;
-	client_manager_func.basic.handle_message = client_manager_handle_message;
-	client_manager_func.new_client = new_client;
-	client_manager_func.new_message = new_message;
-
-	return (&client_manager);
-}
-
-void client_manager_init(struct gaia_func_t *func) {
-	config = (struct simple_config_func_t *)func->get_addon_by_id(ADDON_ID_SIMPLE_CONFIG);
-	server_network = (struct server_network_func_t *)func->get_addon_by_id(ADDON_ID_SERVER_NETWORK);
+int client_manager_init(struct gaia_func_t *func) {
+	config = (struct simple_config_func_t *)func->get_addon_by_type(ADDON_TYPE_CONFIG);
+	server_network = (struct server_network_func_t *)func->get_addon_by_type(ADDON_TYPE_SERVER_NETWORK);
 	printf("client_manager_init\n");
+	return (0);
 }
 
 void client_manager_exit(struct gaia_addon_t *addon) {
@@ -90,4 +77,21 @@ void client_manager_handle_message(struct gaia_message_t *msg) {
 //		handle_new_connection(client->fd);
 //		break;
 //	}
+}
+
+struct gaia_addon_t *client_manager_info() {
+	static struct gaia_addon_t client_manager;
+	static struct client_manager_func_t client_manager_func;
+
+	client_manager.id = ADDON_ID_CLIENT_MANAGER;
+	client_manager.type = ADDON_TYPE_CLIENT_MANAGER;
+	client_manager.func_size = sizeof(struct client_manager_func_t);
+	client_manager.func = (struct gaia_addon_func_t *)&client_manager_func;
+	client_manager_func.basic.init = client_manager_init;
+	client_manager_func.basic.exit = client_manager_exit;
+	client_manager_func.basic.handle_message = client_manager_handle_message;
+	client_manager_func.new_client = new_client;
+	client_manager_func.new_message = new_message;
+
+	return (&client_manager);
 }

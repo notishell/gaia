@@ -14,25 +14,14 @@
  *
  * author: Notis Hell (notishell@gmail.com)
  */
-#ifndef SRC_GAIA_ADDON_NETWORK_SIMPLE_NETWORK_H_
-#define SRC_GAIA_ADDON_NETWORK_SIMPLE_NETWORK_H_
-
-#include <gaia/gaia.h>
 #include <gaia/addon/addon.h>
 
-enum {
-	ADDON_ID_SIMPLE_NETWORK        = 0x2000000000000001,
-};
+int default_addon_init(struct gaia_func_t *func) {
+	return (0);
+}
 
-struct simple_network_func_t {
-	struct gaia_addon_func_t basic;
-	int (*receive_message)(struct gaia_message_t *msg);
-	int (*send_message)(struct gaia_message_t *msg);
-};
+void default_addon_exit(struct gaia_addon_t *addon) {
+}
 
-struct gaia_addon_t *simple_network_info();
-void simple_network_init(struct gaia_func_t *func);
-void simple_network_exit(struct gaia_addon_t *addon);
-void simple_network_handle_message(struct gaia_message_t *msg);
-
-#endif /* SRC_GAIA_ADDON_NETWORK_SIMPLE_NETWORK_H_ */
+void default_addon_handle_message(struct gaia_message_t *msg) {
+}

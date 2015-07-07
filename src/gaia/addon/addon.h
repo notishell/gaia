@@ -20,16 +20,16 @@
 #include <gaia/gaia.h>
 
 enum {
-	ADDON_ID_INIT 				= 0,
-	ADDON_ID_MANAGER 			= 1,
+	ADDON_ID_INIT 						= 0,
 };
 
 enum {
-	ADDON_TYPE_INIT           	= 0,
-	ADDON_TYPE_MANAGER        	= 1,
-	ADDON_TYPE_CONFIG         	= 2,
-	ADDON_TYPE_NETWORK        	= 3,
-	ADDON_TYPE_ETC            	= 4,
+	ADDON_TYPE_INIT         		  	= 0,
+	ADDON_TYPE_MANAGER  	  	    	= 1,
+	ADDON_TYPE_CLIENT_MANAGER  	  	    	= 11,
+	ADDON_TYPE_CONFIG  	    		   	= 2,
+	ADDON_TYPE_SERVER_NETWORK        	= 3,
+	ADDON_TYPE_CLIENT_NETWORK        	= 4,
 };
 
 struct gaia_addon_t;
@@ -47,5 +47,9 @@ struct gaia_addon_t {
 	u4 func_size;
 	struct gaia_addon_func_t *func;
 };
+
+int default_addon_init(struct gaia_func_t *func);
+void default_addon_exit(struct gaia_addon_t *addon);
+void default_addon_handle_message(struct gaia_message_t *msg);
 
 #endif /* SRC_GAIA_ADDON_ADDON_H_ */

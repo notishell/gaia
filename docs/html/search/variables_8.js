@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['type',['type',['../structgaia__message__t.html#a84ad0ef84bac5c6cb7377cd4019d5c6d',1,'gaia_message_t']]]
+  ['parent',['parent',['../structgaia__addon__info__t.html#a9429b0a1d372a4a4180a576758b0f6ff',1,'gaia_addon_info_t']]]
 ];

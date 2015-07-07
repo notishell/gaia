@@ -1,4 +1,4 @@
-.TH "gaia_func_t" 3 "Thu Jul 2 2015" "Version 0.9.0" "gaia" \" -*- nroff -*-
+.TH "gaia_func_t" 3 "Tue Jul 7 2015" "Version 1.0.0" "GAIA" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -15,16 +15,16 @@ gaia_func_t \-
 .RI "int(* \fBinstall\fP )(struct \fBgaia_func_t\fP *obj, struct \fBgaia_addon_t\fP *addon)"
 .br
 .ti -1c
-.RI "int(* \fBuninstall\fP )(struct \fBgaia_func_t\fP *obj, u8 id)"
+.RI "int(* \fBuninstall\fP )(struct \fBgaia_func_t\fP *obj, \fBu8\fP id)"
 .br
 .ti -1c
-.RI "struct \fBgaia_addon_func_t\fP *(* \fBget_addon_by_id\fP )(u8 id)"
+.RI "struct \fBgaia_addon_func_t\fP *(* \fBget_addon_by_id\fP )(\fBu8\fP id)"
 .br
 .ti -1c
-.RI "struct \fBgaia_addon_func_t\fP *(* \fBget_addon_by_type\fP )(u4 type)"
+.RI "struct \fBgaia_addon_func_t\fP *(* \fBget_addon_by_type\fP )(\fBu4\fP type)"
 .br
 .ti -1c
-.RI "int(* \fBget_addon_list_by_type\fP )(u4 type, int len, struct \fBgaia_addon_func_t\fP **addon)"
+.RI "int(* \fBget_addon_list_by_type\fP )(\fBu4\fP type, int len, struct \fBgaia_addon_func_t\fP **addon)"
 .br
 .ti -1c
 .RI "int(* \fBhandle_message\fP )(struct \fBgaia_message_t\fP *msg)"
@@ -46,8 +46,6 @@ if (gaia_func->install(gaia_func, simple_config_info()) == 0) {
   if (config) {
     gaia_func->handle_message(&msg);
   }
-} else {
-  gaia_func->uninstall(simple_config_info()->id);
 }
 .fi
 .PP
@@ -65,7 +63,7 @@ gaia_func->install(gaia_func, simple_config_info());
 .fi
 .PP
  
-.SS "int(* gaia_func_t::uninstall) (struct \fBgaia_func_t\fP *obj, u8 id)"
+.SS "int(* gaia_func_t::uninstall) (struct \fBgaia_func_t\fP *obj, \fBu8\fP id)"
 Method to remove add-on by add-on id\&. Only add-on's direct or indirect father can remove it\&. Return non-zero if not success\&.
 .PP
 Example:
@@ -76,7 +74,7 @@ gaia_func->uninstall(gaia_func, ADDON_ID_INIT);
 .fi
 .PP
  
-.SS "struct \fBgaia_addon_func_t\fP*(* gaia_func_t::get_addon_by_id) (u8 id)"
+.SS "struct \fBgaia_addon_func_t\fP*(* gaia_func_t::get_addon_by_id) (\fBu8\fP id)"
 Get function sets of a add-on by id\&. Use the highest version if exist 2+ add-on with same id\&.
 .PP
 Example:
@@ -91,7 +89,7 @@ if (config) {
 .fi
 .PP
  
-.SS "struct \fBgaia_addon_func_t\fP*(* gaia_func_t::get_addon_by_type) (u4 type)"
+.SS "struct \fBgaia_addon_func_t\fP*(* gaia_func_t::get_addon_by_type) (\fBu4\fP type)"
 Get function sets of a add-on by type\&. Use the last installed version if exist 2+ add-on with same type\&.
 .PP
 Example:
@@ -106,7 +104,7 @@ if (config) {
 .fi
 .PP
  
-.SS "int(* gaia_func_t::get_addon_list_by_type) (u4 type, int len, struct \fBgaia_addon_func_t\fP **addon)"
+.SS "int(* gaia_func_t::get_addon_list_by_type) (\fBu4\fP type, int len, struct \fBgaia_addon_func_t\fP **addon)"
 Get add-on function sets list by type\&. Return N or -N if find N add-ons and saved N\&. -N means buffer is not enough\&.
 .PP
 Example:
@@ -140,4 +138,4 @@ gaia_func->handle_message(&msg);
 
 .SH "Author"
 .PP 
-Generated automatically by Doxygen for gaia from the source code\&.
+Generated automatically by Doxygen for GAIA from the source code\&.

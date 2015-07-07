@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['uninstall',['uninstall',['../structgaia__func__t.html#a4546a7219975869443e4eb0c0db9dbd2',1,'gaia_func_t']]]
+  ['parent',['parent',['../structgaia__addon__info__t.html#a9429b0a1d372a4a4180a576758b0f6ff',1,'gaia_addon_info_t']]]
 ];

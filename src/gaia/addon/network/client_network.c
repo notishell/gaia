@@ -14,8 +14,12 @@
  *
  * author: Notis Hell (notishell@gmail.com)
  */
-#include <gaia/addon/config/simple_config.h>
-#include <gaia/addon/network/simple_network.h>
+#include <gaia/addon/config/direct_config.h>
+#include <gaia/addon/network/client_network.h>
+
+enum {
+	ADDON_ID_SIMPLE_NETWORK        = 0x2000000000000001,
+};
 
 /**
  * depend header files
@@ -189,30 +193,14 @@ static int send_message(struct gaia_message_t *msg) {
 	return (ret);
 }
 
-struct gaia_addon_t *simple_network_info() {
-	static struct gaia_addon_t simple_network;
-	static struct simple_network_func_t simple_network_func;
-
-	simple_network.id = ADDON_ID_SIMPLE_NETWORK;
-	simple_network.type = ADDON_TYPE_NETWORK;
-	simple_network.func_size = sizeof(struct simple_network_func_t);
-	simple_network.func = (struct gaia_addon_func_t *)&simple_network_func;
-	simple_network_func.basic.init = simple_network_init;
-	simple_network_func.basic.exit = simple_network_exit;
-	simple_network_func.basic.handle_message = simple_network_handle_message;
-	simple_network_func.receive_message = receive_message;
-	simple_network_func.send_message = send_message;
-
-	return (&simple_network);
-}
-
-void simple_network_init(struct gaia_func_t *func) {
+static int network_init(struct gaia_func_t *func) {
 	recv_buff = (char *)malloc(buff_size);
 	send_buff = (char *)malloc(buff_size);
 	config = (struct config_func_t *)func->get_addon_by_type(ADDON_TYPE_CONFIG);
+	return (0);
 }
 
-void simple_network_exit(struct gaia_addon_t *addon) {
+static void network_exit(struct gaia_addon_t *addon) {
 	if (sock > 0) {
 		close(sock);
 		sock= -1;
@@ -226,6 +214,23 @@ void simple_network_exit(struct gaia_addon_t *addon) {
 	free(send_buff);
 }
 
-void simple_network_handle_message(struct gaia_message_t *msg) {
+static void network_handle_message(struct gaia_message_t *msg) {
 	printf("simple_network_handle_message\n");
+}
+
+struct gaia_addon_t *client_network_info() {
+	static struct gaia_addon_t network;
+	static struct client_network_func_t network_func;
+
+	network.id = ADDON_ID_SIMPLE_NETWORK;
+	network.type = ADDON_TYPE_CLIENT_NETWORK;
+	network.func_size = sizeof(struct client_network_func_t);
+	network.func = (struct gaia_addon_func_t *)&network_func;
+	network_func.basic.init = network_init;
+	network_func.basic.exit = network_exit;
+	network_func.basic.handle_message = network_handle_message;
+	network_func.receive_message = receive_message;
+	network_func.send_message = send_message;
+
+	return (&network);
 }
