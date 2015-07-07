@@ -27,7 +27,26 @@ gaia_context_t \-
 .in -1c
 .SH "Detailed Description"
 .PP 
-context 
+GAIA running context\&. 
+.SH "Field Documentation"
+.PP 
+.SS "\fBu1\fP gaia_context_t::working"
+Working flag\&. Exit if set false\&. 
+.SS "pthread_rwlock_t gaia_context_t::addon_lock"
+Read-write lock for add-on list \&. 
+.SS "struct \fBlinked_list\fP gaia_context_t::addon_list"
+Add-on list\&. 
+.SS "pthread_mutex_t gaia_context_t::message_lock"
+Lock for message list\&. 
+.SS "struct \fBlinked_list\fP gaia_context_t::message_list"
+Message list\&.
+.PP
+\fBTodo\fP
+.RS 4
+use cache 
+.RE
+.PP
+
 
 .SH "Author"
 .PP 

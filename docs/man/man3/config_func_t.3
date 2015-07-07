@@ -6,6 +6,8 @@ config_func_t \-
 .SH SYNOPSIS
 .br
 .PP
+.PP
+\fC#include <direct_config\&.h>\fP
 .SS "Data Fields"
 
 .in +1c
@@ -31,6 +33,36 @@ config_func_t \-
 .RI "const char *(* \fBremote_server_service\fP )()"
 .br
 .in -1c
+.SH "Detailed Description"
+.PP 
+Get config information from config center like this\&.
+.PP
+Example: 
+.PP
+.nf
+struct config_func_t *config;
+const char **file_list;
+
+config = (struct config_func_t *)func->get_addon_by_type(ADDON_TYPE_CONFIG);
+
+if (config->check_flag(CONFIG_FLAG_LOAD_ADDON)) {
+    file_list = config->get_addon_list();
+    while (*file_list) {
+        printf("load addon : %s\n", *file_list++);
+    }
+}
+
+if (config->check_flag(CONFIG_FLAG_RUN_AS_SERVER)) {
+    printf("local server listen port : %d\n", config->get_server_port());
+    printf("local server maximum connections : %d\n", config->get_server_max_conns());
+}
+
+printf("remote server(%s:%s)\n", config->remote_server_hostname(),
+    config->remote_server_service());
+
+.fi
+.PP
+ 
 .SH "Field Documentation"
 .PP 
 .SS "struct \fBgaia_addon_func_t\fP config_func_t::basic"

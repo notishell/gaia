@@ -6,6 +6,8 @@ gaia_addon_t \-
 .SH SYNOPSIS
 .br
 .PP
+.PP
+\fC#include <addon\&.h>\fP
 .SS "Data Fields"
 
 .in +1c
@@ -25,6 +27,21 @@ gaia_addon_t \-
 .RI "struct \fBgaia_addon_func_t\fP * \fBfunc\fP"
 .br
 .in -1c
+.SH "Detailed Description"
+.PP 
+Add-on information\&. 
+.SH "Field Documentation"
+.PP 
+.SS "\fBu8\fP gaia_addon_t::id"
+Add-on id\&. 
+.SS "\fBu4\fP gaia_addon_t::type"
+Add-on type\&. 
+.SS "\fBu4\fP gaia_addon_t::version"
+Add-on version\&. 
+.SS "\fBu4\fP gaia_addon_t::func_size"
+Functions set size\&. 
+.SS "struct \fBgaia_addon_func_t\fP* gaia_addon_t::func"
+Pointer to functions set\&. 
 
 .SH "Author"
 .PP 

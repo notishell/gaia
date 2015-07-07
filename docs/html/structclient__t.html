@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.9.1"/>
-<title>gaia: client_t Struct Reference</title>
+<title>GAIA: client_t Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -23,10 +23,10 @@
  <tbody>
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
-   <div id="projectname">gaia
-   &#160;<span id="projectnumber">0.9.0</span>
+   <div id="projectname">GAIA
+   &#160;<span id="projectnumber">1.0.0</span>
    </div>
-   <div id="projectbrief">gaia</div>
+   <div id="projectbrief">GAIA is a tool sets for you.</div>
   </td>
  </tr>
  </tbody>
@@ -40,6 +40,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li class="current"><a href="annotated.html"><span>Data&#160;Structures</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -92,19 +93,32 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Data Fields</h2></td></tr>
-<tr class="memitem:a5c3713050b5e58e078b03adb4a4d638d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5c3713050b5e58e078b03adb4a4d638d"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>fd</b></td></tr>
-<tr class="separator:a5c3713050b5e58e078b03adb4a4d638d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae92537279e0e8a18aeda978f7efae06b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae92537279e0e8a18aeda978f7efae06b"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>port</b></td></tr>
+<tr class="separator:ae92537279e0e8a18aeda978f7efae06b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a020f22d839f74cb2eac621e11168aee7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a020f22d839f74cb2eac621e11168aee7"></a>
+char&#160;</td><td class="memItemRight" valign="bottom"><b>ip</b> [16]</td></tr>
+<tr class="separator:a020f22d839f74cb2eac621e11168aee7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae523a658936d2fc29ad4704d3eeb75c7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae523a658936d2fc29ad4704d3eeb75c7"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>recv_size</b></td></tr>
+<tr class="separator:ae523a658936d2fc29ad4704d3eeb75c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb02e4f7214423b9732f614a51882150"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aeb02e4f7214423b9732f614a51882150"></a>
+char&#160;</td><td class="memItemRight" valign="bottom"><b>recv_buff</b> [BUFF_SIZE]</td></tr>
+<tr class="separator:aeb02e4f7214423b9732f614a51882150"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9474c4092cb5c18bd6ae5d306c6c328a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9474c4092cb5c18bd6ae5d306c6c328a"></a>
+char&#160;</td><td class="memItemRight" valign="bottom"><b>send_buff</b> [BUFF_SIZE]</td></tr>
+<tr class="separator:a9474c4092cb5c18bd6ae5d306c6c328a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a025e3fe13982d4fd151c4636e89c97a6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a025e3fe13982d4fd151c4636e89c97a6"></a>
+pthread_mutex_t&#160;</td><td class="memItemRight" valign="bottom"><b>network_lock</b></td></tr>
+<tr class="separator:a025e3fe13982d4fd151c4636e89c97a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>depend header files </p>
-</div><hr/>The documentation for this struct was generated from the following file:<ul>
-<li>client_manager.c</li>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>server_network.c</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jul 2 2015 23:14:21 for gaia by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Jul 7 2015 20:51:54 for GAIA by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

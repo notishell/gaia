@@ -40,6 +40,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="annotated.html"><span>Data&#160;Structures</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -109,45 +110,48 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#ifndef SRC_GAIA_ADDON_CONFIG_DIRECT_CONFIG_H_</span></div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#define SRC_GAIA_ADDON_CONFIG_DIRECT_CONFIG_H_</span></div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &lt;gaia/addon/addon.h&gt;</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">enum</span> {</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;  CONFIG_FLAG_LOAD_ADDON        = 0x00000001,</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;  CONFIG_FLAG_USE_NETWORK       = 0x00000002,</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  CONFIG_FLAG_RUN_AS_SERVER     = 0x00000003,</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;};</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div>
-<div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="structconfig__func__t.html">   60</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structconfig__func__t.html">config_func_t</a> {</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;</div>
-<div class="line"><a name="l00065"></a><span class="lineno"><a class="line" href="structconfig__func__t.html#a1875bd2559731ddd2e72cb49ac4d9443">   65</a></span>&#160;  <span class="keyword">struct </span><a class="code" href="structgaia__addon__func__t.html">gaia_addon_func_t</a> <a class="code" href="structconfig__func__t.html#a1875bd2559731ddd2e72cb49ac4d9443">basic</a>;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;</div>
-<div class="line"><a name="l00070"></a><span class="lineno"><a class="line" href="structconfig__func__t.html#abdd2216c26c3c58163b8766b94e145f3">   70</a></span>&#160;  int (*<a class="code" href="structconfig__func__t.html#abdd2216c26c3c58163b8766b94e145f3">check_flag</a>)(<span class="keywordtype">int</span> flag);</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;</div>
-<div class="line"><a name="l00075"></a><span class="lineno"><a class="line" href="structconfig__func__t.html#a44ecb4eb2eb5926ef3e314e82ecbc754">   75</a></span>&#160;  <span class="keyword">const</span> <span class="keywordtype">char</span> **(*get_addon_list)();</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;</div>
-<div class="line"><a name="l00080"></a><span class="lineno"><a class="line" href="structconfig__func__t.html#ad5acb2a9b6703da36749c1b422048267">   80</a></span>&#160;  <span class="keywordtype">unsigned</span> int (*<a class="code" href="structconfig__func__t.html#ad5acb2a9b6703da36749c1b422048267">get_server_port</a>)();</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;</div>
-<div class="line"><a name="l00085"></a><span class="lineno"><a class="line" href="structconfig__func__t.html#a9d9b6e6c44e06cc6e305be050fb599a8">   85</a></span>&#160;  int (*<a class="code" href="structconfig__func__t.html#a9d9b6e6c44e06cc6e305be050fb599a8">get_server_max_conns</a>)();</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;</div>
-<div class="line"><a name="l00090"></a><span class="lineno"><a class="line" href="structconfig__func__t.html#a8cde41472962ec9f6fdad22857f48636">   90</a></span>&#160;  <span class="keyword">const</span> <span class="keywordtype">char</span> *(*remote_server_hostname)();</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;</div>
-<div class="line"><a name="l00095"></a><span class="lineno"><a class="line" href="structconfig__func__t.html#afd2e40a5fa61678078c0e276ba48df1d">   95</a></span>&#160;  <span class="keyword">const</span> <span class="keywordtype">char</span> *(*remote_server_service)();</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;};</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="keyword">struct </span><a class="code" href="structgaia__addon__t.html">gaia_addon_t</a> *direct_config_info();</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* SRC_GAIA_ADDON_CONFIG_DIRECT_CONFIG_H_ */</span><span class="preprocessor"></span></div>
-<div class="ttc" id="structconfig__func__t_html_a9d9b6e6c44e06cc6e305be050fb599a8"><div class="ttname"><a href="structconfig__func__t.html#a9d9b6e6c44e06cc6e305be050fb599a8">config_func_t::get_server_max_conns</a></div><div class="ttdeci">int(* get_server_max_conns)()</div><div class="ttdef"><b>Definition:</b> direct_config.h:85</div></div>
-<div class="ttc" id="structgaia__addon__func__t_html"><div class="ttname"><a href="structgaia__addon__func__t.html">gaia_addon_func_t</a></div><div class="ttdef"><b>Definition:</b> addon.h:37</div></div>
-<div class="ttc" id="structconfig__func__t_html_a1875bd2559731ddd2e72cb49ac4d9443"><div class="ttname"><a href="structconfig__func__t.html#a1875bd2559731ddd2e72cb49ac4d9443">config_func_t::basic</a></div><div class="ttdeci">struct gaia_addon_func_t basic</div><div class="ttdef"><b>Definition:</b> direct_config.h:65</div></div>
-<div class="ttc" id="structconfig__func__t_html_abdd2216c26c3c58163b8766b94e145f3"><div class="ttname"><a href="structconfig__func__t.html#abdd2216c26c3c58163b8766b94e145f3">config_func_t::check_flag</a></div><div class="ttdeci">int(* check_flag)(int flag)</div><div class="ttdef"><b>Definition:</b> direct_config.h:70</div></div>
-<div class="ttc" id="structconfig__func__t_html"><div class="ttname"><a href="structconfig__func__t.html">config_func_t</a></div><div class="ttdef"><b>Definition:</b> direct_config.h:60</div></div>
-<div class="ttc" id="structgaia__addon__t_html"><div class="ttname"><a href="structgaia__addon__t.html">gaia_addon_t</a></div><div class="ttdef"><b>Definition:</b> addon.h:43</div></div>
-<div class="ttc" id="structconfig__func__t_html_ad5acb2a9b6703da36749c1b422048267"><div class="ttname"><a href="structconfig__func__t.html#ad5acb2a9b6703da36749c1b422048267">config_func_t::get_server_port</a></div><div class="ttdeci">unsigned int(* get_server_port)()</div><div class="ttdef"><b>Definition:</b> direct_config.h:80</div></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="addon_8h.html">gaia/addon/addon.h</a>&gt;</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div>
+<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="direct__config_8h.html#a357ed50f8c02e3fbd9ab5f58aa144ddb">   30</a></span>&#160;<span class="keyword">enum</span> <a class="code" href="direct__config_8h.html#a357ed50f8c02e3fbd9ab5f58aa144ddb">config_flag</a> {</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  CONFIG_FLAG_LOAD_ADDON        = 0x00000001,</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  CONFIG_FLAG_USE_NETWORK       = 0x00000002,</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;  CONFIG_FLAG_RUN_AS_SERVER     = 0x00000003,</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;};</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;</div>
+<div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="structconfig__func__t.html">   63</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structconfig__func__t.html">config_func_t</a> {</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;</div>
+<div class="line"><a name="l00068"></a><span class="lineno"><a class="line" href="structconfig__func__t.html#a1875bd2559731ddd2e72cb49ac4d9443">   68</a></span>&#160;  <span class="keyword">struct </span><a class="code" href="structgaia__addon__func__t.html">gaia_addon_func_t</a> <a class="code" href="structconfig__func__t.html#a1875bd2559731ddd2e72cb49ac4d9443">basic</a>;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;</div>
+<div class="line"><a name="l00073"></a><span class="lineno"><a class="line" href="structconfig__func__t.html#abdd2216c26c3c58163b8766b94e145f3">   73</a></span>&#160;  int (*<a class="code" href="structconfig__func__t.html#abdd2216c26c3c58163b8766b94e145f3">check_flag</a>)(<span class="keywordtype">int</span> flag);</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;</div>
+<div class="line"><a name="l00078"></a><span class="lineno"><a class="line" href="structconfig__func__t.html#a44ecb4eb2eb5926ef3e314e82ecbc754">   78</a></span>&#160;  <span class="keyword">const</span> <span class="keywordtype">char</span> **(*get_addon_list)();</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;</div>
+<div class="line"><a name="l00083"></a><span class="lineno"><a class="line" href="structconfig__func__t.html#ad5acb2a9b6703da36749c1b422048267">   83</a></span>&#160;  <span class="keywordtype">unsigned</span> int (*<a class="code" href="structconfig__func__t.html#ad5acb2a9b6703da36749c1b422048267">get_server_port</a>)();</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;</div>
+<div class="line"><a name="l00088"></a><span class="lineno"><a class="line" href="structconfig__func__t.html#a9d9b6e6c44e06cc6e305be050fb599a8">   88</a></span>&#160;  int (*<a class="code" href="structconfig__func__t.html#a9d9b6e6c44e06cc6e305be050fb599a8">get_server_max_conns</a>)();</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;</div>
+<div class="line"><a name="l00093"></a><span class="lineno"><a class="line" href="structconfig__func__t.html#a8cde41472962ec9f6fdad22857f48636">   93</a></span>&#160;  <span class="keyword">const</span> <span class="keywordtype">char</span> *(*remote_server_hostname)();</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;</div>
+<div class="line"><a name="l00098"></a><span class="lineno"><a class="line" href="structconfig__func__t.html#afd2e40a5fa61678078c0e276ba48df1d">   98</a></span>&#160;  <span class="keyword">const</span> <span class="keywordtype">char</span> *(*remote_server_service)();</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;};</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="keyword">struct </span><a class="code" href="structgaia__addon__t.html">gaia_addon_t</a> *<a class="code" href="direct__config_8h.html#a660c16a3abe55c29698bcfbae48e3acd">direct_config_info</a>();</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* SRC_GAIA_ADDON_CONFIG_DIRECT_CONFIG_H_ */</span><span class="preprocessor"></span></div>
+<div class="ttc" id="direct__config_8h_html_a357ed50f8c02e3fbd9ab5f58aa144ddb"><div class="ttname"><a href="direct__config_8h.html#a357ed50f8c02e3fbd9ab5f58aa144ddb">config_flag</a></div><div class="ttdeci">config_flag</div><div class="ttdef"><b>Definition:</b> direct_config.h:30</div></div>
+<div class="ttc" id="structconfig__func__t_html_a9d9b6e6c44e06cc6e305be050fb599a8"><div class="ttname"><a href="structconfig__func__t.html#a9d9b6e6c44e06cc6e305be050fb599a8">config_func_t::get_server_max_conns</a></div><div class="ttdeci">int(* get_server_max_conns)()</div><div class="ttdef"><b>Definition:</b> direct_config.h:88</div></div>
+<div class="ttc" id="structgaia__addon__func__t_html"><div class="ttname"><a href="structgaia__addon__func__t.html">gaia_addon_func_t</a></div><div class="ttdef"><b>Definition:</b> addon.h:51</div></div>
+<div class="ttc" id="structconfig__func__t_html_a1875bd2559731ddd2e72cb49ac4d9443"><div class="ttname"><a href="structconfig__func__t.html#a1875bd2559731ddd2e72cb49ac4d9443">config_func_t::basic</a></div><div class="ttdeci">struct gaia_addon_func_t basic</div><div class="ttdef"><b>Definition:</b> direct_config.h:68</div></div>
+<div class="ttc" id="structconfig__func__t_html_abdd2216c26c3c58163b8766b94e145f3"><div class="ttname"><a href="structconfig__func__t.html#abdd2216c26c3c58163b8766b94e145f3">config_func_t::check_flag</a></div><div class="ttdeci">int(* check_flag)(int flag)</div><div class="ttdef"><b>Definition:</b> direct_config.h:73</div></div>
+<div class="ttc" id="structconfig__func__t_html"><div class="ttname"><a href="structconfig__func__t.html">config_func_t</a></div><div class="ttdef"><b>Definition:</b> direct_config.h:63</div></div>
+<div class="ttc" id="direct__config_8h_html_a660c16a3abe55c29698bcfbae48e3acd"><div class="ttname"><a href="direct__config_8h.html#a660c16a3abe55c29698bcfbae48e3acd">direct_config_info</a></div><div class="ttdeci">struct gaia_addon_t * direct_config_info()</div><div class="ttdef"><b>Definition:</b> direct_config.c:84</div></div>
+<div class="ttc" id="structgaia__addon__t_html"><div class="ttname"><a href="structgaia__addon__t.html">gaia_addon_t</a></div><div class="ttdef"><b>Definition:</b> addon.h:72</div></div>
+<div class="ttc" id="structconfig__func__t_html_ad5acb2a9b6703da36749c1b422048267"><div class="ttname"><a href="structconfig__func__t.html#ad5acb2a9b6703da36749c1b422048267">config_func_t::get_server_port</a></div><div class="ttdeci">unsigned int(* get_server_port)()</div><div class="ttdef"><b>Definition:</b> direct_config.h:83</div></div>
+<div class="ttc" id="addon_8h_html"><div class="ttname"><a href="addon_8h.html">addon.h</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Jul 7 2015 10:07:05 for GAIA by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Jul 7 2015 20:51:54 for GAIA by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

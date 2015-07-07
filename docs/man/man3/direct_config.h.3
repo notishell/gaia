@@ -20,7 +20,7 @@ direct_config.h \-
 
 .in +1c
 .ti -1c
-.RI "enum { \fBCONFIG_FLAG_LOAD_ADDON\fP = 0x00000001, \fBCONFIG_FLAG_USE_NETWORK\fP = 0x00000002, \fBCONFIG_FLAG_RUN_AS_SERVER\fP = 0x00000003 }"
+.RI "enum \fBconfig_flag\fP { \fBCONFIG_FLAG_LOAD_ADDON\fP = 0x00000001, \fBCONFIG_FLAG_USE_NETWORK\fP = 0x00000002, \fBCONFIG_FLAG_RUN_AS_SERVER\fP = 0x00000003 }"
 .br
 .in -1c
 .SS "Functions"
@@ -32,34 +32,15 @@ direct_config.h \-
 .in -1c
 .SH "Detailed Description"
 .PP 
-Get config information from config center like this\&.
-.PP
-Example: 
-.PP
-.nf
-struct config_func_t *config;
-const char **file_list;
-
-config = (struct config_func_t *)func->get_addon_by_type(ADDON_TYPE_CONFIG);
-
-if (config->check_flag(CONFIG_FLAG_LOAD_ADDON)) {
-    file_list = config->get_addon_list();
-    while (*file_list) {
-        printf("load addon : %s\n", *file_list++);
-    }
-}
-
-if (config->check_flag(CONFIG_FLAG_RUN_AS_SERVER)) {
-    printf("local server listen port : %d\n", config->get_server_port());
-    printf("local server maximum connections : %d\n", config->get_server_max_conns());
-}
-
-printf("remote server(%s:%s)\n", config->remote_server_hostname(),
-    config->remote_server_service());
-
-.fi
-.PP
- 
+Direct config add-on\&. 
+.SH "Enumeration Type Documentation"
+.PP 
+.SS "enum \fBconfig_flag\fP"
+Config flag\&. 
+.SH "Function Documentation"
+.PP 
+.SS "struct \fBgaia_addon_t\fP* direct_config_info ()"
+Return direct config add-on information\&. 
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for GAIA from the source code\&.

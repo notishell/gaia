@@ -6,6 +6,8 @@ gaia_addon_func_t \-
 .SH SYNOPSIS
 .br
 .PP
+.PP
+\fC#include <addon\&.h>\fP
 .SS "Data Fields"
 
 .in +1c
@@ -19,6 +21,17 @@ gaia_addon_func_t \-
 .RI "void(* \fBhandle_message\fP )(struct \fBgaia_message_t\fP *msg)"
 .br
 .in -1c
+.SH "Detailed Description"
+.PP 
+Add-on functions set\&. 
+.SH "Field Documentation"
+.PP 
+.SS "int(* gaia_addon_func_t::init) (struct \fBgaia_func_t\fP *func)"
+Initialize add-on\&. Call after install\&. 
+.SS "void(* gaia_addon_func_t::exit) (struct \fBgaia_addon_t\fP *addon)"
+Cleanup add-on\&. Call before uninstall\&. 
+.SS "void(* gaia_addon_func_t::handle_message) (struct \fBgaia_message_t\fP *msg)"
+Handle message\&. 
 
 .SH "Author"
 .PP 

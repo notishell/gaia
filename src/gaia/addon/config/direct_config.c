@@ -14,42 +14,70 @@
  *
  * author: Notis Hell (notishell@gmail.com)
  */
+
+/**
+ * @file
+ */
 #include <gaia/addon/config/direct_config.h>
 
+/**
+ * Direct config add-on id.
+ */
+#define ADDON_ID_DIRECT_CONFIG 0x1000000000000002
 
-enum {
-	ADDON_ID_DIRECT_CONFIG          = 0x1000000000000002,
-};
-
+/**
+ * Check if flag exits.
+ */
 static int check_flag(int flag) {
 	return (flag & (CONFIG_FLAG_LOAD_ADDON | CONFIG_FLAG_RUN_AS_SERVER));
 }
 
+/**
+ * Get add-on list that ready to load.
+ */
 static const char **get_addon_list() {
 	static const char *addons[] = {0};
 	return (addons);
 }
 
+/**
+ * Local server listen port.
+ */
 static unsigned int server_port() {
 	return (9999);
 }
 
+/**
+ * Local server maximum connections.
+ */
 static int server_max_conns() {
 	return (1000);
 }
 
+/**
+ * Remote server host name.
+ */
 static const char *server_hostname() {
 	return ("127.0.0.1");
 }
 
+/**
+ * Remote server host service name or port.
+ */
 static const char *server_service() {
 	return ("9999");
 }
 
+/**
+ * Init.
+ */
 static int config_init(struct gaia_func_t *func) {
 	return (0);
 }
 
+/**
+ * Exit.
+ */
 static void config_exit(struct gaia_addon_t *addon) {
 }
 

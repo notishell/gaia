@@ -14,6 +14,10 @@
  *
  * author: Notis Hell (notishell@gmail.com)
  */
+
+/**
+ * @file
+ */
 #include <gaia/addon/addon.h>
 
 int default_addon_init(struct gaia_func_t *func) {

@@ -17,20 +17,23 @@
 #ifndef SRC_GAIA_ADDON_CONFIG_DIRECT_CONFIG_H_
 #define SRC_GAIA_ADDON_CONFIG_DIRECT_CONFIG_H_
 
+/**
+ * @file
+ *
+ * Direct config add-on.
+ */
 #include <gaia/addon/addon.h>
 
 /**
- *
+ * Config flag.
  */
-enum {
+enum config_flag {
 	CONFIG_FLAG_LOAD_ADDON				= 0x00000001,
 	CONFIG_FLAG_USE_NETWORK				= 0x00000002,
 	CONFIG_FLAG_RUN_AS_SERVER			= 0x00000003,
 };
 
 /**
- * @file
- *
  * Get config information from config center like this.
  *
  * Example:
@@ -95,6 +98,9 @@ struct config_func_t {
 	const char *(*remote_server_service)();
 };
 
+/**
+ * Return direct config add-on information.
+ */
 struct gaia_addon_t *direct_config_info();
 
 #endif /* SRC_GAIA_ADDON_CONFIG_DIRECT_CONFIG_H_ */

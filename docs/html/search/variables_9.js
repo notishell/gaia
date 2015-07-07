@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['remote_5fserver_5fhostname',['remote_server_hostname',['../structconfig__func__t.html#a8cde41472962ec9f6fdad22857f48636',1,'config_func_t']]],
-  ['remote_5fserver_5fservice',['remote_server_service',['../structconfig__func__t.html#afd2e40a5fa61678078c0e276ba48df1d',1,'config_func_t']]]
+  ['list',['list',['../structgaia__message__list__t.html#a26cd0ba5168ee9d08140d44e59032d69',1,'gaia_message_list_t']]],
+  ['load_5faddon',['load_addon',['../structloader__func__t.html#ad85bcd95e268e4ad8f6d7dd6c1fcd4a5',1,'loader_func_t']]]
 ];

@@ -17,20 +17,35 @@
 #ifndef SRC_GAIA_ADDON_LOADER_DIRECT_LOADER_H_
 #define SRC_GAIA_ADDON_LOADER_DIRECT_LOADER_H_
 
+/**
+ * @file
+ */
 #include <gaia/addon/addon.h>
 
+/**
+ * Loader functions set.
+ */
 struct loader_func_t {
 
 	/**
-	 * Basic.
+	 * Basic functions set.
 	 */
 	struct gaia_addon_func_t basic;
 
+	/**
+	 * Load a add-on.
+	 */
 	int (*load_addon)(const char *addon);
 
+	/**
+	 * Unload a add-on.
+	 */
 	void (*unload_addon)(const char *addon);
 };
 
+/**
+ * Direct loader add-on information.
+ */
 struct gaia_addon_t *direct_loader_info();
 
 #endif /* SRC_GAIA_ADDON_LOADER_DIRECT_LOADER_H_ */

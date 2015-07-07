@@ -1,4 +1,4 @@
-.TH "client_t" 3 "Thu Jul 2 2015" "Version 0.9.0" "gaia" \" -*- nroff -*-
+.TH "client_t" 3 "Tue Jul 7 2015" "Version 1.0.0" "GAIA" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -10,13 +10,25 @@ client_t \-
 
 .in +1c
 .ti -1c
-.RI "int \fBfd\fP"
+.RI "int \fBport\fP"
+.br
+.ti -1c
+.RI "char \fBip\fP [16]"
+.br
+.ti -1c
+.RI "int \fBrecv_size\fP"
+.br
+.ti -1c
+.RI "char \fBrecv_buff\fP [BUFF_SIZE]"
+.br
+.ti -1c
+.RI "char \fBsend_buff\fP [BUFF_SIZE]"
+.br
+.ti -1c
+.RI "pthread_mutex_t \fBnetwork_lock\fP"
 .br
 .in -1c
-.SH "Detailed Description"
-.PP 
-depend header files 
 
 .SH "Author"
 .PP 
-Generated automatically by Doxygen for gaia from the source code\&.
+Generated automatically by Doxygen for GAIA from the source code\&.

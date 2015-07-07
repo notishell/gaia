@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['remote_5fserver_5fhostname',['remote_server_hostname',['../structconfig__func__t.html#a8cde41472962ec9f6fdad22857f48636',1,'config_func_t']]],
-  ['remote_5fserver_5fservice',['remote_server_service',['../structconfig__func__t.html#afd2e40a5fa61678078c0e276ba48df1d',1,'config_func_t']]]
+  ['message',['message',['../structgaia__message__list__t.html#ac58123f0b4653df661b9c61a85ae7d9f',1,'gaia_message_list_t']]],
+  ['message_5flist',['message_list',['../structgaia__context__t.html#a5e236c605b9143ca59cab760fa7acc29',1,'gaia_context_t']]],
+  ['message_5flock',['message_lock',['../structgaia__context__t.html#aab917de6647c740bda4ee827b1d15c0c',1,'gaia_context_t']]]
 ];

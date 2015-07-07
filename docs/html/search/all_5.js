@@ -1,19 +1,5 @@
 var searchData=
 [
-  ['gaia_2eh',['gaia.h',['../gaia_8h.html',1,'']]],
-  ['gaia_5faddon_5ffunc_5ft',['gaia_addon_func_t',['../structgaia__addon__func__t.html',1,'']]],
-  ['gaia_5faddon_5finfo_5ft',['gaia_addon_info_t',['../structgaia__addon__info__t.html',1,'']]],
-  ['gaia_5faddon_5ft',['gaia_addon_t',['../structgaia__addon__t.html',1,'']]],
-  ['gaia_5fcontext_5ft',['gaia_context_t',['../structgaia__context__t.html',1,'']]],
-  ['gaia_5ffunc_5ft',['gaia_func_t',['../structgaia__func__t.html',1,'']]],
-  ['gaia_5fmessage_5flist_5ft',['gaia_message_list_t',['../structgaia__message__list__t.html',1,'']]],
-  ['gaia_5fmessage_5ft',['gaia_message_t',['../structgaia__message__t.html',1,'']]],
-  ['gaia_5frunning',['gaia_running',['../gaia_8h.html#aa8bff47bcaad720ea46f4aedb997ebf9',1,'gaia.c']]],
-  ['get_5faddon_5fby_5fid',['get_addon_by_id',['../structgaia__func__t.html#a60544c4a25105105a13f644f979e39ba',1,'gaia_func_t']]],
-  ['get_5faddon_5fby_5ftype',['get_addon_by_type',['../structgaia__func__t.html#a6dc7d40e6d237a48df64651d51b037db',1,'gaia_func_t']]],
-  ['get_5faddon_5flist',['get_addon_list',['../structconfig__func__t.html#a44ecb4eb2eb5926ef3e314e82ecbc754',1,'config_func_t']]],
-  ['get_5faddon_5flist_5fby_5ftype',['get_addon_list_by_type',['../structgaia__func__t.html#aaa36dd3a916c10c84036951be1b49627',1,'gaia_func_t']]],
-  ['get_5fserver_5fmax_5fconns',['get_server_max_conns',['../structconfig__func__t.html#a9d9b6e6c44e06cc6e305be050fb599a8',1,'config_func_t']]],
-  ['get_5fserver_5fport',['get_server_port',['../structconfig__func__t.html#ad5acb2a9b6703da36749c1b422048267',1,'config_func_t']]],
-  ['gaia',['GAIA',['../index.html',1,'']]]
+  ['func',['func',['../structgaia__addon__info__t.html#a98e8118dd284d199a8ce5a495c897c31',1,'gaia_addon_info_t::func()'],['../structgaia__addon__t.html#a61cd608c35cea8bf274dbe168eaa0b67',1,'gaia_addon_t::func()']]],
+  ['func_5fsize',['func_size',['../structgaia__addon__t.html#a319ef93de197870d917ac8f9871e64e2',1,'gaia_addon_t']]]
 ];

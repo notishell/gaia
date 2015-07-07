@@ -14,13 +14,22 @@
  *
  * author: Notis Hell (notishell@gmail.com)
  */
+
+/**
+ * @file
+ */
 #include <gaia/addon/loader/direct_loader.h>
+
+/**
+ * Direct config add-on id.
+ */
+#define ADDON_ID_DIRECT_LOADER 0x1000000000000002
 
 struct gaia_addon_t *direct_loader_info() {
 	static struct gaia_addon_t addon;
 	static struct loader_func_t addon_func;
 
-	addon.id = ADDON_ID_DIRECT_CONFIG;
+	addon.id = ADDON_ID_DIRECT_LOADER;
 	addon.type = ADDON_TYPE_CONFIG;
 	addon.func_size = sizeof(struct config_func_t);
 	addon.func = (struct loader_func_t *)&addon_func;

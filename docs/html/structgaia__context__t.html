@@ -40,6 +40,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li class="current"><a href="annotated.html"><span>Data&#160;Structures</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -92,31 +93,93 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Data Fields</h2></td></tr>
-<tr class="memitem:a495808946e5364904834baccae6bfcc8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a495808946e5364904834baccae6bfcc8"></a>
-<a class="el" href="util_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a>&#160;</td><td class="memItemRight" valign="bottom"><b>working</b></td></tr>
+<tr class="memitem:a495808946e5364904834baccae6bfcc8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="util_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgaia__context__t.html#a495808946e5364904834baccae6bfcc8">working</a></td></tr>
 <tr class="separator:a495808946e5364904834baccae6bfcc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4d163de6b2562f631d11c18c375e56ce"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4d163de6b2562f631d11c18c375e56ce"></a>
-pthread_rwlock_t&#160;</td><td class="memItemRight" valign="bottom"><b>addon_lock</b></td></tr>
+<tr class="memitem:a4d163de6b2562f631d11c18c375e56ce"><td class="memItemLeft" align="right" valign="top">pthread_rwlock_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgaia__context__t.html#a4d163de6b2562f631d11c18c375e56ce">addon_lock</a></td></tr>
 <tr class="separator:a4d163de6b2562f631d11c18c375e56ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af209eccbe15a6c21d8706e8381b34959"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af209eccbe15a6c21d8706e8381b34959"></a>
-struct <a class="el" href="structlinked__list.html">linked_list</a>&#160;</td><td class="memItemRight" valign="bottom"><b>addon_list</b></td></tr>
+<tr class="memitem:af209eccbe15a6c21d8706e8381b34959"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="structlinked__list.html">linked_list</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgaia__context__t.html#af209eccbe15a6c21d8706e8381b34959">addon_list</a></td></tr>
 <tr class="separator:af209eccbe15a6c21d8706e8381b34959"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aab917de6647c740bda4ee827b1d15c0c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aab917de6647c740bda4ee827b1d15c0c"></a>
-pthread_mutex_t&#160;</td><td class="memItemRight" valign="bottom"><b>message_lock</b></td></tr>
+<tr class="memitem:aab917de6647c740bda4ee827b1d15c0c"><td class="memItemLeft" align="right" valign="top">pthread_mutex_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgaia__context__t.html#aab917de6647c740bda4ee827b1d15c0c">message_lock</a></td></tr>
 <tr class="separator:aab917de6647c740bda4ee827b1d15c0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5e236c605b9143ca59cab760fa7acc29"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5e236c605b9143ca59cab760fa7acc29"></a>
-struct <a class="el" href="structlinked__list.html">linked_list</a>&#160;</td><td class="memItemRight" valign="bottom"><b>message_list</b></td></tr>
+<tr class="memitem:a5e236c605b9143ca59cab760fa7acc29"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="structlinked__list.html">linked_list</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgaia__context__t.html#a5e236c605b9143ca59cab760fa7acc29">message_list</a></td></tr>
 <tr class="separator:a5e236c605b9143ca59cab760fa7acc29"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>context </p>
-</div><hr/>The documentation for this struct was generated from the following file:<ul>
-<li>gaia.c</li>
+<div class="textblock"><p>GAIA running context. </p>
+</div><h2 class="groupheader">Field Documentation</h2>
+<a class="anchor" id="a495808946e5364904834baccae6bfcc8"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="util_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> gaia_context_t::working</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Working flag. Exit if set false. </p>
+
+</div>
+</div>
+<a class="anchor" id="a4d163de6b2562f631d11c18c375e56ce"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">pthread_rwlock_t gaia_context_t::addon_lock</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Read-write lock for add-on list . </p>
+
+</div>
+</div>
+<a class="anchor" id="af209eccbe15a6c21d8706e8381b34959"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="structlinked__list.html">linked_list</a> gaia_context_t::addon_list</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Add-on list. </p>
+
+</div>
+</div>
+<a class="anchor" id="aab917de6647c740bda4ee827b1d15c0c"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">pthread_mutex_t gaia_context_t::message_lock</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Lock for message list. </p>
+
+</div>
+</div>
+<a class="anchor" id="a5e236c605b9143ca59cab760fa7acc29"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="structlinked__list.html">linked_list</a> gaia_context_t::message_list</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Message list.</p>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000001">Todo:</a></b></dt><dd>use cache </dd></dl>
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li><a class="el" href="gaia_8c.html">gaia.c</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Jul 7 2015 10:07:06 for GAIA by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Jul 7 2015 20:51:54 for GAIA by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

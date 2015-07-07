@@ -76,42 +76,42 @@ typedef int64_t             s8;
  * Convert host byte-order unsigned 2-byte integer to network byte-order.
  */
 static inline u2 u2_to_n2(u2 v) {
-	return (v);
+	return (htole16(v));
 }
 
 /**
  * Convert network byte-order unsigned 2-byte integer to host byte-order.
  */
 static inline u2 n2_to_u2(u2 v) {
-	return (v);
+	return (le16toh(v));
 }
 
 /**
  * Convert host byte-order unsigned 4-byte integer to network byte-order.
  */
 static inline u4 u4_to_n4(u4 v) {
-	return (v);
+	return (htole32(v));
 }
 
 /**
  * Convert network byte-order unsigned 4-byte integer to host byte-order.
  */
 static inline u4 n4_to_u4(u4 v) {
-	return (v);
+	return (le32toh(v));
 }
 
 /**
  * Convert host byte-order unsigned 8-byte integer to network byte-order.
  */
 static inline u8 u8_to_n8(u8 v) {
-	return (v);
+	return (htole64(v));
 }
 
 /**
  * Convert network byte-order unsigned 8-byte integer to host byte-order.
  */
 static inline u8 n8_to_u8(u8 v) {
-	return (v);
+	return (le64toh(v));
 }
 
 #ifdef __cplusplus

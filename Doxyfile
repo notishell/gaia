@@ -758,8 +758,8 @@ WARN_LOGFILE           =
 # spaces.
 # Note: If this tag is empty the current directory is searched.
 
-INPUT                  = src/util src/gaia src/gaia/addon src/gaia/addon/config
-                         src/gaia/addon/network
+INPUT                  = src/util src/gaia src/gaia/addon src/gaia/addon/config 
+INPUT                 += src/gaia/addon/loader src/gaia/addon/network
 
 # This tag can be used to specify the character encoding of the source files
 # that doxygen parses. Internally doxygen uses the UTF-8 encoding. Doxygen uses

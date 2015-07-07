@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['type',['type',['../structgaia__addon__info__t.html#a8b44e8f403719ecd743f078d4796a946',1,'gaia_addon_info_t::type()'],['../structgaia__message__t.html#a84ad0ef84bac5c6cb7377cd4019d5c6d',1,'gaia_message_t::type()']]]
+  ['parent',['parent',['../structgaia__addon__info__t.html#a9429b0a1d372a4a4180a576758b0f6ff',1,'gaia_addon_info_t']]],
+  ['prev',['prev',['../structlinked__list.html#a32be641487617a69cd48ee94725f3273',1,'linked_list']]]
 ];

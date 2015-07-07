@@ -17,6 +17,11 @@
 #ifndef SRC_UTIL_LIST_H_
 #define SRC_UTIL_LIST_H_
 
+/**
+ * @file
+ *
+ * Util list.
+ */
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -25,14 +30,24 @@ extern "C" {
  * Element of linked list must contain two pointers (previous, next).
  */
 struct linked_list {
+
+	/**
+	 * Previous and next node.
+	 */
 	struct linked_list *prev, *next;
 };
 
+/**
+ * Initialize a list.
+ */
 static inline void linked_list_init(struct linked_list *head) {
 	head->prev = head;
 	head->next = head;
 }
 
+/**
+ * Add element to list.
+ */
 static inline void linked_list_add(struct linked_list *head, struct linked_list *element) {
 	element->prev = head->prev;
 	element->next = head;
@@ -40,15 +55,24 @@ static inline void linked_list_add(struct linked_list *head, struct linked_list 
 	head->prev = element;
 }
 
+/**
+ * Remove element from list.
+ */
 static inline struct linked_list *linked_list_del(struct linked_list *element) {
 	element->next->prev = element->prev;
 	element->prev->next = element->next;
 	return (element);
 }
 
+/**
+ * Get list entry by list head.
+ */
 #define list_entry(ptr, type, member)\
 	(type *)((char *)(ptr) - offsetof(type, member))
 
+/**
+ * For each element in a list.
+ */
 #define list_for_each(pos, head, member)\
     for ((pos) = list_entry((head)->next, typeof(*(pos)), member);\
     &((pos)->member) != (head); (pos) = list_entry((pos)->member.next, typeof(*pos), member))

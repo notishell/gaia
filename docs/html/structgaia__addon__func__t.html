@@ -40,6 +40,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li class="current"><a href="annotated.html"><span>Data&#160;Structures</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -89,26 +90,67 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">gaia_addon_func_t Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="addon_8h_source.html">addon.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Data Fields</h2></td></tr>
-<tr class="memitem:a368df79767f59bf44fec3f764c38f55f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a368df79767f59bf44fec3f764c38f55f"></a>
-int(*&#160;</td><td class="memItemRight" valign="bottom"><b>init</b> )(struct <a class="el" href="structgaia__func__t.html">gaia_func_t</a> *func)</td></tr>
+<tr class="memitem:a368df79767f59bf44fec3f764c38f55f"><td class="memItemLeft" align="right" valign="top">int(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgaia__addon__func__t.html#a368df79767f59bf44fec3f764c38f55f">init</a> )(struct <a class="el" href="structgaia__func__t.html">gaia_func_t</a> *func)</td></tr>
 <tr class="separator:a368df79767f59bf44fec3f764c38f55f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad776b7ba3422407a920ee60549e15c88"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad776b7ba3422407a920ee60549e15c88"></a>
-void(*&#160;</td><td class="memItemRight" valign="bottom"><b>exit</b> )(struct <a class="el" href="structgaia__addon__t.html">gaia_addon_t</a> *addon)</td></tr>
+<tr class="memitem:ad776b7ba3422407a920ee60549e15c88"><td class="memItemLeft" align="right" valign="top">void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgaia__addon__func__t.html#ad776b7ba3422407a920ee60549e15c88">exit</a> )(struct <a class="el" href="structgaia__addon__t.html">gaia_addon_t</a> *addon)</td></tr>
 <tr class="separator:ad776b7ba3422407a920ee60549e15c88"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a017282eb680a04d1a9ead4168297e3d4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a017282eb680a04d1a9ead4168297e3d4"></a>
-void(*&#160;</td><td class="memItemRight" valign="bottom"><b>handle_message</b> )(struct <a class="el" href="structgaia__message__t.html">gaia_message_t</a> *msg)</td></tr>
+<tr class="memitem:a017282eb680a04d1a9ead4168297e3d4"><td class="memItemLeft" align="right" valign="top">void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgaia__addon__func__t.html#a017282eb680a04d1a9ead4168297e3d4">handle_message</a> )(struct <a class="el" href="structgaia__message__t.html">gaia_message_t</a> *msg)</td></tr>
 <tr class="separator:a017282eb680a04d1a9ead4168297e3d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Add-on functions set. </p>
+</div><h2 class="groupheader">Field Documentation</h2>
+<a class="anchor" id="a368df79767f59bf44fec3f764c38f55f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int(* gaia_addon_func_t::init) (struct <a class="el" href="structgaia__func__t.html">gaia_func_t</a> *func)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Initialize add-on. Call after install. </p>
+
+</div>
+</div>
+<a class="anchor" id="ad776b7ba3422407a920ee60549e15c88"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void(* gaia_addon_func_t::exit) (struct <a class="el" href="structgaia__addon__t.html">gaia_addon_t</a> *addon)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Cleanup add-on. Call before uninstall. </p>
+
+</div>
+</div>
+<a class="anchor" id="a017282eb680a04d1a9ead4168297e3d4"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void(* gaia_addon_func_t::handle_message) (struct <a class="el" href="structgaia__message__t.html">gaia_message_t</a> *msg)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Handle message. </p>
+
+</div>
+</div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
 <li><a class="el" href="addon_8h_source.html">addon.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Jul 7 2015 10:07:06 for GAIA by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Jul 7 2015 20:51:54 for GAIA by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

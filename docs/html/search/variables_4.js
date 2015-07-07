@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['func',['func',['../structgaia__addon__info__t.html#a98e8118dd284d199a8ce5a495c897c31',1,'gaia_addon_info_t']]]
+  ['exit',['exit',['../structgaia__addon__func__t.html#ad776b7ba3422407a920ee60549e15c88',1,'gaia_addon_func_t']]]
 ];

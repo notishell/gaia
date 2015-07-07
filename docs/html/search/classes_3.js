@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['simple_5fconfig_5ffunc_5ft',['simple_config_func_t',['../structsimple__config__func__t.html',1,'']]]
+  ['server_5fnetwork_5ffunc_5ft',['server_network_func_t',['../structserver__network__func__t.html',1,'']]]
 ];
