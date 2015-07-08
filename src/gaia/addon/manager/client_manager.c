@@ -38,7 +38,7 @@ static struct server_network_func_t *server_network;
 
 void new_client(int fd) {
 	struct gaia_message_t msg;
-	printf("handle_new_connection: %s:%d\n", server_network->get_client_ip(fd), server_network->get_client_port(fd));
+	//printf("handle_new_connection: %s:%d\n", server_network->get_client_ip(fd), server_network->get_client_port(fd));
 	msg.addon_id = 1;
 	msg.type = 2;
 	msg.size = sizeof(struct gaia_message_t);
@@ -48,7 +48,7 @@ void new_client(int fd) {
 
 
 void new_message(int fd, struct gaia_message_t *msg) {
-	printf("%lld - %d : %s\n", msg->addon_id, msg->type, msg->data);
+	//printf("%lld - %d : %s\n", msg->addon_id, msg->type, msg->data);
 	msg->addon_id = 1;
 	msg->type = 2;
 	strcpy(msg->data, "hello, how old are you????");
@@ -58,12 +58,10 @@ void new_message(int fd, struct gaia_message_t *msg) {
 int client_manager_init(struct gaia_func_t *func) {
 	config = (struct simple_config_func_t *)func->get_addon_by_type(ADDON_TYPE_CONFIG);
 	server_network = (struct server_network_func_t *)func->get_addon_by_type(ADDON_TYPE_SERVER_NETWORK);
-	printf("client_manager_init\n");
 	return (0);
 }
 
 void client_manager_exit(struct gaia_addon_t *addon) {
-	printf("client_manager_exit\n");
 }
 
 void client_manager_handle_message(struct gaia_message_t *msg) {

@@ -15,6 +15,7 @@
  * author: Notis Hell (notishell@gmail.com)
  */
 #include <stdio.h>
+#include <string.h>
 
 /**
  * @file
@@ -28,24 +29,93 @@
  */
 #define ADDON_ID_SHELL 0x1000000000000002
 
+struct shell_cmd {
+	const char *cmd;
+	int (*func)(int argc, char const *argv[]);
+};
 
+int cmd_help(int argc, char const *argv[]) {
+	fprintf(stdout, "ls xxxx\n");
+	return (0);
+}
+
+int cmd_ls(int argc, char const *argv[]) {
+	fprintf(stdout, "ls client\n");
+	return (0);
+}
+
+int cmd_quit(int argc, char const *argv[]) {
+
+	return (0);
+}
+
+static int working = 1;
 static pthread_t shell_thread;
+static struct shell_cmd cmd_list[] = {
+	{"help", cmd_help},
+	{"ls", cmd_ls},
+	{"quit", cmd_quit},
+	{"exit", cmd_quit},
+	{0, 0}
+};
+
+static int shell_process_line(char *line) {
+	int i, argc;
+	char *str; char const *argv[16];
+
+	argc = 0;
+	str = strtok(line, " \r\n\0");
+	while (str && argc < 16) {
+		argv[argc++] = str;
+		str = strtok(0, " \r\n\0");
+	}
+
+	i = 0;
+	while (cmd_list[i].cmd) {
+		if (!strcmp(cmd_list[i].cmd, argv[0])) {
+			return (cmd_list[i].func(argc, argv));
+		}
+		i++;
+	}
+
+	fprintf(stdout, "gaia command '%s' not found\n", argv[0]);
+	return (0);
+}
 
 static void *shell_work(void *para) {
-	char buff[256];
+	char *buff;
+	int ret, buff_size = 1024;
 
-	while (1) {
-		scanf("%s", buff);
-		printf("%s\n", buff);
+	buff = (char *)malloc(buff_size);
+	if (!buff) {
+		return (0);
 	}
+
+	while (working) {
+		fprintf(stdout, "\\> ");
+		fflush(stdout);
+
+		if (fgets(buff, buff_size, stdin)) {
+			ret = shell_process_line(buff);
+			if (ret != 0) {
+				fprintf(stdout, "Exit with code %d\n", ret);
+			}
+		} else {
+			break;
+		}
+	}
+
+	free(buff);
 }
 
 static int shell_init() {
+	working = 1;
 	pthread_create(&shell_thread, 0, shell_work, 0);
 	return (0);
 }
 
 static void shell_exit() {
+	working = 0;
 	pthread_join(shell_thread, 0);
 }
 

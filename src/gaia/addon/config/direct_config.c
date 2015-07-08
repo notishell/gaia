@@ -29,7 +29,8 @@
  * Check if flag exits.
  */
 static int check_flag(int flag) {
-	return (flag & (CONFIG_FLAG_LOAD_ADDON | CONFIG_FLAG_RUN_AS_SERVER));
+	return (flag & (CONFIG_FLAG_LOAD_ADDON | CONFIG_FLAG_USE_NETWORK | CONFIG_FLAG_USE_SHELL
+			| CONFIG_FLAG_RUN_AS_SERVER));
 }
 
 /**

@@ -215,13 +215,11 @@ void start_network() {
     working = 1;
 	pthread_create(&server_network_thread, 0, server_network_working, 0);
 
-	printf("start_network\n");
 	server_status = STATUS_RUNNING;
 }
 
 void stop_network() {
 	int i;
-	printf("stop_network\n");
 
 	working = 0;
 	if (STATUS_RUNNING == server_status) {
@@ -301,16 +299,13 @@ static int send_message(int fd, struct gaia_message_t *msg) {
 int server_network_init(struct gaia_func_t *func) {
 	config = (struct config_func_t *)func->get_addon_by_type(ADDON_TYPE_CONFIG);
 	gaia_func = func;
-	printf("server_network_init\n");
 	return (0);
 }
 
 void server_network_exit(struct gaia_addon_t *addon) {
-	printf("server_network_exit\n");
 }
 
 void server_network_handle_message(struct gaia_message_t *msg) {
-	printf("server_network_handle_message\n");
 }
 
 struct gaia_addon_t *server_network_info() {

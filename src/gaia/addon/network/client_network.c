@@ -215,7 +215,6 @@ static void network_exit(struct gaia_addon_t *addon) {
 }
 
 static void network_handle_message(struct gaia_message_t *msg) {
-	printf("simple_network_handle_message\n");
 }
 
 struct gaia_addon_t *client_network_info() {

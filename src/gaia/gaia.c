@@ -434,6 +434,15 @@ static void gaia_init_handle_message(struct gaia_message_t *msg) {
 			free(addon);
 			gaia_global_context.working = 0;
 		}
+	} else {
+
+
+
+
+
+
+
+		gaia_global_context.working = 0;
 	}
 }
 
