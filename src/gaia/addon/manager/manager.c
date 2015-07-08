@@ -14,12 +14,17 @@
  *
  * author: Notis Hell (notishell@gmail.com)
  */
+
+/**
+ * @file
+ */
 #include <gaia/addon/manager/manager.h>
 #include <gaia/addon/manager/client_manager.h>
 #include <gaia/addon/config/direct_config.h>
 #include <gaia/addon/loader/direct_loader.h>
 #include <gaia/addon/network/client_network.h>
 #include <gaia/addon/network/server_network.h>
+#include <gaia/addon/shell/shell.h>
 
 /**
  * depend header files
@@ -50,11 +55,11 @@ void *network_working(void *para) {
 	while (working) {
 		if (client_network->receive_message(&msg) > 0) {
 			//gaia_func->handle_message(&msg);
-			printf("%lld - %d : %s\n", msg.addon_id, msg.type, msg.data);
-			msg.addon_id = 2;
-			msg.type = 1;
-			strcat(msg.data, "im fine thanks");
-			client_network->send_message(&msg);
+//			printf("%lld - %d : %s\n", msg.addon_id, msg.type, msg.data);
+//			msg.addon_id = 2;
+//			msg.type = 1;
+//			strcat(msg.data, "im fine thanks");
+//			client_network->send_message(&msg);
 		}
 	}
 }
@@ -104,6 +109,10 @@ int manager_init(struct gaia_func_t *func) {
 	while (*path) {
 		loader->load_addon(*path);
 		path++;
+	}
+
+	if (config->check_flag(CONFIG_FLAG_USE_SHELL)) {
+		func->install(func, shell_addon_info());
 	}
 
 	if (config->check_flag(CONFIG_FLAG_USE_NETWORK)) {

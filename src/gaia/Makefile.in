@@ -102,7 +102,8 @@ am_libgaia_a_OBJECTS = libgaia_a-gaia.$(OBJEXT) \
 	addon/manager/libgaia_a-client_manager.$(OBJEXT) \
 	addon/config/libgaia_a-direct_config.$(OBJEXT) \
 	addon/network/libgaia_a-client_network.$(OBJEXT) \
-	addon/network/libgaia_a-server_network.$(OBJEXT)
+	addon/network/libgaia_a-server_network.$(OBJEXT) \
+	addon/shell/libgaia_a-shell.$(OBJEXT)
 libgaia_a_OBJECTS = $(am_libgaia_a_OBJECTS)
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
@@ -253,7 +254,7 @@ top_srcdir = @top_srcdir@
 AUTOMAKE_OPTIONS = foreign subdir-objects
 noinst_LIBRARIES = libgaia.a 
 libgaia_a_SOURCES = gaia.c addon/addon.c addon/manager/manager.c addon/manager/client_manager.c addon/config/direct_config.c \
-	addon/network/client_network.c addon/network/server_network.c
+	addon/network/client_network.c addon/network/server_network.c addon/shell/shell.c
 
 libgaia_a_CFLAGS = -I.. $(AM_CFLAGS)
 all: all-am
@@ -334,6 +335,14 @@ addon/network/libgaia_a-client_network.$(OBJEXT):  \
 addon/network/libgaia_a-server_network.$(OBJEXT):  \
 	addon/network/$(am__dirstamp) \
 	addon/network/$(DEPDIR)/$(am__dirstamp)
+addon/shell/$(am__dirstamp):
+	@$(MKDIR_P) addon/shell
+	@: > addon/shell/$(am__dirstamp)
+addon/shell/$(DEPDIR)/$(am__dirstamp):
+	@$(MKDIR_P) addon/shell/$(DEPDIR)
+	@: > addon/shell/$(DEPDIR)/$(am__dirstamp)
+addon/shell/libgaia_a-shell.$(OBJEXT): addon/shell/$(am__dirstamp) \
+	addon/shell/$(DEPDIR)/$(am__dirstamp)
 
 libgaia.a: $(libgaia_a_OBJECTS) $(libgaia_a_DEPENDENCIES) $(EXTRA_libgaia_a_DEPENDENCIES) 
 	$(AM_V_at)-rm -f libgaia.a
@@ -346,6 +355,7 @@ mostlyclean-compile:
 	-rm -f addon/config/*.$(OBJEXT)
 	-rm -f addon/manager/*.$(OBJEXT)
 	-rm -f addon/network/*.$(OBJEXT)
+	-rm -f addon/shell/*.$(OBJEXT)
 
 distclean-compile:
 	-rm -f *.tab.c
@@ -357,6 +367,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@addon/manager/$(DEPDIR)/libgaia_a-manager.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@addon/network/$(DEPDIR)/libgaia_a-client_network.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@addon/network/$(DEPDIR)/libgaia_a-server_network.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@addon/shell/$(DEPDIR)/libgaia_a-shell.Po@am__quote@
 
 .c.o:
 @am__fastdepCC_TRUE@	$(AM_V_CC)depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.o$$||'`;\
@@ -471,6 +482,20 @@ addon/network/libgaia_a-server_network.obj: addon/network/server_network.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='addon/network/server_network.c' object='addon/network/libgaia_a-server_network.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgaia_a_CFLAGS) $(CFLAGS) -c -o addon/network/libgaia_a-server_network.obj `if test -f 'addon/network/server_network.c'; then $(CYGPATH_W) 'addon/network/server_network.c'; else $(CYGPATH_W) '$(srcdir)/addon/network/server_network.c'; fi`
+
+addon/shell/libgaia_a-shell.o: addon/shell/shell.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgaia_a_CFLAGS) $(CFLAGS) -MT addon/shell/libgaia_a-shell.o -MD -MP -MF addon/shell/$(DEPDIR)/libgaia_a-shell.Tpo -c -o addon/shell/libgaia_a-shell.o `test -f 'addon/shell/shell.c' || echo '$(srcdir)/'`addon/shell/shell.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) addon/shell/$(DEPDIR)/libgaia_a-shell.Tpo addon/shell/$(DEPDIR)/libgaia_a-shell.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='addon/shell/shell.c' object='addon/shell/libgaia_a-shell.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgaia_a_CFLAGS) $(CFLAGS) -c -o addon/shell/libgaia_a-shell.o `test -f 'addon/shell/shell.c' || echo '$(srcdir)/'`addon/shell/shell.c
+
+addon/shell/libgaia_a-shell.obj: addon/shell/shell.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgaia_a_CFLAGS) $(CFLAGS) -MT addon/shell/libgaia_a-shell.obj -MD -MP -MF addon/shell/$(DEPDIR)/libgaia_a-shell.Tpo -c -o addon/shell/libgaia_a-shell.obj `if test -f 'addon/shell/shell.c'; then $(CYGPATH_W) 'addon/shell/shell.c'; else $(CYGPATH_W) '$(srcdir)/addon/shell/shell.c'; fi`
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) addon/shell/$(DEPDIR)/libgaia_a-shell.Tpo addon/shell/$(DEPDIR)/libgaia_a-shell.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='addon/shell/shell.c' object='addon/shell/libgaia_a-shell.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgaia_a_CFLAGS) $(CFLAGS) -c -o addon/shell/libgaia_a-shell.obj `if test -f 'addon/shell/shell.c'; then $(CYGPATH_W) 'addon/shell/shell.c'; else $(CYGPATH_W) '$(srcdir)/addon/shell/shell.c'; fi`
 
 ID: $(am__tagged_files)
 	$(am__define_uniq_tagged_files); mkid -fID $$unique
@@ -592,6 +617,8 @@ distclean-generic:
 	-rm -f addon/manager/$(am__dirstamp)
 	-rm -f addon/network/$(DEPDIR)/$(am__dirstamp)
 	-rm -f addon/network/$(am__dirstamp)
+	-rm -f addon/shell/$(DEPDIR)/$(am__dirstamp)
+	-rm -f addon/shell/$(am__dirstamp)
 
 maintainer-clean-generic:
 	@echo "This command is intended for maintainers to use"
@@ -601,7 +628,7 @@ clean: clean-am
 clean-am: clean-generic clean-noinstLIBRARIES mostlyclean-am
 
 distclean: distclean-am
-	-rm -rf ./$(DEPDIR) addon/$(DEPDIR) addon/config/$(DEPDIR) addon/manager/$(DEPDIR) addon/network/$(DEPDIR)
+	-rm -rf ./$(DEPDIR) addon/$(DEPDIR) addon/config/$(DEPDIR) addon/manager/$(DEPDIR) addon/network/$(DEPDIR) addon/shell/$(DEPDIR)
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
 	distclean-tags
@@ -647,7 +674,7 @@ install-ps-am:
 installcheck-am:
 
 maintainer-clean: maintainer-clean-am
-	-rm -rf ./$(DEPDIR) addon/$(DEPDIR) addon/config/$(DEPDIR) addon/manager/$(DEPDIR) addon/network/$(DEPDIR)
+	-rm -rf ./$(DEPDIR) addon/$(DEPDIR) addon/config/$(DEPDIR) addon/manager/$(DEPDIR) addon/network/$(DEPDIR) addon/shell/$(DEPDIR)
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic
 

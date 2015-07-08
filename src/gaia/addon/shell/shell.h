@@ -17,6 +17,25 @@
 #ifndef SRC_GAIA_ADDON_SHELL_SHELL_H_
 #define SRC_GAIA_ADDON_SHELL_SHELL_H_
 
+/**
+ * @file
+ */
+#include <gaia/addon/addon.h>
 
+/**
+ * Shell functions set.
+ */
+struct shell_func_t {
+
+	/**
+	 * Basic functions set.
+	 */
+	struct gaia_addon_func_t basic;
+};
+
+/**
+ * Shell add-on information.
+ */
+struct gaia_addon_t *shell_addon_info();
 
 #endif /* SRC_GAIA_ADDON_SHELL_SHELL_H_ */

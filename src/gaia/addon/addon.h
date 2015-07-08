@@ -35,12 +35,13 @@ enum addon_id {
  * Add-on types define here.
  */
 enum addon_type {
-	ADDON_TYPE_INIT         		  	= 0,
-	ADDON_TYPE_MANAGER  	  	    	= 1,
-	ADDON_TYPE_CLIENT_MANAGER  	  	    = 2,
-	ADDON_TYPE_CONFIG  	    		   	= 3,
-	ADDON_TYPE_SERVER_NETWORK        	= 4,
-	ADDON_TYPE_CLIENT_NETWORK        	= 5,
+	ADDON_TYPE_INIT         		  	= 0x00000000,
+	ADDON_TYPE_CONFIG  	    		   	= 0x00000010,
+	ADDON_TYPE_SERVER_NETWORK        	= 0x00000100,
+	ADDON_TYPE_CLIENT_NETWORK        	= 0x00000200,
+	ADDON_TYPE_MANAGER  	  	    	= 0x00001000,
+	ADDON_TYPE_CLIENT_MANAGER  	  	    = 0x00002000,
+	ADDON_TYPE_USER_INTERFACE  	  	    = 0x00010000,
 };
 
 struct gaia_addon_t;
