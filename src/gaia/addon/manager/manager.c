@@ -30,7 +30,8 @@
  * depend header files
  */
 #include <stdio.h>
-#include <String.h>
+#include <string.h>
+#include <stdlib.h>
 
 enum {
 	MSG_TYPE_START             = 0,
@@ -54,12 +55,13 @@ void *network_working(void *para) {
 
 	while (working) {
 		if (client_network->receive_message(&msg) > 0) {
+			sleep(1);
 			//gaia_func->handle_message(&msg);
-//			printf("%lld - %d : %s\n", msg.addon_id, msg.type, msg.data);
-//			msg.addon_id = 2;
-//			msg.type = 1;
-//			strcat(msg.data, "im fine thanks");
-//			client_network->send_message(&msg);
+			printf("%lld - %d : %s\n", msg.addon_id, msg.type, msg.data);
+			msg.addon_id = 2;
+			msg.type = 1;
+			strcat(msg.data, "im fine thanks");
+			client_network->send_message(&msg);
 		}
 	}
 }
@@ -89,9 +91,9 @@ void manager_restart() {
 int manager_init(struct gaia_func_t *func) {
 	const char **path;
 	struct gaia_message_t dowork_msg = {
-	    ADDON_ID_MANAGER, MSG_TYPE_START, 0
+	    ADDON_ID_MANAGER, MSG_TYPE_START, 16
 	};
-	func->handle_message(&dowork_msg);
+	//func->handle_message(&dowork_msg);
 
 	func->install(func, direct_config_info());
 	func->install(func, client_network_info());
@@ -134,6 +136,9 @@ int manager_init(struct gaia_func_t *func) {
 }
 
 void manager_exit(struct gaia_addon_t *addon) {
+	manager_stop();
+	free(addon->func);
+	free(addon);
 }
 
 void manager_handle_message(struct gaia_message_t *msg) {
@@ -150,4 +155,32 @@ void manager_handle_message(struct gaia_message_t *msg) {
 	default:
 		break;
 	}
+}
+
+struct gaia_addon_t *manager_addon_info() {
+	static struct gaia_addon_t *manager;
+	static struct manager_func_t *manager_func;
+
+	if (!manager_func) {
+		manager_func = (struct manager_func_t *)malloc(sizeof(struct manager_func_t));
+		if (!manager_func) {
+			return (0);
+		}
+		manager_func->basic.init = manager_init;
+		manager_func->basic.exit = manager_exit;
+		manager_func->basic.handle_message = manager_handle_message;
+	}
+
+	if (!manager) {
+		manager = (struct gaia_addon_t *)malloc(sizeof(struct gaia_addon_t));
+		if (!manager) {
+			return (0);
+		}
+		manager->id = ADDON_ID_MANAGER;
+		manager->type = ADDON_TYPE_MANAGER;
+		manager->func_size = sizeof(struct client_manager_func_t);
+		manager->func = (struct gaia_addon_func_t *)manager_func;
+	}
+
+	return (manager);
 }

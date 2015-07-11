@@ -20,11 +20,13 @@
 #include <gaia/addon/addon.h>
 
 enum {
-	ADDON_ID_MANAGER        = 0x1000000000000002,
+	ADDON_ID_MANAGER        = 0x1000000000000012,
 };
 
-int manager_init(struct gaia_func_t *func);
-void manager_exit(struct gaia_addon_t *addon);
-void manager_handle_message(struct gaia_message_t *msg);
+struct manager_func_t {
+	struct gaia_addon_func_t basic;
+};
+
+struct gaia_addon_t *manager_addon_info();
 
 #endif /* SRC_GAIA_ADDON_MANAGER_H_ */

@@ -19,7 +19,7 @@
 #include <gaia/addon/network/server_network.h>
 
 enum {
-	ADDON_ID_SERVER_NETWORK        = 0x2000000000000002,
+	ADDON_ID_SERVER_NETWORK        = 0x20000032100002,
 };
 
 /**

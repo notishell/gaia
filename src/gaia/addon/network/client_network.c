@@ -18,7 +18,7 @@
 #include <gaia/addon/network/client_network.h>
 
 enum {
-	ADDON_ID_SIMPLE_NETWORK        = 0x2000000000000001,
+	ADDON_ID_SIMPLE_NETWORK        = 0x200012340001,
 };
 
 /**

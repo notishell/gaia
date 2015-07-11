@@ -19,7 +19,7 @@
 #include <gaia/addon/network/server_network.h>
 
 enum {
-	ADDON_ID_CLIENT_MANAGER        = 0x1000000000000002,
+	ADDON_ID_CLIENT_MANAGER        = 0x1000000000000022,
 };
 /**
  * depend header files
@@ -38,7 +38,7 @@ static struct server_network_func_t *server_network;
 
 void new_client(int fd) {
 	struct gaia_message_t msg;
-	//printf("handle_new_connection: %s:%d\n", server_network->get_client_ip(fd), server_network->get_client_port(fd));
+	printf("handle_new_connection: %s:%d\n", server_network->get_client_ip(fd), server_network->get_client_port(fd));
 	msg.addon_id = 1;
 	msg.type = 2;
 	msg.size = sizeof(struct gaia_message_t);
@@ -48,7 +48,7 @@ void new_client(int fd) {
 
 
 void new_message(int fd, struct gaia_message_t *msg) {
-	//printf("%lld - %d : %s\n", msg->addon_id, msg->type, msg->data);
+	printf("%lld - %d : %s\n", msg->addon_id, msg->type, msg->data);
 	msg->addon_id = 1;
 	msg->type = 2;
 	strcpy(msg->data, "hello, how old are you????");

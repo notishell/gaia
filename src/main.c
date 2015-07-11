@@ -17,5 +17,6 @@
 
 int main (void) {
 	gaia_running();
+	exit(0);
     return (0);
 }

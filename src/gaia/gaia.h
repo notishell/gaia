@@ -133,6 +133,50 @@ struct gaia_func_t {
 	int (*uninstall)(struct gaia_func_t *obj, u8 id);
 
 	/**
+	 * Count how many add-on exist. Return negative value if failed.
+	 *
+	 * Example:
+	 *
+	 * @code
+	 * 		int count = gaia_func->count_addon();
+	 * @endcode
+	 */
+	int (*count_addon)();
+
+	/**
+	 * Count how many add-on of certain type exist. Return negative value if failed.
+	 *
+	 * Example:
+	 *
+	 * @code
+	 * 		int count = gaia_func->count_addon_by_type(ADDON_TYPE_CONFIG);
+	 * @endcode
+	 */
+	int (*count_addon_by_type)(u4 type);
+
+	/**
+	 * Get last installed add-on index. Never failed.
+	 *
+	 * Example:
+	 *
+	 * @code
+	 * 		int count = gaia_func->get_last_index();
+	 * @endcode
+	 */
+	int (*get_last_index)();
+
+	/**
+	 * Get the idx-th add-on information. Return 0 if not find.
+	 *
+	 * Example:
+	 *
+	 * @code
+	 * 		struct gaia_addon_t *init = gaia_func->get_addon_info(0);
+	 * @endcode
+	 */
+	struct gaia_addon_t *(*get_addon_info)(int idx);
+
+	/**
 	 * Get function sets of a add-on by id. Use the highest version if exist 2+ add-on
 	 * with same id.
 	 *

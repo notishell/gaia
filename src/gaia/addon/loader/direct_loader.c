@@ -23,7 +23,7 @@
 /**
  * Direct config add-on id.
  */
-#define ADDON_ID_DIRECT_LOADER 0x1000000000000002
+#define ADDON_ID_DIRECT_LOADER 0x100000000002222
 
 struct gaia_addon_t *direct_loader_info() {
 	static struct gaia_addon_t addon;

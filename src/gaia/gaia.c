@@ -35,25 +35,9 @@
 struct gaia_addon_info_t {
 
 	/**
-	 * Add-on id.
-	 *
-	 * @see gaia_addon_t
+	 * Add-on index.
 	 */
-	u8 id;
-
-	/**
-	 * Add-on type.
-	 *
-	 * @see gaia_addon_t
-	 */
-	u4 type;
-
-	/**
-	 * Add-on version.
-	 *
-	 * @see gaia_addon_t
-	 */
-	u4 version;
+	int index;
 
 	/**
 	 * Function sets. Each add-on has a private sets.
@@ -66,6 +50,11 @@ struct gaia_addon_info_t {
 	 * Pointer to parent add-on.
 	 */
 	struct gaia_addon_info_t *parent;
+
+	/**
+	 * Son list lock.
+	 */
+	pthread_mutex_t list_lock;
 
 	/**
 	 * Son list.
@@ -81,6 +70,13 @@ struct gaia_addon_info_t {
 	 * All add-ons linked as a list.
 	 */
 	struct linked_list addon_list;
+
+	/**
+	 * Add-on information for reader.
+	 *
+	 * @see gaia_addon_t
+	 */
+	struct gaia_addon_t addon_info;
 
 	/**
 	 * Original add-on information.
@@ -133,6 +129,11 @@ struct gaia_context_t {
 	u1 working;
 
 	/**
+	 * Last add-on index.
+	 */
+	int index;
+
+	/**
 	 * Read-write lock for add-on list .
 	 */
 	pthread_rwlock_t addon_lock;
@@ -175,6 +176,26 @@ static int install(struct gaia_func_t *obj, struct gaia_addon_t *addon);
 static int uninstall(struct gaia_func_t *obj, u8 id);
 
 /**
+ * Count how many add-on exist. Return negative value if failed.
+ */
+static int count_addon();
+
+/**
+ * Count how many add-on of certain type exist. Return negative value if failed.
+ */
+static int count_addon_by_type(u4 type);
+
+/**
+ * Get last installed add-on index. Never failed.
+ */
+static int get_last_index();
+
+/**
+ * Get the idx-th add-on information. Return 0 if not find.
+ */
+static struct gaia_addon_t *get_addon_info(int idx);
+
+/**
  * Get add-on by id.
  */
 static struct gaia_addon_func_t *get_addon_by_id(u8 id);
@@ -213,13 +234,13 @@ struct gaia_addon_func_t gaia_init_func = {
  */
 struct gaia_addon_info_t gaia_init_addon = {
 	0,
-	ADDON_TYPE_INIT,
-	0,
 	{install, uninstall},
 	0, // no parent
+	PTHREAD_MUTEX_INITIALIZER,
 	{&gaia_init_addon.son_list, &gaia_init_addon.son_list},
 	{&gaia_init_addon.bro_list, &gaia_init_addon.bro_list},
 	{&gaia_global_context.addon_list, &gaia_global_context.addon_list},
+	{0, 0, ADDON_TYPE_INIT, 0, 0},
 	0,
 	&gaia_init_func,
 };
@@ -237,6 +258,7 @@ struct gaia_message_list_t gaia_msg_init = {
  */
 struct gaia_context_t gaia_global_context = {
 	1,
+	0,
 	PTHREAD_RWLOCK_INITIALIZER,
 	{&gaia_init_addon.addon_list, &gaia_init_addon.addon_list},
 	PTHREAD_MUTEX_INITIALIZER,
@@ -259,29 +281,44 @@ static int install(struct gaia_func_t *obj, struct gaia_addon_t *addon) {
 		return (-2);
 	}
 
-	info->id = addon->id;
-	info->type = addon->type;
-	info->version = addon->version;
 	info->func.install = install;
 	info->func.uninstall = uninstall;
+	info->func.count_addon = count_addon;
+	info->func.count_addon_by_type = count_addon_by_type;
+	info->func.get_last_index = get_last_index;
+	info->func.get_addon_info = get_addon_info;
 	info->func.get_addon_by_id = get_addon_by_id;
 	info->func.get_addon_by_type = get_addon_by_type;
 	info->func.get_addon_list_by_type = get_addon_list_by_type;
 	info->func.handle_message = handle_message;
+	memcpy(&info->addon_info, addon, sizeof(struct gaia_addon_t));
 	info->addon_orig = addon;
 	info->addon_func = addon->func;
+	pthread_mutex_init(&info->list_lock, 0);
+	info->son_list.prev = &info->son_list;
+	info->son_list.next = &info->son_list;
+	info->bro_list.prev = &info->bro_list;
+	info->bro_list.next = &info->bro_list;
 
 	/**
-	 * check caller
+	 * Check caller.
+	 * Check if exists.
 	 */
 	pthread_rwlock_wrlock(&gaia_global_context.addon_lock);
 	list_for_each(src, &gaia_global_context.addon_list, addon_list) {
 		if (&src->func == obj) {
 			valid = 1;
 			info->parent = src;
-			linked_list_add(&gaia_global_context.addon_list, &info->addon_list);
+		}
+		if (src->addon_info.id == info->addon_info.id && &src->func != obj) {
+			valid = 0;
 			break;
 		}
+	}
+	if (valid) {
+		info->index = ++gaia_global_context.index;
+		linked_list_add(&info->parent->son_list, &info->bro_list);
+		linked_list_add(&gaia_global_context.addon_list, &info->addon_list);
 	}
 	pthread_rwlock_unlock(&gaia_global_context.addon_lock);
 
@@ -293,6 +330,7 @@ static int install(struct gaia_func_t *obj, struct gaia_addon_t *addon) {
 	valid = addon->func->init(&info->func);
 	if (valid != 0) {
 		pthread_rwlock_wrlock(&gaia_global_context.addon_lock);
+		linked_list_del(&info->bro_list);
 		linked_list_del(&info->addon_list);
 		pthread_rwlock_unlock(&gaia_global_context.addon_lock);
 		free(info);
@@ -305,11 +343,11 @@ static int install(struct gaia_func_t *obj, struct gaia_addon_t *addon) {
  */
 static int uninstall(struct gaia_func_t *obj, u8 id) {
 	int valid = 0;
-	struct gaia_addon_info_t *addon = 0, *parent = 0;
+	struct gaia_addon_info_t *tmp, *addon = 0, *parent = 0;
 
 	pthread_rwlock_rdlock(&gaia_global_context.addon_lock);
 	list_for_each(addon, &gaia_global_context.addon_list, addon_list) {
-		if (addon->id == id) {
+		if (addon->addon_info.id == id) {
 			parent = addon->parent;
 			if (&(parent->func) == obj) {
 				valid = 1;
@@ -323,12 +361,81 @@ static int uninstall(struct gaia_func_t *obj, u8 id) {
 		return (-1);
 	}
 
-	addon->addon_func->exit(addon->addon_orig);
+	pthread_mutex_lock(&addon->list_lock);
+	list_for_each(tmp, &addon->son_list, son_list) {
+		uninstall(&addon->func, tmp->addon_info.id);
+	}
+	pthread_mutex_unlock(&addon->list_lock);
+
 	pthread_rwlock_wrlock(&gaia_global_context.addon_lock);
+	linked_list_del(&addon->bro_list);
 	linked_list_del(&addon->addon_list);
 	pthread_rwlock_unlock(&gaia_global_context.addon_lock);
+
+	addon->addon_func->exit(addon->addon_orig);
+	pthread_mutex_destroy(&addon->list_lock);
 	free(addon);
 	return (0);
+}
+
+/**
+ * @see gaia_func_t
+ */
+static int count_addon() {
+	int count = 0;
+	struct gaia_addon_info_t *src = 0;
+
+	pthread_rwlock_rdlock(&gaia_global_context.addon_lock);
+	list_for_each(src, &gaia_global_context.addon_list, addon_list) {
+		count++;
+	}
+	pthread_rwlock_unlock(&gaia_global_context.addon_lock);
+
+	return (count);
+}
+
+/**
+ * @see gaia_func_t
+ */
+static int count_addon_by_type(u4 type) {
+	int count = 0;
+	struct gaia_addon_info_t *src = 0;
+
+	pthread_rwlock_rdlock(&gaia_global_context.addon_lock);
+	list_for_each(src, &gaia_global_context.addon_list, addon_list) {
+		if (src->addon_info.type == type) {
+			count++;
+		}
+	}
+	pthread_rwlock_unlock(&gaia_global_context.addon_lock);
+
+	return (count);
+}
+
+/**
+ * @see gaia_func_t
+ */
+static int get_last_index() {
+	return (gaia_global_context.index);
+}
+
+/**
+ * @see gaia_func_t
+ */
+static struct gaia_addon_t *get_addon_info(int idx) {
+	struct gaia_addon_t *addon = 0;
+	struct gaia_addon_info_t *src = 0;
+
+	pthread_rwlock_rdlock(&gaia_global_context.addon_lock);
+	list_for_each(src, &gaia_global_context.addon_list, addon_list) {
+		if (src->index == idx) {
+			addon = &src->addon_info;
+			break;
+		}
+	}
+	pthread_rwlock_unlock(&gaia_global_context.addon_lock);
+
+	return (addon);
 }
 
 /**
@@ -339,7 +446,8 @@ static struct gaia_addon_func_t *get_addon_by_id(u8 id) {
 
 	pthread_rwlock_rdlock(&gaia_global_context.addon_lock);
 	list_for_each(src, &gaia_global_context.addon_list, addon_list) {
-		if (src->id == id && (addon == 0 || addon->version <= src->version)) {
+		if (src->addon_info.id == id && (addon == 0 || addon->addon_info.version <=
+				src->addon_info.version)) {
 			addon = src;
 		}
 	}
@@ -356,7 +464,7 @@ static struct gaia_addon_func_t *get_addon_by_type(u4 type) {
 
 	pthread_rwlock_rdlock(&gaia_global_context.addon_lock);
 	list_for_each(src, &gaia_global_context.addon_list, addon_list) {
-		if (src->type == type) {
+		if (src->addon_info.type == type) {
 			addon = src;
 		}
 	}
@@ -377,7 +485,7 @@ static int get_addon_list_by_type(u4 type, int len, struct gaia_addon_func_t **a
 
 	pthread_rwlock_rdlock(&gaia_global_context.addon_lock);
 	list_for_each(src, &gaia_global_context.addon_list, addon_list) {
-		if (src->type == type) {
+		if (src->addon_info.type == type) {
 			if (count >= len) {
 				enough = 0;
 				break;
@@ -401,7 +509,7 @@ static int handle_message(struct gaia_message_t *msg) {
 	if (!msg_entry) {
 		return (-1);
 	}
-	memcpy(&(msg_entry->message), msg, sizeof(struct gaia_message_t));
+	memcpy(&(msg_entry->message), msg, msg->size);
 
 	pthread_mutex_lock(&gaia_global_context.message_lock);
 	linked_list_add(&gaia_global_context.message_list, &msg_entry->list);
@@ -411,38 +519,21 @@ static int handle_message(struct gaia_message_t *msg) {
 }
 
 static void gaia_init_handle_message(struct gaia_message_t *msg) {
-	struct gaia_addon_t *addon;
+	static struct gaia_addon_t *addon;
 
 	if (msg->type == 0) {
-		addon = (struct gaia_addon_t *)malloc(sizeof(struct gaia_addon_t));
+		addon = manager_addon_info();
 		if (!addon) {
 			return;
 		}
-		addon->id = ADDON_ID_MANAGER;
-		addon->type = ADDON_TYPE_MANAGER;
-
-		addon->func = (struct gaia_addon_func_t *)malloc(sizeof(struct gaia_addon_func_t));
-		if (!addon->func) {
-			free(addon);
-			return;
-		}
-		addon->func->init = manager_init;
-		addon->func->exit = manager_exit;
-		addon->func->handle_message = manager_handle_message;
 
 		if (install(&gaia_init_addon.func, addon) != 0) {
-			free(addon);
 			gaia_global_context.working = 0;
 		}
-	} else {
-
-
-
-
-
-
-
-		gaia_global_context.working = 0;
+	} else if (msg->type == 1) {
+		if (uninstall(&gaia_init_addon.func, ADDON_ID_MANAGER) == 0) {
+			gaia_global_context.working = 0;
+		}
 	}
 }
 
@@ -471,7 +562,7 @@ void gaia_running(void) {
 		valid = 0;
 		pthread_rwlock_rdlock(&gaia_global_context.addon_lock);
 		list_for_each(addon, &gaia_global_context.addon_list, addon_list) {
-			if (addon->id == msg->addon_id) {
+			if (addon->addon_info.id == msg->addon_id) {
 				valid = 1;
 				break;
 			}

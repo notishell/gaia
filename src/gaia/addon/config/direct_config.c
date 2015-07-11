@@ -23,7 +23,7 @@
 /**
  * Direct config add-on id.
  */
-#define ADDON_ID_DIRECT_CONFIG 0x1000000000000002
+#define ADDON_ID_DIRECT_CONFIG 0x10000032002
 
 /**
  * Check if flag exits.
