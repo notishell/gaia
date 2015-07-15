@@ -99,6 +99,14 @@ Data Fields</h2></td></tr>
 <tr class="separator:a04ac13f098f19251704f009087bf1b4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4546a7219975869443e4eb0c0db9dbd2"><td class="memItemLeft" align="right" valign="top">int(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgaia__func__t.html#a4546a7219975869443e4eb0c0db9dbd2">uninstall</a> )(struct <a class="el" href="structgaia__func__t.html">gaia_func_t</a> *obj, <a class="el" href="util_8h.html#ae4d1c3d548028e31400378ec81026110">u8</a> id)</td></tr>
 <tr class="separator:a4546a7219975869443e4eb0c0db9dbd2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4bf0fb2ed95a6790dc30cb3fee0ec33c"><td class="memItemLeft" align="right" valign="top">int(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgaia__func__t.html#a4bf0fb2ed95a6790dc30cb3fee0ec33c">count_addon</a> )()</td></tr>
+<tr class="separator:a4bf0fb2ed95a6790dc30cb3fee0ec33c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a608aae2d0abe79d8002a16d6cb36f4b1"><td class="memItemLeft" align="right" valign="top">int(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgaia__func__t.html#a608aae2d0abe79d8002a16d6cb36f4b1">count_addon_by_type</a> )(<a class="el" href="util_8h.html#ae5be1f726785414dd1b77d60df074c9d">u4</a> type)</td></tr>
+<tr class="separator:a608aae2d0abe79d8002a16d6cb36f4b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36b70ab2c2ed0f50073e7d0678a7893f"><td class="memItemLeft" align="right" valign="top">int(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgaia__func__t.html#a36b70ab2c2ed0f50073e7d0678a7893f">get_last_index</a> )()</td></tr>
+<tr class="separator:a36b70ab2c2ed0f50073e7d0678a7893f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a822dee0ef51aec5a430cde8e5cadda3f"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="structgaia__addon__t.html">gaia_addon_t</a> *(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgaia__func__t.html#a822dee0ef51aec5a430cde8e5cadda3f">get_addon_info</a> )(int idx)</td></tr>
+<tr class="separator:a822dee0ef51aec5a430cde8e5cadda3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a60544c4a25105105a13f644f979e39ba"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="structgaia__addon__func__t.html">gaia_addon_func_t</a> *(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgaia__func__t.html#a60544c4a25105105a13f644f979e39ba">get_addon_by_id</a> )(<a class="el" href="util_8h.html#ae4d1c3d548028e31400378ec81026110">u8</a> id)</td></tr>
 <tr class="separator:a60544c4a25105105a13f644f979e39ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6dc7d40e6d237a48df64651d51b037db"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="structgaia__addon__func__t.html">gaia_addon_func_t</a> *(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgaia__func__t.html#a6dc7d40e6d237a48df64651d51b037db">get_addon_by_type</a> )(<a class="el" href="util_8h.html#ae5be1f726785414dd1b77d60df074c9d">u4</a> type)</td></tr>
@@ -151,6 +159,66 @@ Data Fields</h2></td></tr>
 </div><!-- fragment --> 
 </div>
 </div>
+<a class="anchor" id="a4bf0fb2ed95a6790dc30cb3fee0ec33c"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int(* gaia_func_t::count_addon) ()</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Count how many add-on exist. Return negative value if failed.</p>
+<p>Example:</p>
+<div class="fragment"><div class="line"><span class="keywordtype">int</span> count = gaia_func-&gt;<a class="code" href="structgaia__func__t.html#a4bf0fb2ed95a6790dc30cb3fee0ec33c">count_addon</a>();</div>
+</div><!-- fragment --> 
+</div>
+</div>
+<a class="anchor" id="a608aae2d0abe79d8002a16d6cb36f4b1"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int(* gaia_func_t::count_addon_by_type) (<a class="el" href="util_8h.html#ae5be1f726785414dd1b77d60df074c9d">u4</a> type)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Count how many add-on of certain type exist. Return negative value if failed.</p>
+<p>Example:</p>
+<div class="fragment"><div class="line"><span class="keywordtype">int</span> count = gaia_func-&gt;<a class="code" href="structgaia__func__t.html#a608aae2d0abe79d8002a16d6cb36f4b1">count_addon_by_type</a>(ADDON_TYPE_CONFIG);</div>
+</div><!-- fragment --> 
+</div>
+</div>
+<a class="anchor" id="a36b70ab2c2ed0f50073e7d0678a7893f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int(* gaia_func_t::get_last_index) ()</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Get last installed add-on index. Never failed.</p>
+<p>Example:</p>
+<div class="fragment"><div class="line"><span class="keywordtype">int</span> count = gaia_func-&gt;<a class="code" href="structgaia__func__t.html#a36b70ab2c2ed0f50073e7d0678a7893f">get_last_index</a>();</div>
+</div><!-- fragment --> 
+</div>
+</div>
+<a class="anchor" id="a822dee0ef51aec5a430cde8e5cadda3f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="structgaia__addon__t.html">gaia_addon_t</a>*(* gaia_func_t::get_addon_info) (int idx)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Get the idx-th add-on information. Return 0 if not find.</p>
+<p>Example:</p>
+<div class="fragment"><div class="line"><span class="keyword">struct </span><a class="code" href="structgaia__addon__t.html">gaia_addon_t</a> *init = gaia_func-&gt;<a class="code" href="structgaia__func__t.html#a822dee0ef51aec5a430cde8e5cadda3f">get_addon_info</a>(0);</div>
+</div><!-- fragment --> 
+</div>
+</div>
 <a class="anchor" id="a60544c4a25105105a13f644f979e39ba"></a>
 <div class="memitem">
 <div class="memproto">
@@ -165,7 +233,7 @@ Data Fields</h2></td></tr>
 <div class="fragment"><div class="line"><span class="keyword">struct </span><a class="code" href="structconfig__func__t.html">config_func_t</a> *config;</div>
 <div class="line">config = gaia_func-&gt;<a class="code" href="structgaia__func__t.html#a60544c4a25105105a13f644f979e39ba">get_addon_by_id</a>(ADDON_ID_SIMPLE_CONFIG);</div>
 <div class="line"><span class="keywordflow">if</span> (config) {</div>
-<div class="line">  printf(<span class="stringliteral">&quot;server: %s\n&quot;</span>, config-&gt;<a class="code" href="structconfig__func__t.html#a8cde41472962ec9f6fdad22857f48636">remote_server_hostname</a>());</div>
+<div class="line">  printf(<span class="stringliteral">&quot;server: %s\n&quot;</span>, config-&gt;remote_server_hostname());</div>
 <div class="line">}</div>
 </div><!-- fragment --> 
 </div>
@@ -184,7 +252,7 @@ Data Fields</h2></td></tr>
 <div class="fragment"><div class="line"><span class="keyword">struct </span><a class="code" href="structconfig__func__t.html">config_func_t</a> *config;</div>
 <div class="line">config = gaia_func-&gt;<a class="code" href="structgaia__func__t.html#a6dc7d40e6d237a48df64651d51b037db">get_addon_by_type</a>(ADDON_TYPE_CONFIG);</div>
 <div class="line"><span class="keywordflow">if</span> (config) {</div>
-<div class="line">  printf(<span class="stringliteral">&quot;server: %s\n&quot;</span>, config-&gt;<a class="code" href="structconfig__func__t.html#a8cde41472962ec9f6fdad22857f48636">remote_server_hostname</a>());</div>
+<div class="line">  printf(<span class="stringliteral">&quot;server: %s\n&quot;</span>, config-&gt;remote_server_hostname());</div>
 <div class="line">}</div>
 </div><!-- fragment --> 
 </div>
@@ -234,7 +302,7 @@ Data Fields</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Jul 7 2015 20:51:54 for GAIA by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Jul 14 2015 11:39:36 for GAIA by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

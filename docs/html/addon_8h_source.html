@@ -117,12 +117,12 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;};</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;</div>
 <div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="addon_8h.html#a8665e56a3daea7229667d332f970dc36">   37</a></span>&#160;<span class="keyword">enum</span> <a class="code" href="addon_8h.html#a8665e56a3daea7229667d332f970dc36">addon_type</a> {</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  ADDON_TYPE_INIT                 = 0,</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  ADDON_TYPE_MANAGER              = 1,</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  ADDON_TYPE_CLIENT_MANAGER           = 2,</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  ADDON_TYPE_CONFIG               = 3,</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  ADDON_TYPE_SERVER_NETWORK         = 4,</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  ADDON_TYPE_CLIENT_NETWORK         = 5,</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  ADDON_TYPE_INIT                 = 0x00000000,</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  ADDON_TYPE_CONFIG               = 0x00000010,</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  ADDON_TYPE_NETWORK              = 0x00000100,</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  ADDON_TYPE_MANAGER              = 0x00001000,</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  ADDON_TYPE_CLIENT_MANAGER           = 0x00002000,</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  ADDON_TYPE_USER_INTERFACE           = 0x00010000,</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;};</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="keyword">struct </span><a class="code" href="structgaia__addon__t.html">gaia_addon_t</a>;</div>
@@ -179,7 +179,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Jul 7 2015 20:51:54 for GAIA by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Jul 14 2015 11:39:36 for GAIA by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

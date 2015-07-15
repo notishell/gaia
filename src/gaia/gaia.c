@@ -72,18 +72,18 @@ struct gaia_addon_info_t {
 	struct linked_list addon_list;
 
 	/**
+	 * Parameters.
+	 *
+	 * @see gaia_para_t
+	 */
+	struct gaia_para_t para;
+
+	/**
 	 * Add-on information for reader.
 	 *
 	 * @see gaia_addon_t
 	 */
 	struct gaia_addon_t addon_info;
-
-	/**
-	 * Original add-on information.
-	 *
-	 * @see gaia_addon_t
-	 */
-	struct gaia_addon_t *addon_orig;
 
 	/**
 	 * Function table of add-on.
@@ -168,7 +168,7 @@ extern struct gaia_context_t gaia_global_context;
 /**
  * Install add-on.
  */
-static int install(struct gaia_func_t *obj, struct gaia_addon_t *addon);
+static int install(struct gaia_func_t *obj, const struct gaia_addon_t *addon);
 
 /**
  * Remove add-on.
@@ -240,8 +240,8 @@ struct gaia_addon_info_t gaia_init_addon = {
 	{&gaia_init_addon.son_list, &gaia_init_addon.son_list},
 	{&gaia_init_addon.bro_list, &gaia_init_addon.bro_list},
 	{&gaia_global_context.addon_list, &gaia_global_context.addon_list},
+	{0, 0},
 	{0, 0, ADDON_TYPE_INIT, 0, 0},
-	0,
 	&gaia_init_func,
 };
 
@@ -268,7 +268,7 @@ struct gaia_context_t gaia_global_context = {
 /**
  * @see gaia_func_t
  */
-static int install(struct gaia_func_t *obj, struct gaia_addon_t *addon) {
+static int install(struct gaia_func_t *obj, const struct gaia_addon_t *addon) {
 	int valid = 0;
 	struct gaia_addon_info_t *info, *src = 0;
 
@@ -278,6 +278,12 @@ static int install(struct gaia_func_t *obj, struct gaia_addon_t *addon) {
 
 	info = (struct gaia_addon_info_t *)malloc(sizeof(struct gaia_addon_info_t));
 	if (!info) {
+		return (-2);
+	}
+
+	info->addon_func = (struct gaia_addon_func_t *)malloc(addon->func_size);
+	if (!info->addon_func) {
+		free(info);
 		return (-2);
 	}
 
@@ -291,14 +297,15 @@ static int install(struct gaia_func_t *obj, struct gaia_addon_t *addon) {
 	info->func.get_addon_by_type = get_addon_by_type;
 	info->func.get_addon_list_by_type = get_addon_list_by_type;
 	info->func.handle_message = handle_message;
+
 	memcpy(&info->addon_info, addon, sizeof(struct gaia_addon_t));
-	info->addon_orig = addon;
-	info->addon_func = addon->func;
+
+	memcpy(info->addon_func, addon->func, addon->func_size);
+
 	pthread_mutex_init(&info->list_lock, 0);
-	info->son_list.prev = &info->son_list;
-	info->son_list.next = &info->son_list;
-	info->bro_list.prev = &info->bro_list;
-	info->bro_list.next = &info->bro_list;
+
+	linked_list_init(&info->son_list);
+	linked_list_init(&info->bro_list);
 
 	/**
 	 * Check caller.
@@ -323,16 +330,18 @@ static int install(struct gaia_func_t *obj, struct gaia_addon_t *addon) {
 	pthread_rwlock_unlock(&gaia_global_context.addon_lock);
 
 	if (!valid) {
+		free(info->addon_func);
 		free(info);
 		return (-3);
 	}
 
-	valid = addon->func->init(&info->func);
+	valid = addon->func->init(&info->func, &info->para);
 	if (valid != 0) {
 		pthread_rwlock_wrlock(&gaia_global_context.addon_lock);
 		linked_list_del(&info->bro_list);
 		linked_list_del(&info->addon_list);
 		pthread_rwlock_unlock(&gaia_global_context.addon_lock);
+		free(info->addon_func);
 		free(info);
 	}
 	return (valid);
@@ -372,8 +381,9 @@ static int uninstall(struct gaia_func_t *obj, u8 id) {
 	linked_list_del(&addon->addon_list);
 	pthread_rwlock_unlock(&gaia_global_context.addon_lock);
 
-	addon->addon_func->exit(addon->addon_orig);
+	addon->addon_func->exit(&addon->para);
 	pthread_mutex_destroy(&addon->list_lock);
+	free(addon->addon_func);
 	free(addon);
 	return (0);
 }

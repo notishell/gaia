@@ -88,7 +88,7 @@ void manager_restart() {
 	manager_start();
 }
 
-int manager_init(struct gaia_func_t *func) {
+int manager_init(struct gaia_func_t *func, struct gaia_para_t *para) {
 	const char **path;
 	struct gaia_message_t dowork_msg = {
 	    ADDON_ID_MANAGER, MSG_TYPE_START, 16
@@ -125,8 +125,8 @@ int manager_init(struct gaia_func_t *func) {
 
 		if (config->check_flag(CONFIG_FLAG_RUN_AS_SERVER)) {
 			local_server = 1;
-			server_network = (struct server_network_func_t *)func->get_addon_by_type(ADDON_TYPE_SERVER_NETWORK);
-			client_manager = (struct client_manager_func_t *)func->get_addon_by_type(ADDON_TYPE_CLIENT_NETWORK);
+//			server_network = (struct server_network_func_t *)func->get_addon_by_type(ADDON_TYPE_SERVER_NETWORK);
+//			client_manager = (struct client_manager_func_t *)func->get_addon_by_type(ADDON_TYPE_CLIENT_NETWORK);
 		}
 	}
 
@@ -135,10 +135,10 @@ int manager_init(struct gaia_func_t *func) {
 	return (0);
 }
 
-void manager_exit(struct gaia_addon_t *addon) {
+void manager_exit(struct gaia_para_t *para) {
 	manager_stop();
-	free(addon->func);
-	free(addon);
+//	free(addon->func);
+//	free(addon);
 }
 
 void manager_handle_message(struct gaia_message_t *msg) {

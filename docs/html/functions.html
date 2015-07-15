@@ -121,6 +121,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>addon_id
 : <a class="el" href="structgaia__message__t.html#aa233374e0f6bef233aeeb0dda2a8fbec">gaia_message_t</a>
 </li>
+<li>addon_info
+: <a class="el" href="structgaia__addon__info__t.html#a588eff1a742e3f62e84b5943ed1f7904">gaia_addon_info_t</a>
+</li>
 <li>addon_list
 : <a class="el" href="structgaia__addon__info__t.html#a9d634c0d0e7ce030459aaa07956fa96e">gaia_addon_info_t</a>
 , <a class="el" href="structgaia__context__t.html#af209eccbe15a6c21d8706e8381b34959">gaia_context_t</a>
@@ -138,6 +141,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>basic
 : <a class="el" href="structconfig__func__t.html#a1875bd2559731ddd2e72cb49ac4d9443">config_func_t</a>
 , <a class="el" href="structloader__func__t.html#a75fee27359f8633536b631b508468bd5">loader_func_t</a>
+, <a class="el" href="structnetwork__func__t.html#ade28462640546a323a9841969412cc16">network_func_t</a>
 </li>
 <li>bro_list
 : <a class="el" href="structgaia__addon__info__t.html#a464e7d6bee2f2c06d5e2df1aaa49cef0">gaia_addon_info_t</a>
@@ -149,12 +153,24 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>check_flag
 : <a class="el" href="structconfig__func__t.html#abdd2216c26c3c58163b8766b94e145f3">config_func_t</a>
 </li>
+<li>connect
+: <a class="el" href="structnetwork__func__t.html#ade7c16726ace0467140771533c9a0ec0">network_func_t</a>
+</li>
+<li>count_addon
+: <a class="el" href="structgaia__func__t.html#a4bf0fb2ed95a6790dc30cb3fee0ec33c">gaia_func_t</a>
+</li>
+<li>count_addon_by_type
+: <a class="el" href="structgaia__func__t.html#a608aae2d0abe79d8002a16d6cb36f4b1">gaia_func_t</a>
+</li>
 </ul>
 
 
 <h3><a class="anchor" id="index_d"></a>- d -</h3><ul>
 <li>data
 : <a class="el" href="structgaia__message__t.html#a99379f74b8a6f399461069c6c7bdb9c0">gaia_message_t</a>
+</li>
+<li>disconnect
+: <a class="el" href="structnetwork__func__t.html#a61dec3218613e571a102fa047c0498e6">network_func_t</a>
 </li>
 </ul>
 
@@ -184,17 +200,20 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>get_addon_by_type
 : <a class="el" href="structgaia__func__t.html#a6dc7d40e6d237a48df64651d51b037db">gaia_func_t</a>
 </li>
+<li>get_addon_info
+: <a class="el" href="structgaia__func__t.html#a822dee0ef51aec5a430cde8e5cadda3f">gaia_func_t</a>
+</li>
 <li>get_addon_list
 : <a class="el" href="structconfig__func__t.html#a44ecb4eb2eb5926ef3e314e82ecbc754">config_func_t</a>
 </li>
 <li>get_addon_list_by_type
 : <a class="el" href="structgaia__func__t.html#aaa36dd3a916c10c84036951be1b49627">gaia_func_t</a>
 </li>
-<li>get_server_max_conns
-: <a class="el" href="structconfig__func__t.html#a9d9b6e6c44e06cc6e305be050fb599a8">config_func_t</a>
+<li>get_client_address
+: <a class="el" href="structnetwork__func__t.html#a060b3750a4718749af91438d2af0d806">network_func_t</a>
 </li>
-<li>get_server_port
-: <a class="el" href="structconfig__func__t.html#ad5acb2a9b6703da36749c1b422048267">config_func_t</a>
+<li>get_last_index
+: <a class="el" href="structgaia__func__t.html#a36b70ab2c2ed0f50073e7d0678a7893f">gaia_func_t</a>
 </li>
 </ul>
 
@@ -209,8 +228,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <h3><a class="anchor" id="index_i"></a>- i -</h3><ul>
 <li>id
-: <a class="el" href="structgaia__addon__info__t.html#a755325508a9a7ea890e05bb470142a2c">gaia_addon_info_t</a>
-, <a class="el" href="structgaia__addon__t.html#a0ba2ad0ad03e8e4e16a9d734f30079d7">gaia_addon_t</a>
+: <a class="el" href="structgaia__addon__t.html#a0ba2ad0ad03e8e4e16a9d734f30079d7">gaia_addon_t</a>
+</li>
+<li>index
+: <a class="el" href="structgaia__addon__info__t.html#a3b48e2a67739da5a0c731ac22b3a57f4">gaia_addon_info_t</a>
+, <a class="el" href="structgaia__context__t.html#aa8586e3588dd69c464c051b0268131a5">gaia_context_t</a>
 </li>
 <li>init
 : <a class="el" href="structgaia__addon__func__t.html#a368df79767f59bf44fec3f764c38f55f">gaia_addon_func_t</a>
@@ -225,8 +247,17 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>list
 : <a class="el" href="structgaia__message__list__t.html#a26cd0ba5168ee9d08140d44e59032d69">gaia_message_list_t</a>
 </li>
+<li>list_lock
+: <a class="el" href="structgaia__addon__info__t.html#ae6bb484037a7eddf6576b6846b182c36">gaia_addon_info_t</a>
+</li>
 <li>load_addon
 : <a class="el" href="structloader__func__t.html#ad85bcd95e268e4ad8f6d7dd6c1fcd4a5">loader_func_t</a>
+</li>
+<li>local_server_address
+: <a class="el" href="structconfig__func__t.html#ace579b7e6e3ec02f7343286e7fcbf438">config_func_t</a>
+</li>
+<li>local_server_max_conns
+: <a class="el" href="structconfig__func__t.html#a1330d73a636655005f02d31b86b7e176">config_func_t</a>
 </li>
 </ul>
 
@@ -255,29 +286,37 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <h3><a class="anchor" id="index_r"></a>- r -</h3><ul>
-<li>remote_server_hostname
-: <a class="el" href="structconfig__func__t.html#a8cde41472962ec9f6fdad22857f48636">config_func_t</a>
+<li>receive
+: <a class="el" href="structnetwork__func__t.html#aaec149230b37a91544b6bceb1254f1e5">network_func_t</a>
 </li>
-<li>remote_server_service
-: <a class="el" href="structconfig__func__t.html#afd2e40a5fa61678078c0e276ba48df1d">config_func_t</a>
+<li>remote_server_address
+: <a class="el" href="structconfig__func__t.html#aa7e9eb822f4db0419c777d0deb1a907a">config_func_t</a>
 </li>
 </ul>
 
 
 <h3><a class="anchor" id="index_s"></a>- s -</h3><ul>
+<li>send
+: <a class="el" href="structnetwork__func__t.html#a9793316963d0a45da3ee613f9a3dcdef">network_func_t</a>
+</li>
 <li>size
 : <a class="el" href="structgaia__message__t.html#a97e32a6ca1c9063d07ba65f60a4e3fe1">gaia_message_t</a>
 </li>
 <li>son_list
 : <a class="el" href="structgaia__addon__info__t.html#a8613c03996a49eb7679e17006d6ccb46">gaia_addon_info_t</a>
 </li>
+<li>start_server
+: <a class="el" href="structnetwork__func__t.html#aef8e93b6a5543066996f2a21c2ad42e8">network_func_t</a>
+</li>
+<li>stop_server
+: <a class="el" href="structnetwork__func__t.html#a4b11f7b67ab431b01b538e0f9d53202b">network_func_t</a>
+</li>
 </ul>
 
 
 <h3><a class="anchor" id="index_t"></a>- t -</h3><ul>
 <li>type
-: <a class="el" href="structgaia__addon__info__t.html#a8b44e8f403719ecd743f078d4796a946">gaia_addon_info_t</a>
-, <a class="el" href="structgaia__addon__t.html#ac9855fbacaf2b360ce1cc91736314d63">gaia_addon_t</a>
+: <a class="el" href="structgaia__addon__t.html#ac9855fbacaf2b360ce1cc91736314d63">gaia_addon_t</a>
 , <a class="el" href="structgaia__message__t.html#a84ad0ef84bac5c6cb7377cd4019d5c6d">gaia_message_t</a>
 </li>
 </ul>
@@ -295,8 +334,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <h3><a class="anchor" id="index_v"></a>- v -</h3><ul>
 <li>version
-: <a class="el" href="structgaia__addon__info__t.html#a2926bf439bc4bba9785826138b437ab7">gaia_addon_info_t</a>
-, <a class="el" href="structgaia__addon__t.html#a96d11ff4a54c639d2498c2d89dd64509">gaia_addon_t</a>
+: <a class="el" href="structgaia__addon__t.html#a96d11ff4a54c639d2498c2d89dd64509">gaia_addon_t</a>
 </li>
 </ul>
 
@@ -309,7 +347,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Jul 7 2015 20:51:54 for GAIA by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Jul 14 2015 11:39:36 for GAIA by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

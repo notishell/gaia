@@ -101,14 +101,12 @@ Data Fields</h2></td></tr>
 <tr class="separator:abdd2216c26c3c58163b8766b94e145f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a44ecb4eb2eb5926ef3e314e82ecbc754"><td class="memItemLeft" align="right" valign="top">const char **(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structconfig__func__t.html#a44ecb4eb2eb5926ef3e314e82ecbc754">get_addon_list</a> )()</td></tr>
 <tr class="separator:a44ecb4eb2eb5926ef3e314e82ecbc754"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad5acb2a9b6703da36749c1b422048267"><td class="memItemLeft" align="right" valign="top">unsigned int(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structconfig__func__t.html#ad5acb2a9b6703da36749c1b422048267">get_server_port</a> )()</td></tr>
-<tr class="separator:ad5acb2a9b6703da36749c1b422048267"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9d9b6e6c44e06cc6e305be050fb599a8"><td class="memItemLeft" align="right" valign="top">int(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structconfig__func__t.html#a9d9b6e6c44e06cc6e305be050fb599a8">get_server_max_conns</a> )()</td></tr>
-<tr class="separator:a9d9b6e6c44e06cc6e305be050fb599a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8cde41472962ec9f6fdad22857f48636"><td class="memItemLeft" align="right" valign="top">const char *(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structconfig__func__t.html#a8cde41472962ec9f6fdad22857f48636">remote_server_hostname</a> )()</td></tr>
-<tr class="separator:a8cde41472962ec9f6fdad22857f48636"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afd2e40a5fa61678078c0e276ba48df1d"><td class="memItemLeft" align="right" valign="top">const char *(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structconfig__func__t.html#afd2e40a5fa61678078c0e276ba48df1d">remote_server_service</a> )()</td></tr>
-<tr class="separator:afd2e40a5fa61678078c0e276ba48df1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace579b7e6e3ec02f7343286e7fcbf438"><td class="memItemLeft" align="right" valign="top">const char *(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structconfig__func__t.html#ace579b7e6e3ec02f7343286e7fcbf438">local_server_address</a> )()</td></tr>
+<tr class="separator:ace579b7e6e3ec02f7343286e7fcbf438"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1330d73a636655005f02d31b86b7e176"><td class="memItemLeft" align="right" valign="top">int(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structconfig__func__t.html#a1330d73a636655005f02d31b86b7e176">local_server_max_conns</a> )()</td></tr>
+<tr class="separator:a1330d73a636655005f02d31b86b7e176"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7e9eb822f4db0419c777d0deb1a907a"><td class="memItemLeft" align="right" valign="top">const char *(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structconfig__func__t.html#aa7e9eb822f4db0419c777d0deb1a907a">remote_server_address</a> )()</td></tr>
+<tr class="separator:aa7e9eb822f4db0419c777d0deb1a907a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Get config information from config center like this.</p>
@@ -125,12 +123,12 @@ Data Fields</h2></td></tr>
 <div class="line">}</div>
 <div class="line"></div>
 <div class="line"><span class="keywordflow">if</span> (config-&gt;<a class="code" href="structconfig__func__t.html#abdd2216c26c3c58163b8766b94e145f3">check_flag</a>(CONFIG_FLAG_RUN_AS_SERVER)) {</div>
-<div class="line">    printf(<span class="stringliteral">&quot;local server listen port : %d\n&quot;</span>, config-&gt;<a class="code" href="structconfig__func__t.html#ad5acb2a9b6703da36749c1b422048267">get_server_port</a>());</div>
-<div class="line">    printf(<span class="stringliteral">&quot;local server maximum connections : %d\n&quot;</span>, config-&gt;<a class="code" href="structconfig__func__t.html#a9d9b6e6c44e06cc6e305be050fb599a8">get_server_max_conns</a>());</div>
+<div class="line">    printf(<span class="stringliteral">&quot;local server listen port : %d\n&quot;</span>, config-&gt;get_server_port());</div>
+<div class="line">    printf(<span class="stringliteral">&quot;local server maximum connections : %d\n&quot;</span>, config-&gt;get_server_max_conns());</div>
 <div class="line">}</div>
 <div class="line"></div>
-<div class="line">printf(<span class="stringliteral">&quot;remote server(%s:%s)\n&quot;</span>, config-&gt;<a class="code" href="structconfig__func__t.html#a8cde41472962ec9f6fdad22857f48636">remote_server_hostname</a>(),</div>
-<div class="line">    config-&gt;<a class="code" href="structconfig__func__t.html#afd2e40a5fa61678078c0e276ba48df1d">remote_server_service</a>());</div>
+<div class="line">printf(<span class="stringliteral">&quot;remote server(%s:%s)\n&quot;</span>, config-&gt;remote_server_hostname(),</div>
+<div class="line">    config-&gt;remote_server_service());</div>
 </div><!-- fragment --> </div><h2 class="groupheader">Field Documentation</h2>
 <a class="anchor" id="a1875bd2559731ddd2e72cb49ac4d9443"></a>
 <div class="memitem">
@@ -171,25 +169,25 @@ Data Fields</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ad5acb2a9b6703da36749c1b422048267"></a>
+<a class="anchor" id="ace579b7e6e3ec02f7343286e7fcbf438"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">unsigned int(* config_func_t::get_server_port) ()</td>
+          <td class="memname">const char*(* config_func_t::local_server_address) ()</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Get local server listen port. </p>
+<p>Get local server working address. </p>
 
 </div>
 </div>
-<a class="anchor" id="a9d9b6e6c44e06cc6e305be050fb599a8"></a>
+<a class="anchor" id="a1330d73a636655005f02d31b86b7e176"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int(* config_func_t::get_server_max_conns) ()</td>
+          <td class="memname">int(* config_func_t::local_server_max_conns) ()</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -197,29 +195,16 @@ Data Fields</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a8cde41472962ec9f6fdad22857f48636"></a>
+<a class="anchor" id="aa7e9eb822f4db0419c777d0deb1a907a"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const char*(* config_func_t::remote_server_hostname) ()</td>
+          <td class="memname">const char*(* config_func_t::remote_server_address) ()</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Get remote server host name. </p>
-
-</div>
-</div>
-<a class="anchor" id="afd2e40a5fa61678078c0e276ba48df1d"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const char*(* config_func_t::remote_server_service) ()</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Get remote server service name. </p>
+<p>Get remote server address. </p>
 
 </div>
 </div>
@@ -229,7 +214,7 @@ Data Fields</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Jul 7 2015 20:51:54 for GAIA by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Jul 14 2015 11:39:36 for GAIA by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

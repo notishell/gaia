@@ -1,4 +1,4 @@
-.TH "gaia_context_t" 3 "Tue Jul 7 2015" "Version 1.0.0" "GAIA" \" -*- nroff -*-
+.TH "gaia_context_t" 3 "Tue Jul 14 2015" "Version 1.0.0" "GAIA" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -11,6 +11,9 @@ gaia_context_t \-
 .in +1c
 .ti -1c
 .RI "\fBu1\fP \fBworking\fP"
+.br
+.ti -1c
+.RI "int \fBindex\fP"
 .br
 .ti -1c
 .RI "pthread_rwlock_t \fBaddon_lock\fP"
@@ -32,6 +35,8 @@ GAIA running context\&.
 .PP 
 .SS "\fBu1\fP gaia_context_t::working"
 Working flag\&. Exit if set false\&. 
+.SS "int gaia_context_t::index"
+Last add-on index\&. 
 .SS "pthread_rwlock_t gaia_context_t::addon_lock"
 Read-write lock for add-on list \&. 
 .SS "struct \fBlinked_list\fP gaia_context_t::addon_list"

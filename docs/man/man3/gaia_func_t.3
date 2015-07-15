@@ -1,4 +1,4 @@
-.TH "gaia_func_t" 3 "Tue Jul 7 2015" "Version 1.0.0" "GAIA" \" -*- nroff -*-
+.TH "gaia_func_t" 3 "Tue Jul 14 2015" "Version 1.0.0" "GAIA" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -16,6 +16,18 @@ gaia_func_t \-
 .br
 .ti -1c
 .RI "int(* \fBuninstall\fP )(struct \fBgaia_func_t\fP *obj, \fBu8\fP id)"
+.br
+.ti -1c
+.RI "int(* \fBcount_addon\fP )()"
+.br
+.ti -1c
+.RI "int(* \fBcount_addon_by_type\fP )(\fBu4\fP type)"
+.br
+.ti -1c
+.RI "int(* \fBget_last_index\fP )()"
+.br
+.ti -1c
+.RI "struct \fBgaia_addon_t\fP *(* \fBget_addon_info\fP )(int idx)"
 .br
 .ti -1c
 .RI "struct \fBgaia_addon_func_t\fP *(* \fBget_addon_by_id\fP )(\fBu8\fP id)"
@@ -71,6 +83,50 @@ Example:
 .PP
 .nf
 gaia_func->uninstall(gaia_func, ADDON_ID_INIT);
+.fi
+.PP
+ 
+.SS "int(* gaia_func_t::count_addon) ()"
+Count how many add-on exist\&. Return negative value if failed\&.
+.PP
+Example:
+.PP
+.PP
+.nf
+int count = gaia_func->count_addon();
+.fi
+.PP
+ 
+.SS "int(* gaia_func_t::count_addon_by_type) (\fBu4\fP type)"
+Count how many add-on of certain type exist\&. Return negative value if failed\&.
+.PP
+Example:
+.PP
+.PP
+.nf
+int count = gaia_func->count_addon_by_type(ADDON_TYPE_CONFIG);
+.fi
+.PP
+ 
+.SS "int(* gaia_func_t::get_last_index) ()"
+Get last installed add-on index\&. Never failed\&.
+.PP
+Example:
+.PP
+.PP
+.nf
+int count = gaia_func->get_last_index();
+.fi
+.PP
+ 
+.SS "struct \fBgaia_addon_t\fP*(* gaia_func_t::get_addon_info) (int idx)"
+Get the idx-th add-on information\&. Return 0 if not find\&.
+.PP
+Example:
+.PP
+.PP
+.nf
+struct gaia_addon_t *init = gaia_func->get_addon_info(0);
 .fi
 .PP
  

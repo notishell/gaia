@@ -44,8 +44,8 @@ static const char **get_addon_list() {
 /**
  * Local server listen port.
  */
-static unsigned int server_port() {
-	return (9999);
+static const char *local_server_address() {
+	return ("9999");
 }
 
 /**
@@ -56,30 +56,23 @@ static int server_max_conns() {
 }
 
 /**
- * Remote server host name.
+ * Remote server address.
  */
-static const char *server_hostname() {
-	return ("127.0.0.1");
-}
-
-/**
- * Remote server host service name or port.
- */
-static const char *server_service() {
-	return ("9999");
+static const char *remote_server_address() {
+	return ("tcp://127.0.0.1:9999");
 }
 
 /**
  * Init.
  */
-static int config_init(struct gaia_func_t *func) {
+static int config_init(struct gaia_func_t *func, struct gaia_para_t *para) {
 	return (0);
 }
 
 /**
  * Exit.
  */
-static void config_exit(struct gaia_addon_t *addon) {
+static void config_exit(struct gaia_para_t *para) {
 }
 
 struct gaia_addon_t *direct_config_info() {
@@ -95,10 +88,9 @@ struct gaia_addon_t *direct_config_info() {
 	config_func.basic.handle_message = default_addon_handle_message;
 	config_func.check_flag = check_flag;
 	config_func.get_addon_list = get_addon_list;
-	config_func.get_server_port = server_port;
-	config_func.get_server_max_conns = server_max_conns;
-	config_func.remote_server_hostname = server_hostname;
-	config_func.remote_server_service = server_service;
+	config_func.local_server_address = local_server_address;
+	config_func.local_server_max_conns = server_max_conns;
+	config_func.remote_server_address = remote_server_address;
 
 	return (&config);
 }

@@ -79,24 +79,19 @@ struct config_func_t {
 	const char **(*get_addon_list)();
 
 	/**
-	 * Get local server listen port.
+	 * Get local server working address.
 	 */
-	unsigned int (*get_server_port)();
+	const char *(*local_server_address)();
 
 	/**
 	 * Get local server maximum connections.
 	 */
-	int (*get_server_max_conns)();
+	int (*local_server_max_conns)();
 
 	/**
-	 * Get remote server host name.
+	 * Get remote server address.
 	 */
-	const char *(*remote_server_hostname)();
-
-	/**
-	 * Get remote server service name.
-	 */
-	const char *(*remote_server_service)();
+	const char *(*remote_server_address)();
 };
 
 /**

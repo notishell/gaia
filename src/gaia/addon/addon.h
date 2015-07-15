@@ -37,14 +37,29 @@ enum addon_id {
 enum addon_type {
 	ADDON_TYPE_INIT         		  	= 0x00000000,
 	ADDON_TYPE_CONFIG  	    		   	= 0x00000010,
-	ADDON_TYPE_SERVER_NETWORK        	= 0x00000100,
-	ADDON_TYPE_CLIENT_NETWORK        	= 0x00000200,
+	ADDON_TYPE_NETWORK  	         	= 0x00000100,
 	ADDON_TYPE_MANAGER  	  	    	= 0x00001000,
 	ADDON_TYPE_CLIENT_MANAGER  	  	    = 0x00002000,
 	ADDON_TYPE_USER_INTERFACE  	  	    = 0x00010000,
 };
 
 struct gaia_addon_t;
+
+/**
+ * Save GAIA parameters.
+ */
+struct gaia_para_t {
+
+	/**
+	 * Size.
+	 */
+	int size;
+
+	/**
+	 * Parameter.
+	 */
+	void *para;
+};
 
 /**
  * Add-on functions set.
@@ -54,12 +69,12 @@ struct gaia_addon_func_t {
 	/**
 	 * Initialize add-on. Call after install.
 	 */
-	int (*init)(struct gaia_func_t *func);
+	int (*init)(struct gaia_func_t *func, struct gaia_para_t *para);
 
 	/**
 	 * Cleanup add-on. Call before uninstall.
 	 */
-	void (*exit)(struct gaia_addon_t *addon);
+	void (*exit)(struct gaia_para_t *para);
 
 	/**
 	 * Handle message.
@@ -101,12 +116,12 @@ struct gaia_addon_t {
 /**
  * Default add-on init method.
  */
-int default_addon_init(struct gaia_func_t *func);
+int default_addon_init(struct gaia_func_t *func, struct gaia_para_t *para);
 
 /**
  * Default add-on exit method.
  */
-void default_addon_exit(struct gaia_addon_t *addon);
+void default_addon_exit(struct gaia_para_t *para);
 
 /**
  * Default add-on handle message method.

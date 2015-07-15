@@ -20,11 +20,11 @@
  */
 #include <gaia/addon/addon.h>
 
-int default_addon_init(struct gaia_func_t *func) {
+int default_addon_init(struct gaia_func_t *func, struct gaia_para_t *para) {
 	return (0);
 }
 
-void default_addon_exit(struct gaia_addon_t *addon) {
+void default_addon_exit(struct gaia_para_t *para) {
 }
 
 void default_addon_handle_message(struct gaia_message_t *msg) {

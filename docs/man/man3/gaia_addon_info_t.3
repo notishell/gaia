@@ -1,4 +1,4 @@
-.TH "gaia_addon_info_t" 3 "Tue Jul 7 2015" "Version 1.0.0" "GAIA" \" -*- nroff -*-
+.TH "gaia_addon_info_t" 3 "Tue Jul 14 2015" "Version 1.0.0" "GAIA" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -10,19 +10,16 @@ gaia_addon_info_t \-
 
 .in +1c
 .ti -1c
-.RI "\fBu8\fP \fBid\fP"
-.br
-.ti -1c
-.RI "\fBu4\fP \fBtype\fP"
-.br
-.ti -1c
-.RI "\fBu4\fP \fBversion\fP"
+.RI "int \fBindex\fP"
 .br
 .ti -1c
 .RI "struct \fBgaia_func_t\fP \fBfunc\fP"
 .br
 .ti -1c
 .RI "struct \fBgaia_addon_info_t\fP * \fBparent\fP"
+.br
+.ti -1c
+.RI "pthread_mutex_t \fBlist_lock\fP"
 .br
 .ti -1c
 .RI "struct \fBlinked_list\fP \fBson_list\fP"
@@ -32,6 +29,9 @@ gaia_addon_info_t \-
 .br
 .ti -1c
 .RI "struct \fBlinked_list\fP \fBaddon_list\fP"
+.br
+.ti -1c
+.RI "struct \fBgaia_addon_t\fP \fBaddon_info\fP"
 .br
 .ti -1c
 .RI "struct \fBgaia_addon_t\fP * \fBaddon_orig\fP"
@@ -45,33 +45,8 @@ gaia_addon_info_t \-
 Add-on information\&. 
 .SH "Field Documentation"
 .PP 
-.SS "\fBu8\fP gaia_addon_info_t::id"
-Add-on id\&.
-.PP
-\fBSee also:\fP
-.RS 4
-\fBgaia_addon_t\fP 
-.RE
-.PP
-
-.SS "\fBu4\fP gaia_addon_info_t::type"
-Add-on type\&.
-.PP
-\fBSee also:\fP
-.RS 4
-\fBgaia_addon_t\fP 
-.RE
-.PP
-
-.SS "\fBu4\fP gaia_addon_info_t::version"
-Add-on version\&.
-.PP
-\fBSee also:\fP
-.RS 4
-\fBgaia_addon_t\fP 
-.RE
-.PP
-
+.SS "int gaia_addon_info_t::index"
+Add-on index\&. 
 .SS "struct \fBgaia_func_t\fP gaia_addon_info_t::func"
 Function sets\&. Each add-on has a private sets\&.
 .PP
@@ -83,12 +58,23 @@ Function sets\&. Each add-on has a private sets\&.
 
 .SS "struct \fBgaia_addon_info_t\fP* gaia_addon_info_t::parent"
 Pointer to parent add-on\&. 
+.SS "pthread_mutex_t gaia_addon_info_t::list_lock"
+Son list lock\&. 
 .SS "struct \fBlinked_list\fP gaia_addon_info_t::son_list"
 Son list\&. 
 .SS "struct \fBlinked_list\fP gaia_addon_info_t::bro_list"
 All add-ons has same parent linked as a list\&. 
 .SS "struct \fBlinked_list\fP gaia_addon_info_t::addon_list"
 All add-ons linked as a list\&. 
+.SS "struct \fBgaia_addon_t\fP gaia_addon_info_t::addon_info"
+Add-on information for reader\&.
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgaia_addon_t\fP 
+.RE
+.PP
+
 .SS "struct \fBgaia_addon_t\fP* gaia_addon_info_t::addon_orig"
 Original add-on information\&.
 .PP

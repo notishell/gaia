@@ -118,7 +118,7 @@ struct gaia_func_t {
 	 * 		gaia_func->install(gaia_func, simple_config_info());
 	 * @endcode
 	 */
-	int (*install)(struct gaia_func_t *obj, struct gaia_addon_t *addon);
+	int (*install)(struct gaia_func_t *obj, const struct gaia_addon_t *addon);
 
 	/**
 	 * Method to remove add-on by add-on id. Only add-on's direct or indirect father
