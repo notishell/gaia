@@ -1,0 +1,64 @@
+.TH "addon.h" 3 "Tue Jul 14 2015" "Version 1.0.0" "GAIA" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+addon.h \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <gaia/gaia\&.h>\fP
+.br
+
+.SS "Data Structures"
+
+.in +1c
+.ti -1c
+.RI "struct \fBgaia_addon_func_t\fP"
+.br
+.ti -1c
+.RI "struct \fBgaia_addon_t\fP"
+.br
+.in -1c
+.SS "Enumerations"
+
+.in +1c
+.ti -1c
+.RI "enum \fBaddon_id\fP { \fBADDON_ID_INIT\fP = 0 }"
+.br
+.ti -1c
+.RI "enum \fBaddon_type\fP { \fBADDON_TYPE_INIT\fP = 0x00000000, \fBADDON_TYPE_CONFIG\fP = 0x00000010, \fBADDON_TYPE_NETWORK\fP = 0x00000100, \fBADDON_TYPE_MANAGER\fP = 0x00001000, \fBADDON_TYPE_CLIENT_MANAGER\fP = 0x00002000, \fBADDON_TYPE_USER_INTERFACE\fP = 0x00010000 }"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBdefault_addon_init\fP (struct \fBgaia_func_t\fP *func)"
+.br
+.ti -1c
+.RI "void \fBdefault_addon_exit\fP (struct \fBgaia_addon_t\fP *addon)"
+.br
+.ti -1c
+.RI "void \fBdefault_addon_handle_message\fP (struct \fBgaia_message_t\fP *msg)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Add-on type and basic functions set define here\&. 
+.SH "Enumeration Type Documentation"
+.PP 
+.SS "enum \fBaddon_id\fP"
+Initial add-on id is 0\&. 
+.SS "enum \fBaddon_type\fP"
+Add-on types define here\&. 
+.SH "Function Documentation"
+.PP 
+.SS "int default_addon_init (struct \fBgaia_func_t\fP * func)"
+Default add-on init method\&. 
+.SS "void default_addon_exit (struct \fBgaia_addon_t\fP * addon)"
+Default add-on exit method\&. 
+.SS "void default_addon_handle_message (struct \fBgaia_message_t\fP * msg)"
+Default add-on handle message method\&. 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for GAIA from the source code\&.

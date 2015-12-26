@@ -27,5 +27,5 @@ int default_addon_init(struct gaia_func_t *func, struct gaia_para_t *para) {
 void default_addon_exit(struct gaia_para_t *para) {
 }
 
-void default_addon_handle_message(struct gaia_message_t *msg) {
+void default_addon_handle_message(struct gaia_message_t *msg, struct gaia_para_t *para) {
 }

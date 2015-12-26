@@ -1,0 +1,38 @@
+.TH "loader_func_t" 3 "Tue Jul 14 2015" "Version 1.0.0" "GAIA" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+loader_func_t \- 
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <direct_loader\&.h>\fP
+.SS "Data Fields"
+
+.in +1c
+.ti -1c
+.RI "struct \fBgaia_addon_func_t\fP \fBbasic\fP"
+.br
+.ti -1c
+.RI "int(* \fBload_addon\fP )(const char *addon)"
+.br
+.ti -1c
+.RI "void(* \fBunload_addon\fP )(const char *addon)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Loader functions set\&. 
+.SH "Field Documentation"
+.PP 
+.SS "struct \fBgaia_addon_func_t\fP loader_func_t::basic"
+Basic functions set\&. 
+.SS "int(* loader_func_t::load_addon) (const char *addon)"
+Load a add-on\&. 
+.SS "void(* loader_func_t::unload_addon) (const char *addon)"
+Unload a add-on\&. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for GAIA from the source code\&.

@@ -14,41 +14,55 @@
  *
  * author: Notis Hell (notishell@gmail.com)
  */
-#ifndef SRC_GAIA_ADDON_MANAGER_H_
-#define SRC_GAIA_ADDON_MANAGER_H_
+#ifndef SRC_GAIA_ADDON_NETWORK_NETWORK_H_
+#define SRC_GAIA_ADDON_NETWORK_NETWORK_H_
 
 #include <gaia/addon/addon.h>
 
 /**
- * Manager add-on id.
+ * Network.
  */
-enum {
-	ADDON_ID_MANAGER        = 0x0000000000000001,
-};
-
-/**
- * Manager add-on message type.
- */
-enum {
-	MSG_TYPE_START             = 0,
-	MSG_TYPE_RESTART           = 1,
-	MSG_TYPE_STOP              = 2,
-};
-
-/**
- * Manager add-on functions set.
- */
-struct manager_func_t {
+struct network_func_t {
 
 	/**
 	 * Basic.
 	 */
 	struct gaia_addon_func_t basic;
+
+	/**
+	 * Start local network server.
+	 */
+	int (*start_server)(const char *address, int max_conns);
+
+	/**
+	 * Stop local network server.
+	 */
+	void (*stop_server)();
+
+	/**
+	 * Connect to remote server.
+	 */
+	int (*connect)(const char *address);
+
+	/**
+	 * Close a connection.
+	 */
+	void (*disconnect)(int fd);
+
+	/**
+	 * Send a message.
+	 */
+	int (*send)(int fd, struct gaia_message_t *msg);
+
+	/**
+	 * Receive a message.
+	 */
+	int (*recv)(int fd, struct gaia_message_t *msg);
+
+	/**
+	 * Get client address.
+	 */
+	const char *(*get_client_address)(int fd);
 };
 
-/**
- * Manager add-on information.
- */
-struct gaia_addon_t *manager_addon_info();
-
-#endif /* SRC_GAIA_ADDON_MANAGER_H_ */
+#endif /* SRC_GAIA_ADDON_NETWORK_NETWORK_H_ */

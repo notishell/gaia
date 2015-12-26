@@ -1,0 +1,131 @@
+.TH "gaia.c" 3 "Tue Jul 14 2015" "Version 1.0.0" "GAIA" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+gaia.c \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <config\&.h>\fP
+.br
+\fC#include <stdlib\&.h>\fP
+.br
+\fC#include <string\&.h>\fP
+.br
+\fC#include <pthread\&.h>\fP
+.br
+\fC#include <util/list\&.h>\fP
+.br
+\fC#include <gaia/gaia\&.h>\fP
+.br
+\fC#include <gaia/addon/addon\&.h>\fP
+.br
+\fC#include <gaia/addon/manager/manager\&.h>\fP
+.br
+
+.SS "Data Structures"
+
+.in +1c
+.ti -1c
+.RI "struct \fBgaia_addon_info_t\fP"
+.br
+.ti -1c
+.RI "struct \fBgaia_message_list_t\fP"
+.br
+.ti -1c
+.RI "struct \fBgaia_context_t\fP"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBgaia_running\fP (void)"
+.br
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "struct \fBgaia_context_t\fP \fBgaia_global_context\fP"
+.br
+.ti -1c
+.RI "struct \fBgaia_addon_func_t\fP \fBgaia_init_func\fP"
+.br
+.ti -1c
+.RI "struct \fBgaia_addon_info_t\fP \fBgaia_init_addon\fP"
+.br
+.ti -1c
+.RI "struct \fBgaia_message_list_t\fP \fBgaia_msg_init\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Core of GAIA\&. 
+.SH "Function Documentation"
+.PP 
+.SS "void gaia_running ()"
+Method to run GAIA\&. Never stop until a quit message received\&. 
+.SH "Variable Documentation"
+.PP 
+.SS "struct \fBgaia_context_t\fP gaia_global_context"
+\fBInitial value:\fP
+.PP
+.nf
+= {
+  1,
+  0,
+  PTHREAD_RWLOCK_INITIALIZER,
+  {&gaia_init_addon\&.addon_list, &gaia_init_addon\&.addon_list},
+  PTHREAD_MUTEX_INITIALIZER,
+  {&gaia_msg_init\&.list, &gaia_msg_init\&.list},
+}
+.fi
+GAIA running context\&. 
+.SS "struct \fBgaia_addon_func_t\fP gaia_init_func"
+\fBInitial value:\fP
+.PP
+.nf
+= {
+    0, 0, gaia_init_handle_message
+}
+.fi
+Function set for initial add-on\&.
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgaia_init_addon\fP 
+.RE
+.PP
+
+.SS "struct \fBgaia_addon_info_t\fP gaia_init_addon"
+\fBInitial value:\fP
+.PP
+.nf
+= {
+  0,
+  {install, uninstall},
+  0, 
+  PTHREAD_MUTEX_INITIALIZER,
+  {&gaia_init_addon\&.son_list, &gaia_init_addon\&.son_list},
+  {&gaia_init_addon\&.bro_list, &gaia_init_addon\&.bro_list},
+  {&gaia_global_context\&.addon_list, &gaia_global_context\&.addon_list},
+  {0, 0, ADDON_TYPE_INIT, 0, 0},
+  0,
+  &gaia_init_func,
+}
+.fi
+Information of initial add-on\&. 
+.SS "struct \fBgaia_message_list_t\fP gaia_msg_init"
+\fBInitial value:\fP
+.PP
+.nf
+= {
+  {&gaia_global_context\&.message_list, &gaia_global_context\&.message_list},
+  {ADDON_ID_INIT, 0, 0}
+}
+.fi
+Initial message list\&. 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for GAIA from the source code\&.

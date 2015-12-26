@@ -1,0 +1,63 @@
+.TH "network_func_t" 3 "Tue Jul 14 2015" "Version 1.0.0" "GAIA" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+network_func_t \- 
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <network\&.h>\fP
+.SS "Data Fields"
+
+.in +1c
+.ti -1c
+.RI "struct \fBgaia_addon_func_t\fP \fBbasic\fP"
+.br
+.ti -1c
+.RI "void(* \fBstart_server\fP )(const char *address, int max_conns)"
+.br
+.ti -1c
+.RI "void(* \fBstop_server\fP )()"
+.br
+.ti -1c
+.RI "int(* \fBconnect\fP )(const char *address)"
+.br
+.ti -1c
+.RI "void(* \fBdisconnect\fP )(int fd)"
+.br
+.ti -1c
+.RI "int(* \fBsend\fP )(int fd, struct \fBgaia_message_t\fP *msg)"
+.br
+.ti -1c
+.RI "int(* \fBreceive\fP )(int fd, struct \fBgaia_message_t\fP *msg)"
+.br
+.ti -1c
+.RI "const char *(* \fBget_client_address\fP )(int fd)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Network\&. 
+.SH "Field Documentation"
+.PP 
+.SS "struct \fBgaia_addon_func_t\fP network_func_t::basic"
+Basic\&. 
+.SS "void(* network_func_t::start_server) (const char *address, int max_conns)"
+Start local network server\&. 
+.SS "void(* network_func_t::stop_server) ()"
+Stop local network server\&. 
+.SS "int(* network_func_t::connect) (const char *address)"
+Connect to remote server\&. 
+.SS "void(* network_func_t::disconnect) (int fd)"
+Close a connection\&. 
+.SS "int(* network_func_t::send) (int fd, struct \fBgaia_message_t\fP *msg)"
+Send a message\&. 
+.SS "int(* network_func_t::receive) (int fd, struct \fBgaia_message_t\fP *msg)"
+Receive a message\&. 
+.SS "const char*(* network_func_t::get_client_address) (int fd)"
+Get client address\&. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for GAIA from the source code\&.

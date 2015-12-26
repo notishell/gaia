@@ -1,0 +1,43 @@
+.TH "list.h" 3 "Tue Jul 14 2015" "Version 1.0.0" "GAIA" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+list.h \- 
+.SH SYNOPSIS
+.br
+.PP
+.SS "Data Structures"
+
+.in +1c
+.ti -1c
+.RI "struct \fBlinked_list\fP"
+.br
+.in -1c
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBlist_entry\fP(ptr,  type,  member)   (type *)((char *)(ptr) - offsetof(type, member))"
+.br
+.ti -1c
+.RI "#define \fBlist_for_each\fP(pos,  head,  member)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Util list\&. 
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define list_entry(ptr, type, member)   (type *)((char *)(ptr) - offsetof(type, member))"
+Get list entry by list head\&. 
+.SS "#define list_for_each(pos, head, member)"
+\fBValue:\fP
+.PP
+.nf
+for ((pos) = list_entry((head)->next, typeof(*(pos)), member);\
+    &((pos)->member) != (head); (pos) = list_entry((pos)->member\&.next, typeof(*pos), member))
+.fi
+For each element in a list\&. 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for GAIA from the source code\&.

@@ -218,7 +218,7 @@ static int handle_message(struct gaia_message_t *msg);
 /**
  * GAIA initial add-on handle message function.
  */
-static void gaia_init_handle_message(struct gaia_message_t *msg);
+static void gaia_init_handle_message(struct gaia_message_t *msg, struct gaia_para_t *para);
 
 /**
  * Function set for initial add-on.
@@ -528,7 +528,7 @@ static int handle_message(struct gaia_message_t *msg) {
 	return (0);
 }
 
-static void gaia_init_handle_message(struct gaia_message_t *msg) {
+static void gaia_init_handle_message(struct gaia_message_t *msg, struct gaia_para_t *para) {
 	static struct gaia_addon_t *addon;
 
 	if (msg->type == 0) {
@@ -580,7 +580,7 @@ void gaia_running(void) {
 		pthread_rwlock_unlock(&gaia_global_context.addon_lock);
 
 		if (valid) {
-			addon->addon_func->handle_message(msg);
+			addon->addon_func->handle_message(msg, &addon->para);
 		}
 
 		if (&gaia_msg_init != msg_entry) {

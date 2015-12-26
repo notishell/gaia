@@ -1,0 +1,35 @@
+.TH "addon.c" 3 "Tue Jul 14 2015" "Version 1.0.0" "GAIA" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+addon.c \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <gaia/addon/addon\&.h>\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBdefault_addon_init\fP (struct \fBgaia_func_t\fP *func)"
+.br
+.ti -1c
+.RI "void \fBdefault_addon_exit\fP (struct \fBgaia_addon_t\fP *addon)"
+.br
+.ti -1c
+.RI "void \fBdefault_addon_handle_message\fP (struct \fBgaia_message_t\fP *msg)"
+.br
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "int default_addon_init (struct \fBgaia_func_t\fP * func)"
+Default add-on init method\&. 
+.SS "void default_addon_exit (struct \fBgaia_addon_t\fP * addon)"
+Default add-on exit method\&. 
+.SS "void default_addon_handle_message (struct \fBgaia_message_t\fP * msg)"
+Default add-on handle message method\&. 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for GAIA from the source code\&.

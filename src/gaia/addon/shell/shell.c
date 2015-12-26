@@ -175,14 +175,12 @@ static void *shell_work(void *para) {
 }
 
 static int shell_init(struct gaia_func_t *func, struct gaia_para_t *para) {
-	working = 1;
-	pthread_create(&shell_thread, 0, shell_work, 0);
+	pthread_create(&shell_thread, para->para, shell_work, 0);
 	gaia_func = func;
 	return (0);
 }
 
 static void shell_exit(struct gaia_para_t *para) {
-	working = 0;
 	pthread_join(shell_thread, 0);
 }
 

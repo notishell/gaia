@@ -99,10 +99,7 @@ am__dirstamp = $(am__leading_dot)dirstamp
 am_libgaia_a_OBJECTS = libgaia_a-gaia.$(OBJEXT) \
 	addon/libgaia_a-addon.$(OBJEXT) \
 	addon/manager/libgaia_a-manager.$(OBJEXT) \
-	addon/manager/libgaia_a-client_manager.$(OBJEXT) \
 	addon/config/libgaia_a-direct_config.$(OBJEXT) \
-	addon/network/libgaia_a-client_network.$(OBJEXT) \
-	addon/network/libgaia_a-server_network.$(OBJEXT) \
 	addon/shell/libgaia_a-shell.$(OBJEXT)
 libgaia_a_OBJECTS = $(am_libgaia_a_OBJECTS)
 AM_V_P = $(am__v_P_@AM_V@)
@@ -253,8 +250,8 @@ top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 AUTOMAKE_OPTIONS = foreign subdir-objects
 noinst_LIBRARIES = libgaia.a 
-libgaia_a_SOURCES = gaia.c addon/addon.c addon/manager/manager.c addon/manager/client_manager.c addon/config/direct_config.c \
-	addon/network/client_network.c addon/network/server_network.c addon/shell/shell.c
+libgaia_a_SOURCES = gaia.c addon/addon.c addon/manager/manager.c addon/config/direct_config.c \
+	addon/shell/shell.c
 
 libgaia_a_CFLAGS = -I.. $(AM_CFLAGS)
 all: all-am
@@ -311,9 +308,6 @@ addon/manager/$(DEPDIR)/$(am__dirstamp):
 addon/manager/libgaia_a-manager.$(OBJEXT):  \
 	addon/manager/$(am__dirstamp) \
 	addon/manager/$(DEPDIR)/$(am__dirstamp)
-addon/manager/libgaia_a-client_manager.$(OBJEXT):  \
-	addon/manager/$(am__dirstamp) \
-	addon/manager/$(DEPDIR)/$(am__dirstamp)
 addon/config/$(am__dirstamp):
 	@$(MKDIR_P) addon/config
 	@: > addon/config/$(am__dirstamp)
@@ -323,18 +317,6 @@ addon/config/$(DEPDIR)/$(am__dirstamp):
 addon/config/libgaia_a-direct_config.$(OBJEXT):  \
 	addon/config/$(am__dirstamp) \
 	addon/config/$(DEPDIR)/$(am__dirstamp)
-addon/network/$(am__dirstamp):
-	@$(MKDIR_P) addon/network
-	@: > addon/network/$(am__dirstamp)
-addon/network/$(DEPDIR)/$(am__dirstamp):
-	@$(MKDIR_P) addon/network/$(DEPDIR)
-	@: > addon/network/$(DEPDIR)/$(am__dirstamp)
-addon/network/libgaia_a-client_network.$(OBJEXT):  \
-	addon/network/$(am__dirstamp) \
-	addon/network/$(DEPDIR)/$(am__dirstamp)
-addon/network/libgaia_a-server_network.$(OBJEXT):  \
-	addon/network/$(am__dirstamp) \
-	addon/network/$(DEPDIR)/$(am__dirstamp)
 addon/shell/$(am__dirstamp):
 	@$(MKDIR_P) addon/shell
 	@: > addon/shell/$(am__dirstamp)
@@ -354,7 +336,6 @@ mostlyclean-compile:
 	-rm -f addon/*.$(OBJEXT)
 	-rm -f addon/config/*.$(OBJEXT)
 	-rm -f addon/manager/*.$(OBJEXT)
-	-rm -f addon/network/*.$(OBJEXT)
 	-rm -f addon/shell/*.$(OBJEXT)
 
 distclean-compile:
@@ -363,10 +344,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgaia_a-gaia.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@addon/$(DEPDIR)/libgaia_a-addon.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@addon/config/$(DEPDIR)/libgaia_a-direct_config.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@addon/manager/$(DEPDIR)/libgaia_a-client_manager.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@addon/manager/$(DEPDIR)/libgaia_a-manager.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@addon/network/$(DEPDIR)/libgaia_a-client_network.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@addon/network/$(DEPDIR)/libgaia_a-server_network.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@addon/shell/$(DEPDIR)/libgaia_a-shell.Po@am__quote@
 
 .c.o:
@@ -427,20 +405,6 @@ addon/manager/libgaia_a-manager.obj: addon/manager/manager.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgaia_a_CFLAGS) $(CFLAGS) -c -o addon/manager/libgaia_a-manager.obj `if test -f 'addon/manager/manager.c'; then $(CYGPATH_W) 'addon/manager/manager.c'; else $(CYGPATH_W) '$(srcdir)/addon/manager/manager.c'; fi`
 
-addon/manager/libgaia_a-client_manager.o: addon/manager/client_manager.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgaia_a_CFLAGS) $(CFLAGS) -MT addon/manager/libgaia_a-client_manager.o -MD -MP -MF addon/manager/$(DEPDIR)/libgaia_a-client_manager.Tpo -c -o addon/manager/libgaia_a-client_manager.o `test -f 'addon/manager/client_manager.c' || echo '$(srcdir)/'`addon/manager/client_manager.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) addon/manager/$(DEPDIR)/libgaia_a-client_manager.Tpo addon/manager/$(DEPDIR)/libgaia_a-client_manager.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='addon/manager/client_manager.c' object='addon/manager/libgaia_a-client_manager.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgaia_a_CFLAGS) $(CFLAGS) -c -o addon/manager/libgaia_a-client_manager.o `test -f 'addon/manager/client_manager.c' || echo '$(srcdir)/'`addon/manager/client_manager.c
-
-addon/manager/libgaia_a-client_manager.obj: addon/manager/client_manager.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgaia_a_CFLAGS) $(CFLAGS) -MT addon/manager/libgaia_a-client_manager.obj -MD -MP -MF addon/manager/$(DEPDIR)/libgaia_a-client_manager.Tpo -c -o addon/manager/libgaia_a-client_manager.obj `if test -f 'addon/manager/client_manager.c'; then $(CYGPATH_W) 'addon/manager/client_manager.c'; else $(CYGPATH_W) '$(srcdir)/addon/manager/client_manager.c'; fi`
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) addon/manager/$(DEPDIR)/libgaia_a-client_manager.Tpo addon/manager/$(DEPDIR)/libgaia_a-client_manager.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='addon/manager/client_manager.c' object='addon/manager/libgaia_a-client_manager.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgaia_a_CFLAGS) $(CFLAGS) -c -o addon/manager/libgaia_a-client_manager.obj `if test -f 'addon/manager/client_manager.c'; then $(CYGPATH_W) 'addon/manager/client_manager.c'; else $(CYGPATH_W) '$(srcdir)/addon/manager/client_manager.c'; fi`
-
 addon/config/libgaia_a-direct_config.o: addon/config/direct_config.c
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgaia_a_CFLAGS) $(CFLAGS) -MT addon/config/libgaia_a-direct_config.o -MD -MP -MF addon/config/$(DEPDIR)/libgaia_a-direct_config.Tpo -c -o addon/config/libgaia_a-direct_config.o `test -f 'addon/config/direct_config.c' || echo '$(srcdir)/'`addon/config/direct_config.c
 @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) addon/config/$(DEPDIR)/libgaia_a-direct_config.Tpo addon/config/$(DEPDIR)/libgaia_a-direct_config.Po
@@ -454,34 +418,6 @@ addon/config/libgaia_a-direct_config.obj: addon/config/direct_config.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='addon/config/direct_config.c' object='addon/config/libgaia_a-direct_config.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgaia_a_CFLAGS) $(CFLAGS) -c -o addon/config/libgaia_a-direct_config.obj `if test -f 'addon/config/direct_config.c'; then $(CYGPATH_W) 'addon/config/direct_config.c'; else $(CYGPATH_W) '$(srcdir)/addon/config/direct_config.c'; fi`
-
-addon/network/libgaia_a-client_network.o: addon/network/client_network.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgaia_a_CFLAGS) $(CFLAGS) -MT addon/network/libgaia_a-client_network.o -MD -MP -MF addon/network/$(DEPDIR)/libgaia_a-client_network.Tpo -c -o addon/network/libgaia_a-client_network.o `test -f 'addon/network/client_network.c' || echo '$(srcdir)/'`addon/network/client_network.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) addon/network/$(DEPDIR)/libgaia_a-client_network.Tpo addon/network/$(DEPDIR)/libgaia_a-client_network.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='addon/network/client_network.c' object='addon/network/libgaia_a-client_network.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgaia_a_CFLAGS) $(CFLAGS) -c -o addon/network/libgaia_a-client_network.o `test -f 'addon/network/client_network.c' || echo '$(srcdir)/'`addon/network/client_network.c
-
-addon/network/libgaia_a-client_network.obj: addon/network/client_network.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgaia_a_CFLAGS) $(CFLAGS) -MT addon/network/libgaia_a-client_network.obj -MD -MP -MF addon/network/$(DEPDIR)/libgaia_a-client_network.Tpo -c -o addon/network/libgaia_a-client_network.obj `if test -f 'addon/network/client_network.c'; then $(CYGPATH_W) 'addon/network/client_network.c'; else $(CYGPATH_W) '$(srcdir)/addon/network/client_network.c'; fi`
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) addon/network/$(DEPDIR)/libgaia_a-client_network.Tpo addon/network/$(DEPDIR)/libgaia_a-client_network.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='addon/network/client_network.c' object='addon/network/libgaia_a-client_network.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgaia_a_CFLAGS) $(CFLAGS) -c -o addon/network/libgaia_a-client_network.obj `if test -f 'addon/network/client_network.c'; then $(CYGPATH_W) 'addon/network/client_network.c'; else $(CYGPATH_W) '$(srcdir)/addon/network/client_network.c'; fi`
-
-addon/network/libgaia_a-server_network.o: addon/network/server_network.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgaia_a_CFLAGS) $(CFLAGS) -MT addon/network/libgaia_a-server_network.o -MD -MP -MF addon/network/$(DEPDIR)/libgaia_a-server_network.Tpo -c -o addon/network/libgaia_a-server_network.o `test -f 'addon/network/server_network.c' || echo '$(srcdir)/'`addon/network/server_network.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) addon/network/$(DEPDIR)/libgaia_a-server_network.Tpo addon/network/$(DEPDIR)/libgaia_a-server_network.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='addon/network/server_network.c' object='addon/network/libgaia_a-server_network.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgaia_a_CFLAGS) $(CFLAGS) -c -o addon/network/libgaia_a-server_network.o `test -f 'addon/network/server_network.c' || echo '$(srcdir)/'`addon/network/server_network.c
-
-addon/network/libgaia_a-server_network.obj: addon/network/server_network.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgaia_a_CFLAGS) $(CFLAGS) -MT addon/network/libgaia_a-server_network.obj -MD -MP -MF addon/network/$(DEPDIR)/libgaia_a-server_network.Tpo -c -o addon/network/libgaia_a-server_network.obj `if test -f 'addon/network/server_network.c'; then $(CYGPATH_W) 'addon/network/server_network.c'; else $(CYGPATH_W) '$(srcdir)/addon/network/server_network.c'; fi`
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) addon/network/$(DEPDIR)/libgaia_a-server_network.Tpo addon/network/$(DEPDIR)/libgaia_a-server_network.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='addon/network/server_network.c' object='addon/network/libgaia_a-server_network.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgaia_a_CFLAGS) $(CFLAGS) -c -o addon/network/libgaia_a-server_network.obj `if test -f 'addon/network/server_network.c'; then $(CYGPATH_W) 'addon/network/server_network.c'; else $(CYGPATH_W) '$(srcdir)/addon/network/server_network.c'; fi`
 
 addon/shell/libgaia_a-shell.o: addon/shell/shell.c
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgaia_a_CFLAGS) $(CFLAGS) -MT addon/shell/libgaia_a-shell.o -MD -MP -MF addon/shell/$(DEPDIR)/libgaia_a-shell.Tpo -c -o addon/shell/libgaia_a-shell.o `test -f 'addon/shell/shell.c' || echo '$(srcdir)/'`addon/shell/shell.c
@@ -615,8 +551,6 @@ distclean-generic:
 	-rm -f addon/config/$(am__dirstamp)
 	-rm -f addon/manager/$(DEPDIR)/$(am__dirstamp)
 	-rm -f addon/manager/$(am__dirstamp)
-	-rm -f addon/network/$(DEPDIR)/$(am__dirstamp)
-	-rm -f addon/network/$(am__dirstamp)
 	-rm -f addon/shell/$(DEPDIR)/$(am__dirstamp)
 	-rm -f addon/shell/$(am__dirstamp)
 
@@ -628,7 +562,7 @@ clean: clean-am
 clean-am: clean-generic clean-noinstLIBRARIES mostlyclean-am
 
 distclean: distclean-am
-	-rm -rf ./$(DEPDIR) addon/$(DEPDIR) addon/config/$(DEPDIR) addon/manager/$(DEPDIR) addon/network/$(DEPDIR) addon/shell/$(DEPDIR)
+	-rm -rf ./$(DEPDIR) addon/$(DEPDIR) addon/config/$(DEPDIR) addon/manager/$(DEPDIR) addon/shell/$(DEPDIR)
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
 	distclean-tags
@@ -674,7 +608,7 @@ install-ps-am:
 installcheck-am:
 
 maintainer-clean: maintainer-clean-am
-	-rm -rf ./$(DEPDIR) addon/$(DEPDIR) addon/config/$(DEPDIR) addon/manager/$(DEPDIR) addon/network/$(DEPDIR) addon/shell/$(DEPDIR)
+	-rm -rf ./$(DEPDIR) addon/$(DEPDIR) addon/config/$(DEPDIR) addon/manager/$(DEPDIR) addon/shell/$(DEPDIR)
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic
 

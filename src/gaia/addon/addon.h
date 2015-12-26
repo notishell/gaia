@@ -79,7 +79,7 @@ struct gaia_addon_func_t {
 	/**
 	 * Handle message.
 	 */
-	void (*handle_message)(struct gaia_message_t *msg);
+	void (*handle_message)(struct gaia_message_t *msg, struct gaia_para_t *para);
 };
 
 /**
@@ -126,6 +126,6 @@ void default_addon_exit(struct gaia_para_t *para);
 /**
  * Default add-on handle message method.
  */
-void default_addon_handle_message(struct gaia_message_t *msg);
+void default_addon_handle_message(struct gaia_message_t *msg, struct gaia_para_t *para);
 
 #endif /* SRC_GAIA_ADDON_ADDON_H_ */

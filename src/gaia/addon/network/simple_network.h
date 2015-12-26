@@ -14,41 +14,14 @@
  *
  * author: Notis Hell (notishell@gmail.com)
  */
-#ifndef SRC_GAIA_ADDON_MANAGER_H_
-#define SRC_GAIA_ADDON_MANAGER_H_
+#ifndef SRC_GAIA_ADDON_NETWORK_SIMPLE_NETWORK_H_
+#define SRC_GAIA_ADDON_NETWORK_SIMPLE_NETWORK_H_
 
-#include <gaia/addon/addon.h>
-
-/**
- * Manager add-on id.
- */
-enum {
-	ADDON_ID_MANAGER        = 0x0000000000000001,
-};
+#include <gaia/addon/network/network.h>
 
 /**
- * Manager add-on message type.
+ * Global simple network information.
  */
-enum {
-	MSG_TYPE_START             = 0,
-	MSG_TYPE_RESTART           = 1,
-	MSG_TYPE_STOP              = 2,
-};
+struct gaia_addon_t *simple_network_info();
 
-/**
- * Manager add-on functions set.
- */
-struct manager_func_t {
-
-	/**
-	 * Basic.
-	 */
-	struct gaia_addon_func_t basic;
-};
-
-/**
- * Manager add-on information.
- */
-struct gaia_addon_t *manager_addon_info();
-
-#endif /* SRC_GAIA_ADDON_MANAGER_H_ */
+#endif /* SRC_GAIA_ADDON_NETWORK_SIMPLE_NETWORK_H_ */
